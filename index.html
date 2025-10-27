@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Universal UI — Web Components Demo</title>
+    <link rel="stylesheet" href="src/styles/tokens.css" />
+    <link rel="stylesheet" href="src/styles/base.css" />
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <header class="uui-page-header">
+      <h1>Universal UI（Web Components）</h1>
+      <p>基础架构与 Button 组件演示</p>
+    </header>
+
+    <main class="uui-container">
+      <section>
+        <h2>Buttons</h2>
+        <div class="demo-row">
+          <f7-button>默认按钮</f7-button>
+          <f7-button variant="primary">主要按钮</f7-button>
+          <f7-button variant="outline">描边按钮</f7-button>
+          <f7-button variant="ghost">幽灵按钮</f7-button>
+        </div>
+
+        <div class="demo-row">
+          <f7-button size="sm">小按钮</f7-button>
+          <f7-button>中按钮</f7-button>
+          <f7-button size="lg">大按钮</f7-button>
+        </div>
+
+        <div class="demo-row">
+          <f7-button loading>加载中</f7-button>
+          <f7-button disabled>禁用状态</f7-button>
+        </div>
+      </section>
+    </main>
+  </body>
+  </html>
+

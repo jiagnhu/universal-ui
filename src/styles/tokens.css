@@ -1,0 +1,67 @@
+:root {
+  /* Colors */
+  --uui-color-text: #111827; /* gray-900 */
+  --uui-color-muted: #6b7280; /* gray-500 */
+  --uui-color-bg: #ffffff;
+  --uui-color-border: #e5e7eb; /* gray-200 */
+
+  --uui-color-primary: #2563eb; /* blue-600 */
+  --uui-color-primary-contrast: #ffffff;
+
+  /* Button variants */
+  --uui-button-bg: #f3f4f6; /* gray-100 */
+  --uui-button-text: var(--uui-color-text);
+  --uui-button-bg-hover: #e5e7eb;
+  --uui-button-border: #e5e7eb;
+
+  --uui-button-primary-bg: var(--uui-color-primary);
+  --uui-button-primary-text: var(--uui-color-primary-contrast);
+  --uui-button-primary-bg-hover: #1d4ed8; /* blue-700 */
+
+  --uui-button-outline-text: var(--uui-color-text);
+  --uui-button-outline-border: #d1d5db; /* gray-300 */
+  --uui-button-outline-bg-hover: #f9fafb; /* gray-50 */
+
+  --uui-button-ghost-text: var(--uui-color-text);
+  --uui-button-ghost-bg-hover: #f9fafb;
+
+  /* Radius + spacing */
+  --uui-radius: 10px;
+  --uui-radius-sm: 8px;
+  --uui-radius-lg: 12px;
+
+  --uui-space-1: 4px;
+  --uui-space-2: 8px;
+  --uui-space-3: 12px;
+  --uui-space-4: 16px;
+
+  /* Typography */
+  --uui-font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --uui-font-size-sm: 12px;
+  --uui-font-size-md: 14px;
+  --uui-font-size-lg: 16px;
+  --uui-font-weight: 600;
+
+  /* Effects */
+  --uui-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
+  --uui-transition: 160ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --uui-color-text: #e5e7eb;
+    --uui-color-muted: #9ca3af;
+    --uui-color-bg: #0b0f14;
+    --uui-color-border: #1f2937;
+
+    --uui-button-bg: #111827;
+    --uui-button-text: #e5e7eb;
+    --uui-button-bg-hover: #0b0f14;
+    --uui-button-border: #1f2937;
+
+    --uui-button-outline-border: #374151;
+    --uui-button-outline-bg-hover: #111827;
+    --uui-button-ghost-bg-hover: #111827;
+  }
+}
+
