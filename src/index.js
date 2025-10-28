@@ -1,3 +1,5 @@
-// Entry for all web components
-import './components/button/f7-button.js';
+// Main entry point for Universal UI
+import './components/button/uds-button.js';
+
+console.log('Universal UI initialized');
 

@@ -1,67 +1,74 @@
+/* UDS Design Tokens */
 :root {
   /* Colors */
-  --uui-color-text: #111827; /* gray-900 */
-  --uui-color-muted: #6b7280; /* gray-500 */
-  --uui-color-bg: #ffffff;
-  --uui-color-border: #e5e7eb; /* gray-200 */
+  --uds-color-bg: #ffffff;
+  --uds-color-bg-subtle: #f7f7f8;
+  --uds-color-surface: #ffffff;
+  --uds-color-border: #e5e7eb;
+  --uds-color-text: #111827;
+  --uds-color-text-muted: #6b7280;
 
-  --uui-color-primary: #2563eb; /* blue-600 */
-  --uui-color-primary-contrast: #ffffff;
+  --uds-color-primary: #2F80ED;
+  --uds-color-primary-hover: #1C63D9;
+  --uds-color-primary-active: #1D51B0;
+  --uds-color-primary-text: #ffffff;
+  --uds-color-primary-outline-hover-rgb: rgba(47, 128, 237, 0.1);
+  --uds-color-primary-disabled-rgb: rgba(47, 128, 237, 0.3);
 
-  /* Button variants */
-  --uui-button-bg: #f3f4f6; /* gray-100 */
-  --uui-button-text: var(--uui-color-text);
-  --uui-button-bg-hover: #e5e7eb;
-  --uui-button-border: #e5e7eb;
+  --uds-color-danger: #EB5757;
+  --uds-color-danger-hover: #D62C2C;
+  --uds-color-danger-active: #B42121;
+  --uds-color-danger-text: #ffffff;
+  --uds-color-danger-outline-hover-rgb: rgba(235, 87, 87, 0.1);
+  --uds-color-danger-disabled-rgb: rgba(235, 87, 87, 0.3);
 
-  --uui-button-primary-bg: var(--uui-color-primary);
-  --uui-button-primary-text: var(--uui-color-primary-contrast);
-  --uui-button-primary-bg-hover: #1d4ed8; /* blue-700 */
+  --uds-color-secondary: #EDEDED;
+  --uds-color-secondary-hover: #E0E0E0;
+  --uds-color-secondary-active: #C8C8C8;
+  --uds-color-secondary-text: #545454;
+  --uds-color-secondary-outline-hover-rgb: rgba(103, 103, 103, 0.1);
+  --uds-color-secondary-disabled-rgb: rgba(103, 103, 103, 0.3);
 
-  --uui-button-outline-text: var(--uui-color-text);
-  --uui-button-outline-border: #d1d5db; /* gray-300 */
-  --uui-button-outline-bg-hover: #f9fafb; /* gray-50 */
+  --uds-color-overlay: rgba(17,24,39,0.5);
+  --uds-focus-ring: #1C63D9;
 
-  --uui-button-ghost-text: var(--uui-color-text);
-  --uui-button-ghost-bg-hover: #f9fafb;
-
-  /* Radius + spacing */
-  --uui-radius: 10px;
-  --uui-radius-sm: 8px;
-  --uui-radius-lg: 12px;
-
-  --uui-space-1: 4px;
-  --uui-space-2: 8px;
-  --uui-space-3: 12px;
-  --uui-space-4: 16px;
-
+  --uds-btn-fg: #ffffff;
+  --uds-btn-bg: var(--uds-color-primary);
+  --uds-btn-bg-hover: var(--uds-color-primary-hover);
+  --uds-btn-bg-active: var(--uds-color-primary-active);
+  --uds-btn-disabled-bg: #cbd5e1;
+  --uds-btn-disabled-fg: #ffffff;
+  
   /* Typography */
-  --uui-font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  --uui-font-size-sm: 12px;
-  --uui-font-size-md: 14px;
-  --uui-font-size-lg: 16px;
-  --uui-font-weight: 600;
-
-  /* Effects */
-  --uui-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
-  --uui-transition: 160ms ease;
+  --uds-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+  --uds-fs-md: 16px;
+  --uds-line: 1.5;
+  
+  /* Spacing and Radius */
+  --uds-space-2: 8px;
+  --uds-space-4: 16px;
+  --uds-radius-md: 12px;
+  
+  /* Controls */
+  --uds-cntl-h: 40px;
+  
+  /* Density */
+  --uds-density: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --uui-color-text: #e5e7eb;
-    --uui-color-muted: #9ca3af;
-    --uui-color-bg: #0b0f14;
-    --uui-color-border: #1f2937;
-
-    --uui-button-bg: #111827;
-    --uui-button-text: #e5e7eb;
-    --uui-button-bg-hover: #0b0f14;
-    --uui-button-border: #1f2937;
-
-    --uui-button-outline-border: #374151;
-    --uui-button-outline-bg-hover: #111827;
-    --uui-button-ghost-bg-hover: #111827;
-  }
+[data-density="mobile"] {
+  --uds-density: 1;
+  --uds-cntl-h: 48px;
 }
 
+[data-theme="dark"] {
+  --uds-color-bg: #0b0f14;
+  --uds-color-bg-subtle: #1a202c;
+  --uds-color-surface: #111827;
+  --uds-color-border: #253042;
+  --uds-color-text: #e5e7eb;
+  --uds-color-text-muted: #94a3b8;
+  --uds-color-primary: #60a5fa;
+  --uds-color-primary-hover: #2F80ED;
+  --uds-color-primary-active: #1C63D9;
+}

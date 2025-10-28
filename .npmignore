@@ -1,0 +1,21 @@
+# 开发文件
+node_modules/
+.vscode/
+.idea/
+.git/
+
+# 文档和示例
+docs/
+examples/
+
+# 配置文件
+rollup.config.js
+.eslintrc
+.prettierrc
+
+# 源文件（因为我们只发布dist目录）
+src/
+
+# 其他
+.DS_Store
+*.log

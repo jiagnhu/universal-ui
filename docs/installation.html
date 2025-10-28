@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UDS 安装指南</title>
+  <link rel="stylesheet" href="../src/styles/tokens.css">
+  <style>
+    body {
+      font-family: var(--uds-font-sans);
+      margin: 0;
+      padding: 20px;
+      background-color: var(--uds-color-bg);
+      color: var(--uds-color-text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    .demo-section {
+      margin-bottom: 32px;
+    }
+    
+    .code-block {
+      background: var(--uds-color-bg-subtle);
+      border: 1px solid var(--uds-color-border);
+      border-radius: var(--uds-radius-md);
+      padding: 16px;
+      margin: 16px 0;
+      overflow: auto;
+      font-family: monospace;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    th, td {
+      border: 1px solid var(--uds-color-border);
+      padding: 12px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--uds-color-bg-subtle);
+    }
+    
+    h1, h2, h3 {
+      margin-top: 40px;
+      margin-bottom: 16px;
+    }
+    
+    h1 {
+      font-size: 32px;
+      border-bottom: 1px solid var(--uds-color-border);
+      padding-bottom: 10px;
+    }
+    
+    h2 {
+      font-size: 24px;
+    }
+    
+    h3 {
+      font-size: 20px;
+    }
+    
+    .installation-steps {
+      margin-top: 30px;
+    }
+    
+    .step {
+      margin-bottom: 30px;
+    }
+    
+    .step-number {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background-color: var(--uds-color-primary);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>安装指南</h1>
+  
+  <div class="demo-section">
+    <p>Universal Design System (UDS) 是一个基于 Web Components 的组件库，可以在任何现代浏览器中使用，无需依赖特定的前端框架。</p>
+    
+    <div class="installation-steps">
+      <div class="step">
+        <h2><span class="step-number">1</span>安装组件库</h2>
+        <p>使用 npm 安装组件库：</p>
+        <div class="code-block">
+          <pre><code>npm install universal-design-system</code></pre>
+        </div>
+      </div>
+      
+      <div class="step">
+        <h2><span class="step-number">2</span>在项目中引入组件</h2>
+        
+        <h3>方式一：引入整个组件库</h3>
+        <p>在项目入口文件中引入整个组件库：</p>
+        <div class="code-block">
+          <pre><code>// 在项目入口文件中引入
+import 'universal-design-system';</code></pre>
+        </div>
+        
+        <h3>方式二：按需引入单个组件</h3>
+        <p>只引入需要的组件，减小打包体积：</p>
+        <div class="code-block">
+          <pre><code>// 只引入按钮组件
+import 'universal-design-system/dist/components/button';</code></pre>
+        </div>
+      </div>
+      
+      <div class="step">
+        <h2><span class="step-number">3</span>在HTML中使用组件</h2>
+        <p>引入组件库后，可以直接在HTML中使用组件：</p>
+        <div class="code-block">
+          <pre><code>&lt;!-- 基础按钮 --&gt;
+&lt;uds-button&gt;默认按钮&lt;/uds-button&gt;
+
+&lt;!-- 不同类型的按钮 --&gt;
+&lt;uds-button type="primary"&gt;主要按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary"&gt;次要按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger"&gt;危险按钮&lt;/uds-button&gt;
+
+&lt;!-- 轮廓按钮 --&gt;
+&lt;uds-button type="primary" plain&gt;主要轮廓按钮&lt;/uds-button&gt;
+
+&lt;!-- 超小尺寸按钮（适用于移动端） --&gt;
+&lt;uds-button size="xs"&gt;超小按钮&lt;/uds-button&gt;
+
+&lt;!-- 带图标的按钮 --&gt;
+&lt;uds-button&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em"&gt;
+    &lt;!-- 图标路径 --&gt;
+  &lt;/svg&gt;
+  带图标的按钮
+&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+    
+    <h2>浏览器兼容性</h2>
+    <p>Universal Design System 支持所有现代浏览器，包括：</p>
+    <ul>
+      <li>Chrome (最新版)</li>
+      <li>Firefox (最新版)</li>
+      <li>Safari (最新版)</li>
+      <li>Edge (最新版)</li>
+    </ul>
+    <p>由于使用了 Web Components 技术，不支持 IE11 及以下版本。</p>
+  </div>
+  
+  <script>
+    // 监听来自父窗口的主题切换消息
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'themeChange') {
+        if (event.data.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      }
+    });
+
+    // 检查URL参数中是否有主题设置
+    const urlParams = new URLSearchParams(window.location.search);
+    const theme = urlParams.get('theme');
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal Design System - 组件文档</title>
+  <link rel="stylesheet" href="../src/styles/tokens.css">
+  <style>
+    body {
+      font-family: var(--uds-font-sans);
+      margin: 0;
+      padding: 0;
+      background-color: var(--uds-color-bg);
+      color: var(--uds-color-text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 250px;
+      background-color: var(--uds-color-bg-subtle);
+      border-right: 1px solid var(--uds-color-border);
+      padding: 20px;
+      overflow-y: auto;
+      height: 100%;
+      box-sizing: border-box;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar.collapsed {
+      transform: translateX(-220px);
+    }
+    
+    .sidebar-toggle {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: var(--uds-color-primary);
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    .content {
+      flex: 1;
+      padding: 0;
+      overflow-y: auto;
+      height: 100%;
+      margin-left: 250px;
+      transition: margin-left 0.3s ease;
+    }
+    
+    .content.expanded {
+      margin-left: 30px;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--uds-color-border);
+    }
+    
+    .nav-group {
+      margin-bottom: 20px;
+    }
+    
+    .nav-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--uds-color-text-muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    
+    .nav-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-item {
+      margin-bottom: 8px;
+    }
+    
+    .nav-link {
+      display: block;
+      padding: 8px 12px;
+      color: var(--uds-color-text);
+      text-decoration: none;
+      border-radius: var(--uds-radius-md);
+      transition: background-color 0.2s;
+    }
+    
+    .nav-link:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-link.active {
+      background-color: var(--uds-color-primary);
+      color: white;
+    }
+    
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      padding: 8px 16px;
+      background: var(--uds-color-bg-subtle);
+      border: 1px solid var(--uds-color-border);
+      border-radius: var(--uds-radius-md);
+      cursor: pointer;
+      color: var(--uds-color-text);
+    }
+    
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+  <script type="module" src="../src/index.js"></script>
+</head>
+<body>
+  <button class="theme-toggle" id="theme-toggle">切换暗色模式</button>
+  
+  <div class="sidebar">
+    <button class="sidebar-toggle" id="sidebar-toggle">≡</button>
+    <div class="logo">Universal Design System</div>
+    
+    <div class="nav-group">
+      <div class="nav-title">入门</div>
+      <ul class="nav-items">
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-page="intro">介绍</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-page="installation">安装指南</a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="nav-group">
+      <div class="nav-title">组件</div>
+      <ul class="nav-items">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" data-page="button">Button 按钮</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-page="input">Input 输入框</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-page="select">Select 选择器</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-page="checkbox">Checkbox 复选框</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-page="radio">Radio 单选框</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="content">
+    <iframe id="content-frame" src="button.html"></iframe>
+  </div>
+
+  <script>
+    // 主题切换
+    const themeToggle = document.getElementById('theme-toggle');
+    let contentFrame = document.getElementById('content-frame');
+    
+    // 向iframe发送主题切换消息
+    function sendThemeToIframe(theme) {
+      try {
+        contentFrame.contentWindow.postMessage({
+          type: 'themeChange',
+          theme: theme
+        }, '*');
+      } catch (e) {
+        console.error('无法向iframe发送消息:', e);
+      }
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      if (document.body.classList.contains('dark-theme')) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        sendThemeToIframe('dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        sendThemeToIframe('light');
+      }
+    });
+    
+    // 侧边栏展开收起功能
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const content = document.querySelector('.content');
+    
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      content.classList.toggle('expanded');
+    });
+    
+    // 导航切换
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // 移除所有active类
+        navLinks.forEach(l => l.classList.remove('active'));
+        
+        // 添加active类到当前点击的链接
+        link.classList.add('active');
+        
+        // 获取页面名称
+        const page = link.getAttribute('data-page');
+        
+        // button页面和installation页面实际存在
+        if (page === 'button' || page === 'installation') {
+          // 先移除iframe，然后重新创建并添加到DOM中
+          const parentElement = contentFrame.parentElement;
+          const currentTheme = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';
+          contentFrame.remove();
+          contentFrame = document.createElement('iframe');
+          contentFrame.id = 'content-frame';
+          contentFrame.src = `${page}.html?theme=${currentTheme}`;
+          parentElement.appendChild(contentFrame);
+          
+          // 当iframe加载完成后发送主题消息
+          contentFrame.onload = function() {
+            sendThemeToIframe(currentTheme);
+          };
+        } else {
+          contentFrame.srcdoc = `
+            <html>
+              <head>
+                <link rel="stylesheet" href="../src/styles/tokens.css">
+                <style>
+                  body {
+                    font-family: var(--uds-font-sans);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    margin: 0;
+                    background-color: var(--uds-color-bg);
+                    color: var(--uds-color-text);
+                  }
+                  .message {
+                    text-align: center;
+                    padding: 20px;
+                  }
+                  h1 {
+                    margin-bottom: 10px;
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="message">
+                  <h1>${page.charAt(0).toUpperCase() + page.slice(1)} 组件</h1>
+                  <p>该组件文档正在开发中...</p>
+                </div>
+              </body>
+            </html>
+          `;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

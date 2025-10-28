@@ -1,41 +1,125 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Universal UI — Web Components Demo</title>
+    <title>Universal UI - Button Demo</title>
     <link rel="stylesheet" href="src/styles/tokens.css" />
-    <link rel="stylesheet" href="src/styles/base.css" />
+    <style>
+      body {
+        font-family: var(--uds-font-sans);
+        margin: 0;
+        padding: 20px;
+        background-color: var(--uds-color-bg);
+        color: var(--uds-color-text);
+      }
+      
+      header {
+        margin-bottom: 40px;
+      }
+      
+      h1, h2 {
+        margin-bottom: 16px;
+      }
+      
+      .demo-section {
+        margin-bottom: 32px;
+      }
+      
+      .demo-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+        align-items: center;
+      }
+      
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 8px 16px;
+        background: var(--uds-color-bg-subtle);
+        border: 1px solid var(--uds-color-border);
+        border-radius: var(--uds-radius-md);
+        cursor: pointer;
+        color: var(--uds-color-text);
+      }
+    </style>
     <script type="module" src="src/index.js"></script>
   </head>
   <body>
-    <header class="uui-page-header">
-      <h1>Universal UI（Web Components）</h1>
-      <p>基础架构与 Button 组件演示</p>
+    <button class="theme-toggle" id="theme-toggle">Toggle Dark Mode</button>
+    
+    <header>
+      <h1>UDS Button Component</h1>
+      <p>A demo of the Universal Design System button component</p>
     </header>
 
-    <main class="uui-container">
-      <section>
-        <h2>Buttons</h2>
+    <main>
+      <section class="demo-section">
+        <h2>Button Variants</h2>
         <div class="demo-row">
-          <f7-button>默认按钮</f7-button>
-          <f7-button variant="primary">主要按钮</f7-button>
-          <f7-button variant="outline">描边按钮</f7-button>
-          <f7-button variant="ghost">幽灵按钮</f7-button>
+          <uds-button>Default Button</uds-button>
+          <uds-button variant="solid">Solid Button</uds-button>
+          <uds-button variant="outline">Outline Button</uds-button>
+          <uds-button variant="ghost">Ghost Button</uds-button>
         </div>
-
+      </section>
+      
+      <section class="demo-section">
+        <h2>Button Sizes</h2>
         <div class="demo-row">
-          <f7-button size="sm">小按钮</f7-button>
-          <f7-button>中按钮</f7-button>
-          <f7-button size="lg">大按钮</f7-button>
+          <uds-button size="sm">Small Button</uds-button>
+          <uds-button>Medium Button</uds-button>
+          <uds-button size="lg">Large Button</uds-button>
         </div>
-
+      </section>
+      
+      <section class="demo-section">
+        <h2>Button States</h2>
         <div class="demo-row">
-          <f7-button loading>加载中</f7-button>
-          <f7-button disabled>禁用状态</f7-button>
+          <uds-button disabled>Disabled Button</uds-button>
+          <uds-button loading>Loading Button</uds-button>
+        </div>
+      </section>
+      
+      <section class="demo-section">
+        <h2>Buttons with Icons</h2>
+        <div class="demo-row">
+          <uds-button>
+            <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Add Item
+          </uds-button>
+          
+          <uds-button variant="outline">
+            <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Download
+          </uds-button>
         </div>
       </section>
     </main>
+    
+    <script>
+      // Theme toggle functionality
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+      });
+      
+      // Log button clicks
+      document.addEventListener('uds-click', (e) => {
+        if (e.target.tagName.toLowerCase() === 'uds-button') {
+          console.log('Button clicked:', e.target.textContent.trim());
+        }
+      });
+    </script>
   </body>
-  </html>
+</html>
 

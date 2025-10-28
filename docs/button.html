@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UDS Button Component</title>
+  <link rel="stylesheet" href="../src/styles/tokens.css">
+  <style>
+    body {
+      font-family: var(--uds-font-sans);
+      margin: 0;
+      padding: 20px;
+      background-color: var(--uds-color-bg);
+      color: var(--uds-color-text);
+    }
+    
+    .demo-section {
+      margin-bottom: 32px;
+    }
+    
+    .demo-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    
+    .code-block {
+      background: var(--uds-color-bg-subtle);
+      border: 1px solid var(--uds-color-border);
+      border-radius: var(--uds-radius-md);
+      padding: 16px;
+      margin: 16px 0;
+      overflow: auto;
+      font-family: monospace;
+      display: none; /* 默认隐藏代码块 */
+    }
+    
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--uds-color-bg-subtle);
+      border: 1px solid var(--uds-color-border);
+      border-radius: var(--uds-radius-md);
+      padding: 8px 16px;
+      margin: 16px 0;
+      font-family: var(--uds-font-sans);
+      font-size: 14px;
+      color: var(--uds-color-text-subtle);
+    }
+    
+    .code-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--uds-color-primary);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .code-toggle-btn:hover {
+      text-decoration: underline;
+    }
+    
+    .code-toggle-btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s;
+    }
+    
+    .code-toggle-btn.expanded svg {
+      transform: rotate(180deg);
+    }
+  </style>
+  <script type="module" src="../src/index.js"></script>
+  <script>
+    // 监听来自父页面的消息，用于主题切换
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'themeChange') {
+        if (event.data.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.body.classList.add('dark-theme');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          document.body.classList.remove('dark-theme');
+        }
+      }
+    });
+    
+    // 检查URL参数中是否有主题设置
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.body.classList.add('dark-theme');
+    }
+    
+    // 代码块展开/隐藏功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 为所有代码块添加展开/隐藏按钮
+      const codeBlocks = document.querySelectorAll('.code-block');
+      codeBlocks.forEach((codeBlock, index) => {
+        // 创建代码块头部
+        const header = document.createElement('div');
+        header.className = 'code-block-header';
+        header.innerHTML = '<span>示例代码</span>';
+        
+        // 创建展开/隐藏按钮
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'code-toggle-btn';
+        toggleBtn.innerHTML = '显示代码 <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.setAttribute('aria-controls', 'code-block-' + index);
+        
+        // 添加按钮点击事件
+        toggleBtn.addEventListener('click', function() {
+          const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+          toggleBtn.setAttribute('aria-expanded', !expanded);
+          
+          if (expanded) {
+            // 隐藏代码块
+            codeBlock.style.display = 'none';
+            toggleBtn.innerHTML = '显示代码 <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            toggleBtn.classList.remove('expanded');
+          } else {
+            // 显示代码块
+            codeBlock.style.display = 'block';
+            toggleBtn.innerHTML = '隐藏代码 <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            toggleBtn.classList.add('expanded');
+          }
+        });
+        
+        // 将按钮添加到头部
+        header.appendChild(toggleBtn);
+        
+        // 将头部插入到代码块前面
+        codeBlock.parentNode.insertBefore(header, codeBlock);
+        
+        // 设置代码块ID
+        codeBlock.id = 'code-block-' + index;
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Button 按钮</h1>
+  <p>按钮用于触发一个操作或事件，如提交表单、打开对话框、取消操作或执行删除操作。</p>
+  
+  <section class="demo-section">
+    <h2>基础用法</h2>
+    <h3>实心按钮</h3>
+    <div class="demo-row">
+      <uds-button type="primary">主要按钮</uds-button>
+      <uds-button type="secondary" >次要按钮</uds-button>
+      <uds-button type="danger" >危险按钮</uds-button>
+      <uds-button >默认按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary"&gt;主要按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary"&gt;次要按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger"&gt;危险按钮&lt;/uds-button&gt;
+&lt;uds-button&gt;默认按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+
+    <h3>描边按钮</h3>
+    <div class="demo-row">
+      <uds-button type="primary" plain>主要描边按钮</uds-button>
+      <uds-button type="secondary" plain>次要描边按钮</uds-button>
+      <uds-button type="danger" plain>危险描边按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary" plain&gt;主要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" plain&gt;次要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" plain&gt;危险描边按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+
+    <h3>圆角按钮</h3>
+    <div class="demo-row">
+      <uds-button type="primary" round>主要圆角按钮</uds-button>
+      <uds-button type="secondary" round>次要圆角按钮</uds-button>
+      <uds-button type="danger" round>危险圆角按钮</uds-button>
+      <uds-button type="primary" plain round>描边圆角按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary" round&gt;主要圆角按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" round&gt;次要圆角按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" round&gt;危险圆角按钮&lt;/uds-button&gt;
+&lt;uds-button type="primary" plain round&gt;描边圆角按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+  </section>
+  
+  <section class="demo-section">
+    <h2>组合使用</h2>
+    <div class="demo-row">
+      <uds-button type="primary" plain>主要轮廓按钮</uds-button>
+      <uds-button type="secondary">次要幽灵按钮</uds-button>
+      <uds-button type="text">文本按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary" plain&gt;主要轮廓按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary"&gt;次要幽灵按钮&lt;/uds-button&gt;
+&lt;uds-button type="text"&gt;文本按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+  </section>
+  
+  <section class="demo-section">
+    <h2>按钮尺寸</h2>
+    <div class="demo-row">
+      <uds-button size="xs">超小按钮</uds-button>
+      <uds-button size="sm">小按钮</uds-button>
+      <uds-button>中按钮</uds-button>
+      <uds-button size="lg">大按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button size="xs"&gt;超小按钮&lt;/uds-button&gt;
+&lt;uds-button size="sm"&gt;小按钮&lt;/uds-button&gt;
+&lt;uds-button&gt;中按钮&lt;/uds-button&gt;
+&lt;uds-button size="lg"&gt;大按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+    <p>注意：超小尺寸按钮(xs)专为移动端设计，在移动端使用时不会显示hover效果。</p>
+  </section>
+  
+  <section class="demo-section">
+    <h2>按钮状态</h2>
+    <div class="demo-row">
+      <uds-button type="primary" disabled onclick="alert('禁用主要按钮点击')">禁用主要按钮</uds-button>
+      <uds-button type="secondary" disabled onclick="alert('禁用次要按钮点击')">禁用次要按钮</uds-button>
+      <uds-button type="danger" disabled onclick="alert('禁用危险按钮点击')">禁用危险按钮</uds-button>
+      <uds-button disabled onclick="alert('禁用默认按钮点击')">禁用默认按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary" disabled&gt;禁用主要按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" disabled&gt;禁用次要按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" disabled&gt;禁用危险按钮&lt;/uds-button&gt;
+&lt;uds-button disabled&gt;禁用默认按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+
+    <div class="demo-row">
+      <uds-button type="primary" plain disabled>禁用主要描边按钮</uds-button>
+      <uds-button type="secondary" plain disabled>禁用次要描边按钮</uds-button>
+      <uds-button type="danger" plain disabled>禁用危险描边按钮</uds-button>
+      <uds-button type="text" disabled>禁用文本按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary" plain disabled&gt;禁用主要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" plain disabled&gt;禁用次要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" plain disabled&gt;禁用危险描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="text" disabled&gt;禁用文本按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+
+    <h3>加载状态</h3>
+     <div class="demo-row">
+       <uds-button loading>默认加载中</uds-button>
+       <uds-button type="primary" loading>主要按钮加载中</uds-button>
+       <uds-button type="secondary" loading>次要按钮加载中</uds-button>
+       <uds-button type="danger" loading>危险按钮加载中</uds-button>
+     </div>
+     <div class="code-block">
+       <pre><code>&lt;uds-button loading&gt;默认加载中&lt;/uds-button&gt;
+&lt;uds-button type="primary" loading&gt;主要按钮加载中&lt;/uds-button&gt;
+&lt;uds-button type="secondary" loading&gt;次要按钮加载中&lt;/uds-button&gt;
+&lt;uds-button type="danger" loading&gt;危险按钮加载中&lt;/uds-button&gt;</code></pre>
+     </div>
+     
+     <div class="demo-row">
+       <uds-button plain loading>描边默认加载中</uds-button>
+       <uds-button type="primary" plain loading>描边主要加载中</uds-button>
+       <uds-button type="secondary" plain loading>描边次要加载中</uds-button>
+       <uds-button type="danger" plain loading>描边危险加载中</uds-button>
+     </div>
+     <div class="code-block">
+       <pre><code>&lt;uds-button plain loading&gt;描边默认加载中&lt;/uds-button&gt;
+&lt;uds-button type="primary" plain loading&gt;描边主要加载中&lt;/uds-button&gt;
+&lt;uds-button type="secondary" plain loading&gt;描边次要加载中&lt;/uds-button&gt;
+&lt;uds-button type="danger" plain loading&gt;描边危险加载中&lt;/uds-button&gt;</code></pre>
+     </div>
+  </section>
+  
+  <section class="demo-section">
+    <h2>按钮形状</h2>
+    <div class="demo-row">
+      <uds-button round>圆角按钮</uds-button>
+      <uds-button>直角按钮</uds-button>
+    </div>
+    <div class="demo-row">
+      <uds-button round size="sm">小圆角按钮</uds-button>
+      <uds-button round size="md">中圆角按钮</uds-button>
+      <uds-button round size="lg">大圆角按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button round&gt;圆角按钮&lt;/uds-button&gt;
+&lt;uds-button&gt;直角按钮&lt;/uds-button&gt;
+
+&lt;uds-button round size="sm"&gt;小圆角按钮&lt;/uds-button&gt;
+&lt;uds-button round size="md"&gt;中圆角按钮&lt;/uds-button&gt;
+&lt;uds-button round size="lg"&gt;大圆角按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+  </section>
+  
+  <section class="demo-section">
+    <h2>带图标的按钮</h2>
+    <div class="demo-row">
+      <uds-button>
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        添加项目
+      </uds-button>
+      
+      <uds-button plain>
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        下载文件
+      </uds-button>
+      
+      <uds-button type="primary">
+        前往下一步
+        <svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  添加项目
+&lt;/uds-button&gt;
+
+&lt;uds-button plain&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  下载文件
+&lt;/uds-button&gt;
+
+&lt;uds-button type="primary"&gt;
+  前往下一步
+  &lt;svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+&lt;/uds-button&gt;</code></pre>
+    </div>
+
+    <h3>左右都有图标的按钮</h3>
+    <div class="demo-row">
+      <uds-button type="primary">
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        确认操作
+        <svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </uds-button>
+      
+      <uds-button type="secondary">
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        返回首页
+        <svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </uds-button>
+      
+      <uds-button type="danger">
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        删除确认
+        <svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary"&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  确认操作
+  &lt;svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+&lt;/uds-button&gt;
+
+&lt;uds-button type="secondary"&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  返回首页
+  &lt;svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+&lt;/uds-button&gt;
+
+&lt;uds-button type="danger"&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  删除确认
+  &lt;svg slot="icon-right" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+&lt;/uds-button&gt;</code></pre>
+    </div>
+
+    <h3>不同类型的带图标按钮</h3>
+    <div class="demo-row">
+      <uds-button type="primary">
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        主要按钮
+      </uds-button>
+      
+      <uds-button type="secondary">
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        次要按钮
+      </uds-button>
+      
+      <uds-button type="danger">
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        危险按钮
+      </uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary"&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  主要按钮
+&lt;/uds-button&gt;
+
+&lt;uds-button type="secondary"&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  次要按钮
+&lt;/uds-button&gt;
+
+&lt;uds-button type="danger"&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  危险按钮
+&lt;/uds-button&gt;</code></pre>
+    </div>
+
+    <div class="demo-row">
+      <uds-button type="primary" plain>
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        主要描边按钮
+      </uds-button>
+      
+      <uds-button type="secondary" plain>
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        次要描边按钮
+      </uds-button>
+      
+      <uds-button type="danger" plain>
+        <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        危险描边按钮
+      </uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary" plain&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  主要描边按钮
+&lt;/uds-button&gt;
+
+&lt;uds-button type="secondary" plain&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  次要描边按钮
+&lt;/uds-button&gt;
+
+&lt;uds-button type="danger" plain&gt;
+  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
+  &lt;/svg&gt;
+  危险描边按钮
+&lt;/uds-button&gt;</code></pre>
+    </div>
+  </section>
+  
+  <section class="demo-section">
+    <h2>API</h2>
+    <h3>属性</h3>
+    <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>属性</th>
+          <th>说明</th>
+          <th>类型</th>
+          <th>默认值</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>type</td>
+          <td>按钮类型，决定按钮的颜色和样式</td>
+          <td>primary | secondary | danger | text | ghost</td>
+          <td>ghost</td>
+        </tr>
+        <tr>
+          <td>plain</td>
+          <td>是否使用轮廓样式，设置为true时会应用outline样式</td>
+          <td>boolean</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>size</td>
+          <td>按钮尺寸，其中xs为超小尺寸，适用于移动端</td>
+          <td>xs | sm | md | lg</td>
+          <td>md</td>
+        </tr>
+        <tr>
+          <td>round</td>
+          <td>是否使用圆角，默认为直角</td>
+          <td>boolean</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>disabled</td>
+          <td>是否禁用</td>
+          <td>boolean</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>loading</td>
+          <td>是否加载中</td>
+          <td>boolean</td>
+          <td>false</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="color: #ff4d4f; margin-top: 8px;">注意：之前的variant属性已被移除，请使用type和plain属性组合来控制按钮样式</p>
+    
+    <h3>插槽</h3>
+    <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>默认</td>
+          <td>按钮内容</td>
+        </tr>
+        <tr>
+          <td>icon</td>
+          <td>按钮左侧图标</td>
+        </tr>
+        <tr>
+          <td>icon-right</td>
+          <td>按钮右侧图标</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>
