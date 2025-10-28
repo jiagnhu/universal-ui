@@ -1,0 +1,371 @@
+:host {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--uds-font-sans);
+  font-size: var(--uds-fs-md, 16px);
+  line-height: var(--uds-line, 1.5);
+  padding: 0 8px;
+  height: calc(var(--uds-cntl-h, 40px) - 8px);
+  cursor: pointer;
+  border: 1px solid rgb(220, 223, 230);
+  transition: background-color 0.2s, transform 0.12s, opacity 0.2s;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  font-size: var(--uds-fs-md);
+}
+
+/* Button shapes */
+.button {
+  border-radius: 6px; /* 默认所有按钮都有圆角 */
+}
+
+.button--sm {
+  border-radius: 4px;
+}
+
+.button--lg {
+  border-radius: 8px;
+}
+
+/* 当添加round属性时，设置为圆形 */
+.button--round {
+  border-radius: 20px;
+}
+
+/* Icon slots styling */
+/* ::slotted([slot="icon"]) {
+  margin-right: 4px;
+}
+
+::slotted([slot="icon-right"]) {
+  margin-left: 4px;
+} */
+
+/* Variants */
+.button--solid {
+  background-color: var(--uds-btn-bg, var(--uds-color-primary));
+  color: var(--uds-btn-fg, #ffffff);
+  border: none;
+}
+
+.button--solid:hover {
+  background-color: var(--uds-btn-bg-hover, var(--uds-color-primary-hover));
+}
+
+.button--solid:active {
+  background-color: var(--uds-btn-bg-active, var(--uds-color-primary-active));
+  transform: scale(0.98);
+}
+
+.button--outline {
+  background-color: transparent;
+  color: var(--uds-btn-outline-color);
+  border-color: var(--uds-btn-outline-border, var(--uds-color-border));
+}
+
+.button--outline:hover {
+  background-color: var(--uds-color-bg-subtle, #f7f7f8);
+}
+
+.button--outline:active {
+  background-color: var(--uds-color-border, #e5e7eb);
+  transform: scale(0.98);
+}
+
+/* 轮廓按钮类型特殊处理 */
+.button--outline.button--primary {
+  --uds-btn-outline-color: var(--uds-color-primary);
+  --uds-btn-outline-border: var(--uds-color-primary);
+}
+
+.button--outline.button--primary:hover {
+  background-color: var(--uds-color-primary-outline-hover-rgb);
+  border-color: var(--uds-color-primary-outline-hover-rgb);
+}
+
+.button--outline.button--secondary {
+  --uds-btn-outline-color: var(--uds-color-secondary);
+  --uds-btn-outline-border: var(--uds-color-secondary);
+  --uds-btn-outline-color: var(--uds-color-secondary-text);
+
+}
+
+.button--outline.button--secondary:hover {
+  background-color: var(--uds-color-secondary-outline-hover-rgb);
+  border-color: var(--uds-color-secondary-outline-hover-rgb);
+}
+
+.button--outline.button--danger {
+  --uds-btn-outline-color: var(--uds-color-danger);
+  --uds-btn-outline-border: var(--uds-color-danger);
+}
+
+.button--outline.button--danger:hover {
+  background-color: var(--uds-color-danger-outline-hover-rgb);
+  border-color: var(--uds-color-danger-outline-hover-rgb);
+}
+
+.button--ghost {
+  background-color: transparent;
+  color: var(--uds-btn-ghost-color, var(--uds-color-text, #111827));
+}
+
+.button--ghost:hover {
+  background-color: var(--uds-color-bg-subtle, #f7f7f8);
+}
+
+.button--ghost:active {
+  background-color: var(--uds-color-border, #e5e7eb);
+  transform: scale(0.98);
+}
+
+/* 幽灵按钮类型特殊处理 */
+.button--ghost.button--primary {
+  --uds-btn-ghost-color: var(--uds-color-primary);
+}
+
+.button--ghost.button--secondary {
+  --uds-btn-ghost-color: var(--uds-color-secondary);
+}
+
+.button--ghost.button--danger {
+  --uds-btn-ghost-color: var(--uds-color-danger);
+}
+
+.button--text {
+  background-color: transparent;
+  color: var(--uds-btn-text-color, var(--uds-color-text, #111827));
+  padding: 0;
+  height: auto;
+  border: none;
+}
+
+.button--text:hover {
+  text-decoration: underline;
+}
+
+.button--text:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* 文本按钮类型特殊处理 */
+.button--text.button--primary {
+  --uds-btn-text-color: var(--uds-color-primary);
+}
+
+.button--text.button--secondary {
+  --uds-btn-text-color: var(--uds-color-secondary);
+}
+
+.button--text.button--danger {
+  --uds-btn-text-color: var(--uds-color-danger);
+}
+
+/* Sizes */
+.button--sm {
+  height: calc(var(--uds-cntl-h, 40px) - 12px);
+  font-size: var(--uds-fs-md);
+  padding: 0 4px;
+}
+
+.button--lg {
+  height: calc(var(--uds-cntl-h, 40px) + 4px);
+  font-size: var(--uds-fs-md);
+  padding: 0 12px;
+}
+
+.button--xs {
+  height: calc(var(--uds-cntl-h, 40px) - 16px);
+  font-size: var(--uds-fs-sm, 14px);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+/* States */
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--uds-focus-ring, #2563eb);
+}
+
+.button[disabled], .button--loading {
+  cursor: not-allowed;
+  color: var(--uds-color-text-muted);
+}
+
+.button--loading {
+  position: relative;
+}
+
+.button--loading > * {
+  visibility: hidden;
+}
+
+.button--loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-top: -9px;
+  margin-left: -8px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  border-top-color: transparent;
+  animation: button-loading-spinner 0.8s linear infinite;
+}
+
+/* 实心按钮加载状态图标颜色 */
+.button--solid.button--loading::after {
+  border-color: #ffffff;
+  border-top-color: transparent;
+}
+
+/* 描边按钮加载状态图标颜色 */
+.button--outline.button--loading::after {
+  border-color: var(--uds-btn-outline-color);
+  border-top-color: transparent;
+}
+
+/* 不同类型描边按钮的加载状态图标颜色 */
+.button--outline.button--primary.button--loading::after {
+  border-color: var(--uds-color-primary);
+  border-top-color: transparent;
+}
+
+.button--outline.button--secondary.button--loading::after {
+  border-color: var(--uds-color-secondary);
+  border-top-color: transparent;
+}
+
+.button--outline.button--danger.button--loading::after {
+  border-color: var(--uds-color-danger);
+  border-top-color: transparent;
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 实心按钮禁用状态 */
+.button--solid[disabled] {
+  background-color: #c0c4cc;
+  border-color: #c0c4cc;
+  color: #ffffff;
+}
+
+.button--solid.button--primary[disabled] {
+  background-color: var(--uds-color-primary-disabled-rgb);
+  border-color: none;
+}
+
+.button--solid.button--secondary[disabled] {
+  background-color: var(--uds-color-secondary-disabled-rgb);
+  border-color: none;
+}
+
+.button--solid.button--danger[disabled] {
+  background-color: var(--uds-color-danger-disabled-rgb);
+  border-color: none;
+}
+
+/* 描边按钮禁用状态 */
+.button--outline[disabled] {
+  background-color: #f5f7fa;
+  border-color: #e4e7ed;
+  color: #ffffff;
+}
+
+.button--outline.button--primary[disabled] {
+  border-color: var(--uds-color-primary-disabled-rgb);
+  color: var(--uds-color-primary-disabled-rgb);
+  background-color: transparent;
+}
+
+.button--outline.button--secondary[disabled] {
+  border-color: var(--uds-color-secondary-disabled-rgb);
+  color: var(--uds-color-secondary-disabled-rgb);
+  background-color: transparent;
+}
+
+.button--outline.button--danger[disabled] {
+  border-color: var(--uds-color-danger-disabled-rgb);
+  color: var(--uds-color-danger-disabled-rgb);
+  background-color: transparent;
+}
+
+/* 文本按钮的禁用状态 */
+.button--text[disabled] {
+  color: var(--uds-color-text-muted);
+  text-decoration: none;
+}
+
+/* Loading spinner已移至::after伪元素中 */
+
+/* Button Types */
+.button--primary {
+  --uds-btn-bg: var(--uds-color-primary);
+  --uds-btn-bg-hover: var(--uds-color-primary-hover);
+  --uds-btn-bg-active: var(--uds-color-primary-active);
+  --uds-btn-fg: var(--uds-color-primary-text);
+}
+
+.button--secondary {
+  --uds-btn-bg: var(--uds-color-secondary);
+  --uds-btn-bg-hover: var(--uds-color-secondary-hover);
+  --uds-btn-bg-active: var(--uds-color-secondary-active);
+  --uds-btn-fg: var(--uds-color-secondary-text);
+}
+
+.button--danger {
+  --uds-btn-bg: var(--uds-color-danger);
+  --uds-btn-bg-hover: var(--uds-color-danger-hover);
+  --uds-btn-bg-active: var(--uds-color-danger-active);
+  --uds-btn-fg: var(--uds-color-danger-text);
+}
+
+/* Slots */
+::slotted([slot="icon"]) {
+  width: 1em;
+  height: 1em;
+  display: inline-flex;
+}
+
+/* 移动端媒体查询 - 移除hover效果 */
+@media (max-width: 768px) {
+  .button:hover {
+    background-color: inherit;
+    border-color: inherit;
+    text-decoration: none;
+  }
+  
+  .button--solid:hover {
+    background-color: var(--uds-btn-bg, var(--uds-color-primary));
+  }
+  
+  .button--outline:hover {
+    background-color: transparent;
+  }
+  
+  .button--ghost:hover {
+    background-color: transparent;
+  }
+  
+  .button--text:hover {
+    text-decoration: none;
+  }
+}

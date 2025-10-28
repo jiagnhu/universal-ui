@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UDS Button Component</title>
-  <link rel="stylesheet" href="../src/styles/tokens.css">
+  <!-- 引入样式文件 -->
+  <link rel="stylesheet" href="../dist/styles/tokens.css">
+  <!-- 引入本地构建的universal-design-system包 -->
+  <script src="../dist/index.umd.js"></script>
   <style>
     body {
       font-family: var(--uds-font-sans);
@@ -76,7 +79,6 @@
       transform: rotate(180deg);
     }
   </style>
-  <script type="module" src="../src/index.js"></script>
   <script>
     // 监听来自父页面的消息，用于主题切换
     window.addEventListener('message', function(event) {

@@ -7,7 +7,7 @@ package-lock.json
 yarn.lock
 
 # 构建输出
-/dist
+# /dist
 /build
 /out
 /.next

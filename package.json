@@ -1,6 +1,6 @@
 {
   "name": "universal-design-system",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "通用设计系统组件库",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -8,8 +8,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build"
   },
@@ -22,12 +23,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@vitejs/plugin-legacy": "^6.1.1",
     "postcss": "^8.5.6",
-    "rollup": "^2.79.2",
-    "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-terser": "^7.0.2"
+    "vite": "^6.4.1",
+    "vite-plugin-static-copy": "^3.1.4"
   },
   "publishConfig": {
     "access": "public"

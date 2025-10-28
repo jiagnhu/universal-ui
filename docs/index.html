@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Universal Design System - 组件文档</title>
-  <link rel="stylesheet" href="../src/styles/tokens.css">
+  <link rel="stylesheet" href="../dist/styles/tokens.css">
   <style>
     body {
       font-family: var(--uds-font-sans);
@@ -134,7 +134,9 @@
       border: none;
     }
   </style>
-  <script type="module" src="../src/index.js"></script>
+  <!-- 引入样式文件 -->
+  <!-- 引入本地构建的universal-design-system包 -->
+  <script src="../dist/index.umd.js"></script>
 </head>
 <body>
   <button class="theme-toggle" id="theme-toggle">切换暗色模式</button>

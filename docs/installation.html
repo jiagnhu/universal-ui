@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UDS 安装指南</title>
-  <link rel="stylesheet" href="../src/styles/tokens.css">
+  <link rel="stylesheet" href="../dist/styles/tokens.css">
   <style>
     body {
       font-family: var(--uds-font-sans);
@@ -119,7 +119,34 @@ import 'universal-design-system/dist/components/button';</code></pre>
       </div>
       
       <div class="step">
-        <h2><span class="step-number">3</span>在HTML中使用组件</h2>
+        <h2><span class="step-number">3</span>在原生环境中使用组件</h2>
+        <p>在原生HTML/JavaScript环境中使用组件库有两种方式：</p>
+        
+        <h3>方式一：通过CDN引入</h3>
+        <p>可以通过CDN直接在HTML中引入组件库：</p>
+        <div class="code-block">
+          <pre><code>&lt;!-- 在HTML头部引入样式和脚本 --&gt;
+&lt;head&gt;
+  &lt;!-- 引入样式文件 --&gt;
+  &lt;link rel="stylesheet" href="https://unpkg.com/universal-design-system/dist/styles/tokens.css"&gt;
+  &lt;!-- 引入组件库 --&gt;
+  &lt;script src="https://unpkg.com/universal-design-system/dist/index.umd.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+        </div>
+        
+        <h3>方式二：本地引入</h3>
+        <p>如果已通过npm安装，可以直接引用本地文件：</p>
+        <div class="code-block">
+          <pre><code>&lt;!-- 在HTML头部引入样式和脚本 --&gt;
+&lt;head&gt;
+  &lt;!-- 引入样式文件 --&gt;
+  &lt;link rel="stylesheet" href="./node_modules/universal-design-system/dist/styles/tokens.css"&gt;
+  &lt;!-- 引入组件库 --&gt;
+  &lt;script src="./node_modules/universal-design-system/dist/index.umd.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+        </div>
+        
+        <h3>使用组件</h3>
         <p>引入组件库后，可以直接在HTML中使用组件：</p>
         <div class="code-block">
           <pre><code>&lt;!-- 基础按钮 --&gt;
@@ -143,6 +170,26 @@ import 'universal-design-system/dist/components/button';</code></pre>
   &lt;/svg&gt;
   带图标的按钮
 &lt;/uds-button&gt;</code></pre>
+        </div>
+        
+        <h3>JavaScript交互</h3>
+        <p>在原生JavaScript中监听组件事件：</p>
+        <div class="code-block">
+          <pre><code>// 获取按钮元素
+const button = document.querySelector('uds-button');
+
+// 添加点击事件监听
+button.addEventListener('click', () => {
+  console.log('按钮被点击了');
+});
+
+// 动态修改属性
+button.setAttribute('type', 'primary');
+button.setAttribute('disabled', 'true');
+
+// 或者直接设置属性
+button.type = 'primary';
+button.disabled = true;</code></pre>
         </div>
       </div>
     </div>
