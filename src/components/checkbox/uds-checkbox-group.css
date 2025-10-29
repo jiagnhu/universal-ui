@@ -1,0 +1,10 @@
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-group[horizontal] {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}

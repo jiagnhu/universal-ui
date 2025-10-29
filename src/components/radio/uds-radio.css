@@ -1,0 +1,343 @@
+/* @import '../../styles/tokens.css'; */
+
+.radio-container {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer !important;
+  user-select: none;
+  font-family: var(--uds-font-family);
+  font-size: var(--uds-font-size-md);
+  line-height: 1.5;
+  color: var(--uds-color-text);
+  margin: 8px 0;
+  pointer-events: auto;
+}
+
+/* 样式变体 */
+.radio-container.style-text {
+  /* 默认样式，不需要额外设置 */
+}
+
+.radio-container.style-ghost {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: transparent;
+}
+
+.radio-container.style-ghost:hover {
+  background-color: var(--uds-color-bg-subtle, #f7f7f8);
+}
+
+.radio-container.style-outline {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--uds-color-border);
+  background-color: transparent;
+}
+
+.radio-container.style-outline:hover {
+  background-color: var(--uds-color-bg-subtle, #f7f7f8);
+}
+
+.radio-container.style-solid {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: var(--uds-color-primary-light, rgba(var(--uds-color-primary-rgb), 0.1));
+  border: none;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radio-label {
+  cursor: pointer;
+}
+
+.radio-checkmark {
+  position: relative;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 1px solid var(--uds-color-border);
+  border-radius: 50%;
+  margin-right: 8px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.radio-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--uds-color-primary);
+}
+
+/* 显示选中状态 */
+.radio-input:checked ~ .radio-checkmark:after {
+  display: block;
+}
+
+.radio-input:checked ~ .radio-checkmark {
+  border-color: var(--uds-color-primary);
+}
+
+/* Hover 状态 */
+.radio-container:hover .radio-checkmark {
+  border-color: var(--uds-color-primary-hover);
+}
+
+
+/* 禁用状态 */
+.radio-container.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+.radio-container.disabled .radio-checkmark {
+  background-color: var(--uds-color-disabled-bg);
+  border-color: var(--uds-color-disabled-border);
+  cursor: not-allowed !important;
+}
+
+.radio-container.disabled .radio-label {
+  cursor: not-allowed !important;
+}
+
+
+
+/* 不同类型的样式 */
+/* Primary 类型 */
+.radio-container.primary {
+  color: var(--uds-color-primary);
+}
+
+.radio-container.primary .radio-checkmark:after {
+  background: var(--uds-color-primary);
+}
+
+.radio-container.primary .radio-input:checked ~ .radio-checkmark {
+  border-color: var(--uds-color-primary);
+}
+
+.radio-container.primary:hover .radio-checkmark, .radio-container.primary:hover .radio-label {
+  border-color: var(--uds-color-primary-hover);
+  color: var(--uds-color-primary-hover);
+}
+
+.radio-container.primary:active .radio-label {
+  color: var(--uds-color-primary-active);
+}
+
+.radio-container.primary:active .radio-checkmark {
+  background-color: var(--uds-color-primary-ghost-hover-rgb);
+}
+
+/* Primary 类型的样式变体 */
+.radio-container.primary.style-ghost:hover {
+  background-color: var(--uds-color-primary-ghost-hover-rgb, rgba(var(--uds-color-primary-rgb), 0.1));
+}
+
+.radio-container.primary.style-ghost:active {
+  background-color: var(--uds-color-primary-ghost-active-rgb, rgba(var(--uds-color-primary-rgb), 0.2));
+}
+
+.radio-container.primary.style-outline {
+  border-color: var(--uds-color-primary);
+}
+
+.radio-container.primary.style-outline:hover {
+  background-color: var(--uds-color-primary-ghost-hover-rgb);
+}
+
+.radio-container.primary.style-outline:active {
+  background-color: var(--uds-color-primary-ghost-active-rgb);
+}
+
+.radio-container.primary.style-solid {
+  background-color: var(--uds-color-primary);
+  color: var(--uds-color-bg);
+}
+
+.radio-container.primary.style-solid:hover {
+  background-color: var(--uds-color-primary-hover);
+}
+
+.radio-container.primary.style-solid:active {
+  background-color: var(--uds-color-primary-active);
+}
+
+.radio-container.primary.style-solid:hover .radio-label {
+  color: var(--uds-color-bg);
+}
+
+/* Secondary 类型 */
+.radio-container.secondary {
+  color: var(--uds-color-secondary);
+}
+
+.radio-container.secondary .radio-checkmark:after {
+  background: var(--uds-color-secondary);
+}
+
+.radio-container.secondary .radio-input:checked ~ .radio-checkmark {
+  border-color: var(--uds-color-secondary);
+}
+
+.radio-container.secondary:hover .radio-checkmark, .radio-container.secondary:hover .radio-label {
+  border-color: var(--uds-color-secondary-hover);
+  color: var(--uds-color-secondary-hover);
+}
+
+.radio-container.secondary:active .radio-label {
+  color: var(--uds-color-secondary-active);
+}
+
+.radio-container.secondary:active .radio-checkmark {
+  background-color: var(--uds-color-secondary-ghost-hover-rgb);
+}
+
+
+
+/* Secondary 类型的样式变体 */
+.radio-container.secondary.style-ghost:hover {
+  background-color: var(--uds-color-secondary-ghost-hover-rgb, rgba(var(--uds-color-secondary-rgb), 0.1));
+}
+
+.radio-container.secondary.style-ghost:active {
+  background-color: var(--uds-color-secondary-ghost-active-rgb, rgba(var(--uds-color-secondary-rgb), 0.2));
+}
+
+.radio-container.secondary.style-outline {
+  border-color: var(--uds-color-secondary);
+}
+
+.radio-container.secondary.style-outline:hover {
+  background-color: var(--uds-color-secondary-ghost-hover-rgb);
+}
+
+.radio-container.secondary.style-outline:active {
+  background-color: var(--uds-color-secondary-ghost-active-rgb);
+}
+
+.radio-container.secondary.style-solid {
+  background-color: var(--uds-color-secondary);
+  color: var(--uds-color-bg);
+}
+
+.radio-container.secondary.style-solid:hover {
+  background-color: var(--uds-color-secondary-hover);
+}
+
+.radio-container.secondary.style-solid:active {
+  background-color: var(--uds-color-secondary-active);
+}
+
+
+
+.radio-container.secondary.style-solid:hover .radio-label {
+  color: var(--uds-color-bg);
+}
+
+/* Danger 类型 */
+.radio-container.danger {
+  color: var(--uds-color-danger);
+}
+
+.radio-container.danger .radio-checkmark:after {
+  background: var(--uds-color-danger);
+}
+
+.radio-container.danger .radio-input:checked ~ .radio-checkmark {
+  border-color: var(--uds-color-danger);
+}
+
+.radio-container.danger:hover .radio-checkmark, .radio-container.danger:hover .radio-label {
+  border-color: var(--uds-color-danger-hover);
+  color: var(--uds-color-danger-hover);
+}
+
+.radio-container.danger:active .radio-label {
+  color: var(--uds-color-danger-active);
+}
+
+.radio-container.danger:active .radio-checkmark {
+  background-color: var(--uds-color-danger-ghost-hover-rgb);
+}
+
+/* Danger 类型的样式变体 */
+.radio-container.danger.style-ghost:hover {
+  background-color: var(--uds-color-danger-ghost-hover-rgb, rgba(var(--uds-color-danger-rgb), 0.1));
+}
+
+.radio-container.danger.style-ghost:active {
+  background-color: var(--uds-color-danger-ghost-active-rgb, rgba(var(--uds-color-danger-rgb), 0.2));
+}
+
+.radio-container.danger.style-outline {
+  border-color: var(--uds-color-danger);
+}
+
+.radio-container.danger.style-outline:hover {
+  background-color: var(--uds-color-danger-ghost-hover-rgb);
+}
+
+.radio-container.danger.style-outline:active {
+  background-color: var(--uds-color-danger-ghost-active-rgb);
+}
+
+
+
+.radio-container.danger.style-solid {
+  background-color: var(--uds-color-danger);
+  color: var(--uds-color-bg);
+}
+
+.radio-container.danger.style-solid:hover {
+  background-color: var(--uds-color-danger-hover);
+}
+
+.radio-container.danger.style-solid:active {
+  background-color: var(--uds-color-danger-active);
+}
+
+
+
+.radio-container.danger.style-solid:hover .radio-label {
+  color: var(--uds-color-bg);
+}
+
+/* 不同尺寸 */
+.radio-container.size-sm .radio-checkmark {
+  height: 14px;
+  width: 14px;
+}
+
+.radio-container.size-sm .radio-checkmark:after {
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+}
+
+.radio-container.size-lg .radio-checkmark {
+  height: 22px;
+  width: 22px;
+}
+
+.radio-container.size-lg .radio-checkmark:after {
+  top: 5px;
+  left: 5px;
+  width: 12px;
+  height: 12px;
+}

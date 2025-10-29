@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox 复选框 - Universal Design System</title>
+  <link rel="stylesheet" href="../dist/styles/tokens.css">
+  <!-- 引用共用JS文件 -->
+  <script src="js/common.js"></script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: var(--uds-color-text);
+      --heading-color: var(--uds-color-heading);
+      --border-color: var(--uds-color-border);
+      --code-bg: #f5f5f5;
+    }
+    
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #e0e0e0;
+      --heading-color: #ffffff;
+      --border-color: #444444;
+      --code-bg: #2a2a2a;
+    }
+    
+    body {
+      font-family: var(--uds-font-family);
+      color: var(--text-color);
+      line-height: 1.5;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1, h2, h3 {
+      color: var(--heading-color);
+    }
+    .demo-section {
+      margin: 32px 0;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+    .demo-block {
+      margin-bottom: 24px;
+    }
+    .demo-title {
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .code-block {
+      background-color: var(--code-bg);
+      padding: 16px;
+      border-radius: 4px;
+      margin: 16px 0;
+      font-family: monospace;
+      white-space: pre-wrap;
+      display: none; /* 默认隐藏代码块 */
+    }
+    
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 8px 16px;
+      margin: 16px 0;
+      font-family: var(--uds-font-family);
+      font-size: 14px;
+      color: var(--text-color);
+    }
+    
+    .code-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--uds-color-primary);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .code-toggle-btn:hover {
+      text-decoration: underline;
+    }
+    
+    .code-toggle-btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s;
+    }
+    
+    .code-toggle-btn.expanded svg {
+      transform: rotate(180deg);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f5f5f5;
+    }
+    .nav {
+      margin-bottom: 24px;
+    }
+    .nav a {
+      margin-right: 16px;
+      color: var(--uds-color-primary);
+      text-decoration: none;
+    }
+    .nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    // 监听来自父窗口的主题切换消息
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'themeChange') {
+        if (event.data.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Checkbox 复选框</h1>
+    <p>Checkbox 复选框用于在一组备选项中进行多选。</p>
+
+    <section class="demo-section">
+      <h2>基础用法</h2>
+      <div class="demo-block">
+        <div class="demo-title">基础复选框</div>
+        <uds-checkbox-group name="demo1">
+          <uds-checkbox value="1">选项1</uds-checkbox>
+          <uds-checkbox value="2">选项2</uds-checkbox>
+          <uds-checkbox value="3">选项3</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo1"&gt;
+  &lt;uds-checkbox value="1"&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3"&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+      
+      <div class="demo-block">
+        <div class="demo-title">不同样式</div>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+          <div>
+            <p>文本样式（默认）</p>
+            <uds-checkbox-group name="style-text">
+              <uds-checkbox value="1" text>选项1</uds-checkbox>
+              <uds-checkbox value="2" type="danger" text>选项2</uds-checkbox>
+              <uds-checkbox value="3" type="secondary" text>选项3</uds-checkbox>
+            </uds-checkbox-group>
+          </div>
+          <div>
+            <p>幽灵样式</p>
+            <uds-checkbox-group name="style-ghost">
+              <uds-checkbox value="1" ghost>选项1</uds-checkbox>
+              <uds-checkbox value="2" type="danger" ghost>选项2</uds-checkbox>
+              <uds-checkbox value="3" type="secondary" ghost>选项3</uds-checkbox>
+            </uds-checkbox-group>
+          </div>
+          <div>
+            <p>描边样式</p>
+            <uds-checkbox-group name="style-outline">
+              <uds-checkbox value="1" outline>选项1</uds-checkbox>
+              <uds-checkbox value="2" type="danger" outline>选项2</uds-checkbox>
+              <uds-checkbox value="3" type="secondary" outline>选项3</uds-checkbox>
+            </uds-checkbox-group>
+          </div>
+          <div>
+            <p>实心样式</p>
+            <uds-checkbox-group name="style-solid">
+              <uds-checkbox value="1" solid>选项1</uds-checkbox>
+              <uds-checkbox value="2" type="danger" solid>选项2</uds-checkbox>
+              <uds-checkbox value="3" type="secondary" solid>选项3</uds-checkbox>
+            </uds-checkbox-group>
+          </div>
+        </div>
+        <div class="code-block">&lt;!-- 文本样式（默认） --&gt;
+&lt;uds-checkbox-group name="style-text"&gt;
+  &lt;uds-checkbox value="1" text&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2" type="danger" text&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3" type="secondary" text&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;
+
+&lt;!-- 幽灵样式 --&gt;
+&lt;uds-checkbox-group name="style-ghost"&gt;
+  &lt;uds-checkbox value="1" ghost&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2" type="danger" ghost&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3" type="secondary" ghost&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;
+
+&lt;!-- 描边样式 --&gt;
+&lt;uds-checkbox-group name="style-outline"&gt;
+  &lt;uds-checkbox value="1" outline&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2" type="danger" outline&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3" type="secondary" outline&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;
+
+&lt;!-- Solid样式 --&gt;
+&lt;uds-checkbox-group name="style-solid"&gt;
+  &lt;uds-checkbox value="1" solid&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2" type="danger" solid&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3" type="secondary" solid&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">禁用状态和半选状态</div>
+        <uds-checkbox-group name="demo2">
+          <uds-checkbox value="1">正常选项</uds-checkbox>
+          <uds-checkbox value="2" indeterminate>半选状态</uds-checkbox>
+          <uds-checkbox value="3" disabled>禁用选项</uds-checkbox>
+          <uds-checkbox value="4" disabled type="danger">禁用选项</uds-checkbox>
+          <uds-checkbox value="5" disabled type="secondary">禁用选项</uds-checkbox>
+        </uds-checkbox-group>
+
+        <div class="code-block">&lt;uds-checkbox-group name="demo2"&gt;
+  &lt;uds-checkbox value="1"&gt;正常选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2" indeterminate&gt;半选状态&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3" disabled&gt;禁用选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="4" disabled type="danger"&gt;禁用选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="5" disabled type="secondary"&gt;禁用选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>不同类型</h2>
+      <div class="demo-block">
+        <div class="demo-title">主要类型</div>
+        <uds-checkbox-group name="demo3" type="primary">
+          <uds-checkbox value="1">Primary 选项</uds-checkbox>
+          <uds-checkbox value="2">Primary 选项</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo3" type="primary"&gt;
+  &lt;uds-checkbox value="1"&gt;Primary 选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;Primary 选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">次要类型</div>
+        <uds-checkbox-group name="demo4" type="secondary">
+          <uds-checkbox value="1">Secondary 选项</uds-checkbox>
+          <uds-checkbox value="2">Secondary 选项</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo4" type="secondary"&gt;
+  &lt;uds-checkbox value="1"&gt;Secondary 选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;Secondary 选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">危险类型</div>
+        <uds-checkbox-group name="demo5" type="danger">
+          <uds-checkbox value="1">Danger 选项</uds-checkbox>
+          <uds-checkbox value="2">Danger 选项</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo5" type="danger"&gt;
+  &lt;uds-checkbox value="1"&gt;Danger 选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;Danger 选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>不同尺寸</h2>
+      <div class="demo-block">
+        <div class="demo-title">小尺寸</div>
+        <uds-checkbox-group name="demo6" size="sm">
+          <uds-checkbox value="1">小尺寸选项</uds-checkbox>
+          <uds-checkbox value="2">小尺寸选项</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo6" size="sm"&gt;
+  &lt;uds-checkbox value="1"&gt;小尺寸选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;小尺寸选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">中等尺寸（默认）</div>
+        <uds-checkbox-group name="demo7">
+          <uds-checkbox value="1">中等尺寸选项</uds-checkbox>
+          <uds-checkbox value="2">中等尺寸选项</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo7"&gt;
+  &lt;uds-checkbox value="1"&gt;中等尺寸选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;中等尺寸选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">大尺寸</div>
+        <uds-checkbox-group name="demo8" size="lg">
+          <uds-checkbox value="1">大尺寸选项</uds-checkbox>
+          <uds-checkbox value="2">大尺寸选项</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo8" size="lg"&gt;
+  &lt;uds-checkbox value="1"&gt;大尺寸选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;大尺寸选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>水平排列</h2>
+      <div class="demo-block">
+        <div class="demo-title">水平排列</div>
+        <uds-checkbox-group name="demo9" horizontal>
+          <uds-checkbox value="1">选项1</uds-checkbox>
+          <uds-checkbox value="2">选项2</uds-checkbox>
+          <uds-checkbox value="3">选项3</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo9" horizontal&gt;
+  &lt;uds-checkbox value="1"&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3"&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>默认选中</h2>
+      <div class="demo-block">
+        <div class="demo-title">通过 checked 属性默认选中</div>
+        <uds-checkbox-group name="demo-default-checked">
+          <uds-checkbox value="1" checked>默认选中</uds-checkbox>
+          <uds-checkbox value="2">未选中</uds-checkbox>
+          <uds-checkbox value="3" checked>默认选中</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo-default-checked"&gt;
+  &lt;uds-checkbox value="1" checked&gt;默认选中&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;未选中&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3" checked&gt;默认选中&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">通过 value 属性默认选中</div>
+        <uds-checkbox-group name="demo-value-checked" value="1,3" all-checked>
+          <uds-checkbox value="1">选项1</uds-checkbox>
+          <uds-checkbox value="2">选项2</uds-checkbox>
+          <uds-checkbox value="3">选项3</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo-value-checked" value="1,3"&gt;
+  &lt;uds-checkbox value="1"&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3"&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>全选功能</h2>
+      <div class="demo-block">
+        <div class="demo-title">基础全选</div>
+        <uds-checkbox-group name="demo10" all-checked>
+          <uds-checkbox value="1">选项1</uds-checkbox>
+          <uds-checkbox value="2">选项2</uds-checkbox>
+          <uds-checkbox value="3">选项3</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo10" all-checked&gt;
+  &lt;uds-checkbox value="1"&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3"&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+      
+      <div class="demo-block">
+        <div class="demo-title">带禁用选项的全选</div>
+        <uds-checkbox-group name="demo-disabled-all" all-checked>
+          <uds-checkbox value="1">可选项1</uds-checkbox>
+          <uds-checkbox value="2">可选项2</uds-checkbox>
+          <uds-checkbox value="3" disabled>禁用选项</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo-disabled-all" all-checked&gt;
+  &lt;uds-checkbox value="1"&gt;可选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;可选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3" disabled&gt;禁用选项&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">自定义全选文本</div>
+        <uds-checkbox-group name="demo11" all-checked all-text="全部选择">
+          <uds-checkbox value="1">选项1</uds-checkbox>
+          <uds-checkbox value="2">选项2</uds-checkbox>
+          <uds-checkbox value="3">选项3</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo11" all-checked all-text="全部选择"&gt;
+  &lt;uds-checkbox value="1"&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2"&gt;选项2&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3"&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+
+      <div class="demo-block">
+        <div class="demo-title">带禁用选项的全选</div>
+        <uds-checkbox-group name="demo12" all-checked>
+          <uds-checkbox value="1">选项1</uds-checkbox>
+          <uds-checkbox value="2" disabled>禁用选项</uds-checkbox>
+          <uds-checkbox value="3">选项3</uds-checkbox>
+        </uds-checkbox-group>
+        <div class="code-block">&lt;uds-checkbox-group name="demo12" all-checked&gt;
+  &lt;uds-checkbox value="1"&gt;选项1&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="2" disabled&gt;禁用选项&lt;/uds-checkbox&gt;
+  &lt;uds-checkbox value="3"&gt;选项3&lt;/uds-checkbox&gt;
+&lt;/uds-checkbox-group&gt;</div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>API</h2>
+      <h3>Checkbox 属性</h3>
+      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+        <thead>
+          <tr>
+            <th>属性</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>type</td>
+            <td>复选框类型，决定复选框的颜色和样式</td>
+            <td>primary | secondary | danger</td>
+            <td>primary</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>复选框尺寸</td>
+            <td>sm | md | lg</td>
+            <td>md</td>
+          </tr>
+          <tr>
+            <td>text</td>
+            <td>文本样式（默认）</td>
+            <td>boolean</td>
+            <td>true</td>
+          </tr>
+          <tr>
+            <td>ghost</td>
+            <td>幽灵样式</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>outline</td>
+            <td>描边样式</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>solid</td>
+            <td>实心样式</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td>是否禁用</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>checked</td>
+            <td>是否选中</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>indeterminate</td>
+            <td>半选状态</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>复选框名称，通常由CheckboxGroup统一设置</td>
+            <td>string</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td>复选框值</td>
+            <td>string</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>CheckboxGroup 属性</h3>
+      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+        <thead>
+          <tr>
+            <th>属性</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td>复选框组名称</td>
+            <td>string</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td>复选框组类型，会应用到所有子复选框</td>
+            <td>primary | secondary | danger</td>
+            <td>primary</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>复选框组尺寸，会应用到所有子复选框</td>
+            <td>sm | md | lg</td>
+            <td>md</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td>是否禁用整个复选框组</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>horizontal</td>
+            <td>是否水平排列</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>all-checked</td>
+            <td>是否启用全选功能</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>all-text</td>
+            <td>全选复选框的文本</td>
+            <td>string</td>
+            <td>全选</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>事件</h3>
+      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+        <thead>
+          <tr>
+            <th>事件名称</th>
+            <th>说明</th>
+            <th>回调参数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>change</td>
+            <td>选中值变化时触发</td>
+            <td>event.detail.checked: 当前选中状态<br>event.detail.value: 当前值</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script type="module">
+    import '../src/components/checkbox/uds-checkbox.js';
+    import '../src/components/checkbox/uds-checkbox-group.js';
+  </script>
+</body>
+</html>

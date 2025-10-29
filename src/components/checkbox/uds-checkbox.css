@@ -1,0 +1,389 @@
+/* @import '../../styles/tokens.css'; */
+
+.checkbox-container {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer !important;
+  user-select: none;
+  font-family: var(--uds-font-family);
+  font-size: var(--uds-font-size-md);
+  line-height: 1.5;
+  color: var(--uds-color-text);
+  margin: 8px 0;
+  pointer-events: auto;
+}
+
+/* 样式变体 */
+.checkbox-container.style-text {
+  /* 默认样式，不需要额外设置 */
+}
+
+.checkbox-container.style-ghost {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: transparent;
+}
+
+.checkbox-container.style-ghost:hover {
+  background-color: var(--uds-color-bg-subtle, #f7f7f8);
+}
+
+.checkbox-container.style-outline {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--uds-color-border);
+  background-color: transparent;
+}
+
+.checkbox-container.style-outline:hover {
+  background-color: var(--uds-color-bg-subtle, #f7f7f8);
+}
+
+.checkbox-container.style-solid {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: var(--uds-color-primary-light, rgba(var(--uds-color-primary-rgb), 0.1));
+  border: none;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+.checkbox-checkmark {
+  position: relative;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 1px solid var(--uds-color-border);
+  border-radius: 3px;
+  margin-right: 8px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* 显示选中状态 */
+.checkbox-input:checked ~ .checkbox-checkmark {
+  background-color: var(--uds-color-primary);
+  border-color: var(--uds-color-primary);
+}
+
+.checkbox-input:checked ~ .checkbox-checkmark:after {
+  display: block;
+}
+
+/* 半选状态 */
+.checkbox-input:indeterminate ~ .checkbox-checkmark {
+  background-color: var(--uds-color-primary);
+  border-color: var(--uds-color-primary);
+}
+
+.checkbox-input:indeterminate ~ .checkbox-checkmark:after {
+  display: block;
+  transform: none;
+  border-width: 0 0 2px 0;
+  left: 4px;
+  top: 8px;
+  width: 10px;
+  height: 0;
+}
+
+/* Hover 状态 */
+.checkbox-container:hover .checkbox-checkmark {
+  border-color: var(--uds-color-primary-hover);
+}
+
+/* 禁用状态 */
+.checkbox-container.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+.checkbox-container.disabled .checkbox-checkmark {
+  background-color: var(--uds-color-disabled-bg);
+  border-color: var(--uds-color-disabled-border);
+  cursor: not-allowed !important;
+}
+
+.checkbox-container.disabled .checkbox-label {
+  cursor: not-allowed !important;
+}
+
+/* 不同类型的样式 */
+/* Primary 类型 */
+.checkbox-container.primary {
+  color: var(--uds-color-primary);
+}
+
+.checkbox-container.primary .checkbox-input:checked ~ .checkbox-checkmark {
+  background-color: var(--uds-color-primary);
+  border-color: var(--uds-color-primary);
+}
+
+.checkbox-container.primary:hover .checkbox-checkmark, .checkbox-container.primary:hover .checkbox-label {
+  border-color: var(--uds-color-primary-hover);
+  color: var(--uds-color-primary-hover);
+}
+
+.checkbox-container.primary:active .checkbox-label {
+  color: var(--uds-color-primary-active);
+}
+
+.checkbox-container.primary:active .checkbox-checkmark {
+  background-color: var(--uds-color-primary-ghost-hover-rgb);
+}
+
+/* Primary 类型的样式变体 */
+.checkbox-container.primary.style-ghost:hover {
+  background-color: var(--uds-color-primary-ghost-hover-rgb, rgba(var(--uds-color-primary-rgb), 0.1));
+}
+
+.checkbox-container.primary.style-ghost:active {
+  background-color: var(--uds-color-primary-ghost-active-rgb, rgba(var(--uds-color-primary-rgb), 0.2));
+}
+
+.checkbox-container.primary.style-outline {
+  border-color: var(--uds-color-primary);
+}
+
+.checkbox-container.primary.style-outline:hover {
+  background-color: var(--uds-color-primary-ghost-hover-rgb);
+}
+
+.checkbox-container.primary.style-outline:active {
+  background-color: var(--uds-color-primary-ghost-active-rgb);
+}
+
+.checkbox-container.primary.style-solid {
+  background-color: var(--uds-color-primary);
+  color: var(--uds-color-bg);
+}
+
+.checkbox-container.primary.style-solid:hover {
+  background-color: var(--uds-color-primary-hover);
+}
+
+.checkbox-container.primary.style-solid:active {
+  background-color: var(--uds-color-primary-active);
+}
+
+.checkbox-container.primary.style-solid:hover .checkbox-label {
+  color: var(--uds-color-bg);
+}
+
+/* Secondary 类型 */
+.checkbox-container.secondary {
+  color: var(--uds-color-secondary);
+}
+
+.checkbox-container.secondary .checkbox-input:checked ~ .checkbox-checkmark {
+  background-color: var(--uds-color-secondary);
+  border-color: var(--uds-color-secondary);
+}
+
+.checkbox-container.secondary:hover .checkbox-checkmark, .checkbox-container.secondary:hover .checkbox-label {
+  border-color: var(--uds-color-secondary-hover);
+  color: var(--uds-color-secondary-hover);
+}
+
+.checkbox-container.secondary:active .checkbox-label {
+  color: var(--uds-color-secondary-active);
+}
+
+.checkbox-container.secondary:active .checkbox-checkmark {
+  background-color: var(--uds-color-secondary-ghost-hover-rgb);
+}
+
+/* Secondary 类型的样式变体 */
+.checkbox-container.secondary.style-ghost:hover {
+  background-color: var(--uds-color-secondary-ghost-hover-rgb, rgba(var(--uds-color-secondary-rgb), 0.1));
+}
+
+.checkbox-container.secondary.style-ghost:active {
+  background-color: var(--uds-color-secondary-ghost-active-rgb, rgba(var(--uds-color-secondary-rgb), 0.2));
+}
+
+.checkbox-container.secondary.style-outline {
+  border-color: var(--uds-color-secondary);
+}
+
+.checkbox-container.secondary.style-outline:hover {
+  background-color: var(--uds-color-secondary-ghost-hover-rgb);
+}
+
+.checkbox-container.secondary.style-outline:active {
+  background-color: var(--uds-color-secondary-ghost-active-rgb);
+}
+
+.checkbox-container.secondary.style-solid {
+  background-color: var(--uds-color-secondary);
+  color: var(--uds-color-bg);
+}
+
+.checkbox-container.secondary.style-solid:hover {
+  background-color: var(--uds-color-secondary-hover);
+}
+
+.checkbox-container.secondary.style-solid:active {
+  background-color: var(--uds-color-secondary-active);
+}
+
+.checkbox-container.secondary.style-solid:hover .checkbox-label {
+  color: var(--uds-color-bg);
+}
+
+/* Danger 类型 */
+.checkbox-container.danger {
+  color: var(--uds-color-danger);
+}
+
+.checkbox-container.danger .checkbox-input:checked ~ .checkbox-checkmark {
+  background-color: var(--uds-color-danger);
+  border-color: var(--uds-color-danger);
+}
+
+.checkbox-container.danger:hover .checkbox-checkmark, .checkbox-container.danger:hover .checkbox-label {
+  border-color: var(--uds-color-danger-hover);
+  color: var(--uds-color-danger-hover);
+}
+
+.checkbox-container.danger:active .checkbox-label {
+  color: var(--uds-color-danger-active);
+}
+
+.checkbox-container.danger:active .checkbox-checkmark {
+  background-color: var(--uds-color-danger-ghost-hover-rgb);
+}
+
+/* Danger 类型的样式变体 */
+.checkbox-container.danger.style-ghost:hover {
+  background-color: var(--uds-color-danger-ghost-hover-rgb, rgba(var(--uds-color-danger-rgb), 0.1));
+}
+
+.checkbox-container.danger.style-ghost:active {
+  background-color: var(--uds-color-danger-ghost-active-rgb, rgba(var(--uds-color-danger-rgb), 0.2));
+}
+
+.checkbox-container.danger.style-outline {
+  border-color: var(--uds-color-danger);
+}
+
+.checkbox-container.danger.style-outline:hover {
+  background-color: var(--uds-color-danger-ghost-hover-rgb);
+}
+
+.checkbox-container.danger.style-outline:active {
+  background-color: var(--uds-color-danger-ghost-active-rgb);
+}
+
+.checkbox-container.danger.style-solid {
+  background-color: var(--uds-color-danger);
+  color: var(--uds-color-bg);
+}
+
+.checkbox-container.danger.style-solid:hover {
+  background-color: var(--uds-color-danger-hover);
+}
+
+.checkbox-container.danger.style-solid:active {
+  background-color: var(--uds-color-danger-active);
+}
+
+.checkbox-container.danger.style-solid:hover .checkbox-label {
+  color: var(--uds-color-bg);
+}
+
+/* 尺寸变体 */
+.checkbox-container.size-sm {
+  font-size: var(--uds-font-size-sm);
+}
+
+.checkbox-container.size-sm .checkbox-checkmark {
+  height: 14px;
+  width: 14px;
+}
+
+.checkbox-container.size-sm .checkbox-checkmark:after {
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+}
+
+.checkbox-container.size-lg {
+  font-size: var(--uds-font-size-lg);
+}
+
+.checkbox-container.size-lg .checkbox-checkmark {
+  height: 22px;
+  width: 22px;
+}
+
+.checkbox-container.size-lg .checkbox-checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 12px;
+}
+
+/* 禁用状态 */
+.checkbox-container.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkbox-container.disabled .checkbox-checkmark,
+.checkbox-container.disabled .checkbox-label {
+  cursor: not-allowed;
+}
+
+/* 类型变体 */
+.checkbox-container.primary .checkbox-input:checked ~ .checkbox-checkmark {
+  background-color: var(--uds-color-primary);
+  border-color: var(--uds-color-primary);
+}
+
+.checkbox-container.secondary .checkbox-input:checked ~ .checkbox-checkmark {
+  background-color: var(--uds-color-secondary);
+  border-color: var(--uds-color-secondary);
+}
+
+.checkbox-container.danger .checkbox-input:checked ~ .checkbox-checkmark {
+  background-color: var(--uds-color-danger);
+  border-color: var(--uds-color-danger);
+}
+
+/* 样式变体的类型特定颜色 */
+.checkbox-container.style-solid.primary {
+  background-color: var(--uds-color-primary);
+}
+
+.checkbox-container.style-solid.secondary {
+  background-color: var(--uds-color-secondary);
+}
+
+.checkbox-container.style-solid.danger {
+  background-color: var(--uds-color-danger);
+}

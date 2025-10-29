@@ -173,8 +173,8 @@
           <a href="#" class="nav-link" data-page="checkbox">Checkbox 复选框</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" data-page="radio">Radio 单选框</a>
-        </li>
+           <a href="#" class="nav-link" data-page="radio">Radio 单选框</a>
+         </li>
       </ul>
     </div>
   </div>
@@ -237,8 +237,8 @@
         // 获取页面名称
         const page = link.getAttribute('data-page');
         
-        // button页面和installation页面实际存在
-        if (page === 'button' || page === 'installation') {
+        // button、installation、radio和checkbox页面实际存在
+        if (page === 'button' || page === 'installation' || page === 'radio' || page === 'checkbox') {
           // 先移除iframe，然后重新创建并添加到DOM中
           const parentElement = contentFrame.parentElement;
           const currentTheme = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';
