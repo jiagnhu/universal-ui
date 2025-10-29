@@ -169,14 +169,14 @@
 
     <h3>描边按钮</h3>
     <div class="demo-row">
-      <uds-button type="primary" plain>主要描边按钮</uds-button>
-      <uds-button type="secondary" plain>次要描边按钮</uds-button>
-      <uds-button type="danger" plain>危险描边按钮</uds-button>
+      <uds-button type="primary" outline>主要描边按钮</uds-button>
+      <uds-button type="secondary" outline>次要描边按钮</uds-button>
+      <uds-button type="danger" outline>危险描边按钮</uds-button>
     </div>
     <div class="code-block">
-      <pre><code>&lt;uds-button type="primary" plain&gt;主要描边按钮&lt;/uds-button&gt;
-&lt;uds-button type="secondary" plain&gt;次要描边按钮&lt;/uds-button&gt;
-&lt;uds-button type="danger" plain&gt;危险描边按钮&lt;/uds-button&gt;</code></pre>
+      <pre><code>&lt;uds-button type="primary" outline&gt;主要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" outline&gt;次要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" outline&gt;危险描边按钮&lt;/uds-button&gt;</code></pre>
     </div>
 
     <h3>圆角按钮</h3>
@@ -184,27 +184,40 @@
       <uds-button type="primary" round>主要圆角按钮</uds-button>
       <uds-button type="secondary" round>次要圆角按钮</uds-button>
       <uds-button type="danger" round>危险圆角按钮</uds-button>
-      <uds-button type="primary" plain round>描边圆角按钮</uds-button>
+      <uds-button type="primary" outline round>描边圆角按钮</uds-button>
+      <uds-button type="primary" ghost round>幽灵圆角按钮</uds-button>
     </div>
     <div class="code-block">
       <pre><code>&lt;uds-button type="primary" round&gt;主要圆角按钮&lt;/uds-button&gt;
 &lt;uds-button type="secondary" round&gt;次要圆角按钮&lt;/uds-button&gt;
 &lt;uds-button type="danger" round&gt;危险圆角按钮&lt;/uds-button&gt;
-&lt;uds-button type="primary" plain round&gt;描边圆角按钮&lt;/uds-button&gt;</code></pre>
+&lt;uds-button type="primary" outline round&gt;描边圆角按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+    
+    <h3>幽灵按钮</h3>
+    <div class="demo-row">
+      <uds-button type="primary" ghost>主要幽灵按钮</uds-button>
+      <uds-button type="secondary" ghost>次要幽灵按钮</uds-button>
+      <uds-button type="danger" ghost>危险幽灵按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button type="primary" ghost&gt;主要幽灵按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" ghost&gt;次要幽灵按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" ghost&gt;危险幽灵按钮&lt;/uds-button&gt;</code></pre>
     </div>
   </section>
   
   <section class="demo-section">
-    <h2>组合使用</h2>
+    <h3>文本按钮</h3>
     <div class="demo-row">
-      <uds-button type="primary" plain>主要轮廓按钮</uds-button>
-      <uds-button type="secondary">次要幽灵按钮</uds-button>
-      <uds-button type="text">文本按钮</uds-button>
+      <uds-button type="primary" text>主要文本按钮</uds-button>
+      <uds-button type="secondary" text>次要文本按钮</uds-button>
+      <uds-button type="danger" text>危险文本按钮</uds-button>
     </div>
     <div class="code-block">
-      <pre><code>&lt;uds-button type="primary" plain&gt;主要轮廓按钮&lt;/uds-button&gt;
-&lt;uds-button type="secondary"&gt;次要幽灵按钮&lt;/uds-button&gt;
-&lt;uds-button type="text"&gt;文本按钮&lt;/uds-button&gt;</code></pre>
+      <pre><code>&lt;uds-button type="primary" text&gt;主要文本按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" text&gt;次要文本按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" text&gt;危险文本按钮&lt;/uds-button&gt;</code></pre>
     </div>
   </section>
   
@@ -226,7 +239,7 @@
   </section>
   
   <section class="demo-section">
-    <h2>按钮状态</h2>
+    <h2>禁用状态</h2>
     <div class="demo-row">
       <uds-button type="primary" disabled onclick="alert('禁用主要按钮点击')">禁用主要按钮</uds-button>
       <uds-button type="secondary" disabled onclick="alert('禁用次要按钮点击')">禁用次要按钮</uds-button>
@@ -241,16 +254,40 @@
     </div>
 
     <div class="demo-row">
-      <uds-button type="primary" plain disabled>禁用主要描边按钮</uds-button>
-      <uds-button type="secondary" plain disabled>禁用次要描边按钮</uds-button>
-      <uds-button type="danger" plain disabled>禁用危险描边按钮</uds-button>
-      <uds-button type="text" disabled>禁用文本按钮</uds-button>
+      <uds-button type="primary" outline disabled>禁用主要描边按钮</uds-button>
+      <uds-button type="secondary" outline disabled>禁用次要描边按钮</uds-button>
+      <uds-button type="danger" outline disabled>禁用危险描边按钮</uds-button>
     </div>
     <div class="code-block">
-      <pre><code>&lt;uds-button type="primary" plain disabled&gt;禁用主要描边按钮&lt;/uds-button&gt;
-&lt;uds-button type="secondary" plain disabled&gt;禁用次要描边按钮&lt;/uds-button&gt;
-&lt;uds-button type="danger" plain disabled&gt;禁用危险描边按钮&lt;/uds-button&gt;
-&lt;uds-button type="text" disabled&gt;禁用文本按钮&lt;/uds-button&gt;</code></pre>
+      <pre><code>&lt;uds-button type="primary" outline disabled&gt;禁用主要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" outline disabled&gt;禁用次要描边按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" outline disabled&gt;禁用危险描边按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+    
+    <div class="demo-row">
+      <uds-button text disabled>禁用文本按钮</uds-button>
+      <uds-button type="primary" text disabled>禁用主要文本按钮</uds-button>
+      <uds-button type="secondary" text disabled>禁用次要文本按钮</uds-button>
+      <uds-button type="danger" text disabled>禁用危险文本按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button text disabled&gt;禁用文本按钮&lt;/uds-button&gt;
+&lt;uds-button type="primary" text disabled&gt;禁用主要文本按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" text disabled&gt;禁用次要文本按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" text disabled&gt;禁用危险文本按钮&lt;/uds-button&gt;</code></pre>
+    </div>
+    
+    <div class="demo-row">
+      <uds-button ghost disabled>禁用幽灵按钮</uds-button>
+      <uds-button type="primary" ghost disabled>禁用主要幽灵按钮</uds-button>
+      <uds-button type="secondary" ghost disabled>禁用次要幽灵按钮</uds-button>
+      <uds-button type="danger" ghost disabled>禁用危险幽灵按钮</uds-button>
+    </div>
+    <div class="code-block">
+      <pre><code>&lt;uds-button ghost disabled&gt;禁用幽灵按钮&lt;/uds-button&gt;
+&lt;uds-button type="primary" ghost disabled&gt;禁用主要幽灵按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" ghost disabled&gt;禁用次要幽灵按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" ghost disabled&gt;禁用危险幽灵按钮&lt;/uds-button&gt;</code></pre>
     </div>
 
     <h3>加载状态</h3>
@@ -268,16 +305,42 @@
      </div>
      
      <div class="demo-row">
-       <uds-button plain loading>描边默认加载中</uds-button>
-       <uds-button type="primary" plain loading>描边主要加载中</uds-button>
-       <uds-button type="secondary" plain loading>描边次要加载中</uds-button>
-       <uds-button type="danger" plain loading>描边危险加载中</uds-button>
+       <uds-button outline loading>描边默认加载中</uds-button>
+       <uds-button type="primary" outline loading>描边主要加载中</uds-button>
+       <uds-button type="secondary" outline loading>描边次要加载中</uds-button>
+       <uds-button type="danger" outline loading>描边危险加载中</uds-button>
      </div>
      <div class="code-block">
-       <pre><code>&lt;uds-button plain loading&gt;描边默认加载中&lt;/uds-button&gt;
-&lt;uds-button type="primary" plain loading&gt;描边主要加载中&lt;/uds-button&gt;
-&lt;uds-button type="secondary" plain loading&gt;描边次要加载中&lt;/uds-button&gt;
-&lt;uds-button type="danger" plain loading&gt;描边危险加载中&lt;/uds-button&gt;</code></pre>
+       <pre><code>&lt;uds-button outline loading&gt;描边默认加载中&lt;/uds-button&gt;
+&lt;uds-button type="primary" outline loading&gt;描边主要加载中&lt;/uds-button&gt;
+&lt;uds-button type="secondary" outline loading&gt;描边次要加载中&lt;/uds-button&gt;
+&lt;uds-button type="danger" outline loading&gt;描边危险加载中&lt;/uds-button&gt;</code></pre>
+     </div>
+     
+     <div class="demo-row">
+       <uds-button text loading>文本默认加载中</uds-button>
+       <uds-button type="primary" text loading>文本主要加载中</uds-button>
+       <uds-button type="secondary" text loading>文本次要加载中</uds-button>
+       <uds-button type="danger" text loading>文本危险加载中</uds-button>
+     </div>
+     <div class="code-block">
+       <pre><code>&lt;uds-button text loading&gt;文本默认加载中&lt;/uds-button&gt;
+&lt;uds-button type="primary" text loading&gt;文本主要加载中&lt;/uds-button&gt;
+&lt;uds-button type="secondary" text loading&gt;文本次要加载中&lt;/uds-button&gt;
+&lt;uds-button type="danger" text loading&gt;文本危险加载中&lt;/uds-button&gt;</code></pre>
+     </div>
+     
+     <div class="demo-row">
+       <uds-button ghost loading>幽灵默认加载中</uds-button>
+       <uds-button type="primary" ghost loading>幽灵主要加载中</uds-button>
+       <uds-button type="secondary" ghost loading>幽灵次要加载中</uds-button>
+       <uds-button type="danger" ghost loading>幽灵危险加载中</uds-button>
+     </div>
+     <div class="code-block">
+       <pre><code>&lt;uds-button ghost loading&gt;幽灵默认加载中&lt;/uds-button&gt;
+&lt;uds-button type="primary" ghost loading&gt;幽灵主要加载中&lt;/uds-button&gt;
+&lt;uds-button type="secondary" ghost loading&gt;幽灵次要加载中&lt;/uds-button&gt;
+&lt;uds-button type="danger" ghost loading&gt;幽灵危险加载中&lt;/uds-button&gt;</code></pre>
      </div>
   </section>
   
@@ -312,7 +375,7 @@
         添加项目
       </uds-button>
       
-      <uds-button plain>
+      <uds-button outline>
         <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -334,7 +397,7 @@
   添加项目
 &lt;/uds-button&gt;
 
-&lt;uds-button plain&gt;
+&lt;uds-button outline&gt;
   &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
     &lt;path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/&gt;
   &lt;/svg&gt;
@@ -464,21 +527,21 @@
     </div>
 
     <div class="demo-row">
-      <uds-button type="primary" plain>
+      <uds-button type="primary" outline>
         <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         主要描边按钮
       </uds-button>
       
-      <uds-button type="secondary" plain>
+      <uds-button type="secondary" outline>
         <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         次要描边按钮
       </uds-button>
       
-      <uds-button type="danger" plain>
+      <uds-button type="danger" outline>
         <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -486,21 +549,21 @@
       </uds-button>
     </div>
     <div class="code-block">
-      <pre><code>&lt;uds-button type="primary" plain&gt;
+      <pre><code>&lt;uds-button type="primary" outline&gt;
   &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
     &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
   &lt;/svg&gt;
   主要描边按钮
 &lt;/uds-button&gt;
 
-&lt;uds-button type="secondary" plain&gt;
+&lt;uds-button type="secondary" outline&gt;
   &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
     &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
   &lt;/svg&gt;
   次要描边按钮
 &lt;/uds-button&gt;
 
-&lt;uds-button type="danger" plain&gt;
+&lt;uds-button type="danger" outline&gt;
   &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"&gt;
     &lt;path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/&gt;
   &lt;/svg&gt;
@@ -525,12 +588,24 @@
         <tr>
           <td>type</td>
           <td>按钮类型，决定按钮的颜色和样式</td>
-          <td>primary | secondary | danger | text | ghost</td>
-          <td>ghost</td>
+          <td>primary | secondary | danger</td>
+          <td>primary</td>
         </tr>
         <tr>
-          <td>plain</td>
+          <td>outline</td>
           <td>是否使用轮廓样式，设置为true时会应用outline样式</td>
+          <td>boolean</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>text</td>
+          <td>是否为文本按钮</td>
+          <td>boolean</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>ghost</td>
+          <td>是否为幽灵按钮，透明背景</td>
           <td>boolean</td>
           <td>false</td>
         </tr>
@@ -558,9 +633,9 @@
           <td>boolean</td>
           <td>false</td>
         </tr>
+        
       </tbody>
     </table>
-    <p style="color: #ff4d4f; margin-top: 8px;">注意：之前的variant属性已被移除，请使用type和plain属性组合来控制按钮样式</p>
     
     <h3>插槽</h3>
     <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">

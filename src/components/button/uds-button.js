@@ -6,7 +6,7 @@ class UdsButton extends HTMLElement {
   _button = null;
   
   static get observedAttributes() {
-    return ['size', 'disabled', 'loading', 'type', 'round', 'plain'];
+    return ['size', 'disabled', 'loading', 'type', 'round', 'outline', 'text', 'ghost'];
   }
 
   constructor() {
@@ -23,7 +23,9 @@ class UdsButton extends HTMLElement {
     this._upgradeProperty('loading');
     this._upgradeProperty('type');
     this._upgradeProperty('round');
-    this._upgradeProperty('plain');
+    this._upgradeProperty('outline');
+    this._upgradeProperty('text');
+    this._upgradeProperty('ghost');
 
     this.setAttribute('role', 'button');
     this.tabIndex = this.disabled ? -1 : 0;
@@ -81,27 +83,30 @@ class UdsButton extends HTMLElement {
     if (this.hasAttribute('variant')) {
       const variant = this.getAttribute('variant');
       this._button.classList.add(`button--${variant}`);
-    } else if (this.type === 'text') {
-      // 如果type是text，应用文本按钮样式
+    } else if (this.text) {
+      // 如果有text属性，应用文本按钮样式
       this._button.classList.add('button--text');
-    } else if (this.plain) {
-      // 如果没有variant但有plain属性
+    } else if (this.ghost) {
+      // 如果有ghost属性，应用幽灵按钮样式
+      this._button.classList.add('button--ghost');
+    } else if (this.outline) {
+      // 如果没有variant但有outline属性
       this._button.classList.add('button--outline');
     } else if (this.hasAttribute('type')) {
-      // 如果有type属性但没有variant和plain
+      // 如果有type属性但没有variant和outline
       this._button.classList.add('button--solid');
     } else {
-      // 默认为ghost（幽灵按钮）
-      this._button.classList.add('button--ghost');
+      // 默认为solid（实心按钮）
+      this._button.classList.add('button--solid');
     }
     
     // Update type
     this._button.classList.remove('button--primary', 'button--secondary', 'button--danger');
-    if (this.hasAttribute('type') && this.type !== 'text') {
+    if (this.hasAttribute('type')) {
       const type = this.type || 'primary';
       this._button.classList.add(`button--${type}`);
-    } else if (this.type === 'text') {
-      // 为文本按钮添加默认primary类型
+    } else {
+      // 默认为primary类型
       this._button.classList.add('button--primary');
     }
     
@@ -159,15 +164,15 @@ class UdsButton extends HTMLElement {
   }
 
   // Properties
-  get plain() {
-    return this.hasAttribute('plain');
+  get outline() {
+    return this.hasAttribute('outline');
   }
   
-  set plain(value) {
+  set outline(value) {
     if (value) {
-      this.setAttribute('plain', '');
+      this.setAttribute('outline', '');
     } else {
-      this.removeAttribute('plain');
+      this.removeAttribute('outline');
     }
   }
   
@@ -231,6 +236,32 @@ class UdsButton extends HTMLElement {
     } else {
       this.setAttribute('type', value);
     }
+  }
+  
+  get text() {
+    return this.hasAttribute('text');
+  }
+  
+  set text(value) {
+    if (value) {
+      this.setAttribute('text', '');
+    } else {
+      this.removeAttribute('text');
+    }
+  }
+  
+  get ghost() {
+    return this.hasAttribute('ghost');
+  }
+  
+  set ghost(value) {
+    const isGhost = Boolean(value);
+    if (isGhost) {
+      this.setAttribute('ghost', '');
+    } else {
+      this.removeAttribute('ghost');
+    }
+    this._updateState();
   }
 }
 

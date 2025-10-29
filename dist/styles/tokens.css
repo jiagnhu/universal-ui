@@ -14,6 +14,8 @@
   --uds-color-primary-text: #ffffff;
   --uds-color-primary-outline-hover-rgb: rgba(47, 128, 237, 0.1);
   --uds-color-primary-disabled-rgb: rgba(47, 128, 237, 0.3);
+  --uds-color-primary-ghost-hover-rgb: rgba(47, 128, 237, 0.1);
+  --uds-color-primary-ghost-active-rgb: rgba(47, 128, 237, 0.2);
 
   --uds-color-danger: #EB5757;
   --uds-color-danger-hover: #D62C2C;
@@ -21,13 +23,19 @@
   --uds-color-danger-text: #ffffff;
   --uds-color-danger-outline-hover-rgb: rgba(235, 87, 87, 0.1);
   --uds-color-danger-disabled-rgb: rgba(235, 87, 87, 0.3);
+  --uds-color-danger-ghost-hover-rgb: rgba(235, 87, 87, 0.1);
+  --uds-color-danger-ghost-active-rgb: rgba(235, 87, 87, 0.2);
 
   --uds-color-secondary: #EDEDED;
   --uds-color-secondary-hover: #E0E0E0;
   --uds-color-secondary-active: #C8C8C8;
   --uds-color-secondary-text: #545454;
+  --uds-color-secondary-text-hover: #545454;
+  --uds-color-secondary-text-active: #636363;
   --uds-color-secondary-outline-hover-rgb: rgba(103, 103, 103, 0.1);
   --uds-color-secondary-disabled-rgb: rgba(103, 103, 103, 0.3);
+  --uds-color-secondary-ghost-hover-rgb: rgba(103, 103, 103, 0.1);
+  --uds-color-secondary-ghost-active-rgb: rgba(103, 103, 103, 0.2);
 
   --uds-color-overlay: rgba(17,24,39,0.5);
   --uds-focus-ring: #1C63D9;
