@@ -21,6 +21,9 @@
 | round | `boolean` | `false` | 是否使用圆角，默认为直角 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | loading | `boolean` | `false` | 是否显示加载状态 |
+| hasLabel | `boolean` | `true` | 是否显示按钮文本内容，设为false时隐藏文本 |
+| hasCounter | `boolean` | `false` | 是否显示计数器，需配合counter插槽使用 |
+| focused | `boolean` | `false` | 是否显示焦点状态，显示蓝色边框，与按钮间隔1px |
 
 > 注意：之前的`variant`属性已被移除，请使用`type`和`plain`属性组合来控制按钮样式
 
@@ -31,6 +34,7 @@
 | default | 按钮文本内容 |
 | icon | 按钮图标，通常放置在文本前面 |
 | icon-right | 按钮右侧图标，通常放置在文本后面 |
+| counter | 计数器内容，需配合hasCounter属性使用 |
 
 ## 事件
 

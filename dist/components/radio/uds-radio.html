@@ -2,6 +2,13 @@
   <input type="radio" class="radio-input" />
   <span class="radio-checkmark"></span>
   <label class="radio-label">
-    <slot></slot>
+    <div class="label-content">
+      <slot></slot>
+      <slot name="counter" class="counter"></slot>
+      <div class="icon-right">
+        <slot name="icon-right" ></slot>
+      </div>
+    </div>
+    <div class="description"></div>
   </label>
 </div>

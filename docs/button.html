@@ -103,50 +103,7 @@
     }
     
     // 代码块展开/隐藏功能
-    document.addEventListener('DOMContentLoaded', function() {
-      // 为所有代码块添加展开/隐藏按钮
-      const codeBlocks = document.querySelectorAll('.code-block');
-      codeBlocks.forEach((codeBlock, index) => {
-        // 创建代码块头部
-        const header = document.createElement('div');
-        header.className = 'code-block-header';
-        header.innerHTML = '<span>示例代码</span>';
-        
-        // 创建展开/隐藏按钮
-        const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'code-toggle-btn';
-        toggleBtn.innerHTML = '显示代码 <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        toggleBtn.setAttribute('aria-controls', 'code-block-' + index);
-        
-        // 添加按钮点击事件
-        toggleBtn.addEventListener('click', function() {
-          const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-          toggleBtn.setAttribute('aria-expanded', !expanded);
-          
-          if (expanded) {
-            // 隐藏代码块
-            codeBlock.style.display = 'none';
-            toggleBtn.innerHTML = '显示代码 <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-            toggleBtn.classList.remove('expanded');
-          } else {
-            // 显示代码块
-            codeBlock.style.display = 'block';
-            toggleBtn.innerHTML = '隐藏代码 <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-            toggleBtn.classList.add('expanded');
-          }
-        });
-        
-        // 将按钮添加到头部
-        header.appendChild(toggleBtn);
-        
-        // 将头部插入到代码块前面
-        codeBlock.parentNode.insertBefore(header, codeBlock);
-        
-        // 设置代码块ID
-        codeBlock.id = 'code-block-' + index;
-      });
-    });
+    
   </script>
 </head>
 <body>
@@ -168,6 +125,18 @@
 &lt;uds-button type="danger"&gt;危险按钮&lt;/uds-button&gt;
 &lt;uds-button&gt;默认按钮&lt;/uds-button&gt;</code></pre>
     </div>
+    
+    <h3>计数器示例</h3>
+    <div class="demo-row">
+      <div class="interactive-demo" style="width: 100%;">
+         <uds-button>示例按钮 <span slot="counter">(5)</span></uds-button>
+       </div>
+    </div>
+    <div class="code-block">
+       <pre><code>
+        &lt;uds-button&gt;示例按钮 &lt;span slot="counter"&gt;(5)&lt;/span&gt;&lt;/uds-button&gt;
+       </code></pre>
+     </div>
 
     <h3>描边按钮</h3>
     <div class="demo-row">
@@ -635,6 +604,13 @@
           <td>boolean</td>
           <td>false</td>
         </tr>
+
+        <tr>
+          <td>focused</td>
+          <td>是否处于聚焦状态</td>
+          <td>boolean</td>
+          <td>false</td>
+        </tr>
         
       </tbody>
     </table>
@@ -659,6 +635,10 @@
         <tr>
           <td>icon-right</td>
           <td>按钮右侧图标</td>
+        </tr>
+        <tr>
+          <td>counter</td>
+          <td>计数器插槽，用于显示数量信息</td>
         </tr>
       </tbody>
     </table>

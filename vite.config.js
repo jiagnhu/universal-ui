@@ -8,41 +8,58 @@ function copyComponentFiles() {
   return {
     name: 'copy-component-files',
     closeBundle() {
-      // 复制按钮组件文件
-      const buttonTargetDir = path.resolve(__dirname, 'dist/components/button');
-      if (!fs.existsSync(buttonTargetDir)) {
-        fs.mkdirSync(buttonTargetDir, { recursive: true });
-      }
-      
-      const buttonSourceDir = path.resolve(__dirname, 'src/components/button');
-      const buttonFiles = fs.readdirSync(buttonSourceDir);
-      
-      buttonFiles.forEach(file => {
-        if (file.endsWith('.html') || file.endsWith('.css') || file.endsWith('.js')) {
-          const sourcePath = path.join(buttonSourceDir, file);
-          const targetPath = path.join(buttonTargetDir, file);
-          fs.copyFileSync(sourcePath, targetPath);
-          console.log(`Copied: ${file} to ${buttonTargetDir}`);
+      try {
+        // 获取所有组件目录
+        const componentsSourceDir = path.resolve(__dirname, 'src/components');
+        const dirEntries = fs.readdirSync(componentsSourceDir, { withFileTypes: true });
+        const componentFolders = [];
+        
+        for (const dirent of dirEntries) {
+          if (dirent.isDirectory()) {
+            componentFolders.push(dirent.name);
+          }
         }
-      });
-      
-      // 复制styles文件夹
-      const stylesTargetDir = path.resolve(__dirname, 'dist/styles');
-      if (!fs.existsSync(stylesTargetDir)) {
-        fs.mkdirSync(stylesTargetDir, { recursive: true });
-      }
-      
-      const stylesSourceDir = path.resolve(__dirname, 'src/styles');
-      const stylesFiles = fs.readdirSync(stylesSourceDir);
-      
-      stylesFiles.forEach(file => {
-        if (file.endsWith('.css')) {
-          const sourcePath = path.join(stylesSourceDir, file);
-          const targetPath = path.join(stylesTargetDir, file);
-          fs.copyFileSync(sourcePath, targetPath);
-          console.log(`Copied: ${file} to ${stylesTargetDir}`);
+        
+        // 复制每个组件的文件
+        for (const componentName of componentFolders) {
+          const componentTargetDir = path.resolve(__dirname, 'dist/components/' + componentName);
+          if (!fs.existsSync(componentTargetDir)) {
+            fs.mkdirSync(componentTargetDir, { recursive: true });
+          }
+          
+          const componentSourceDir = path.resolve(__dirname, 'src/components/' + componentName);
+          const componentFiles = fs.readdirSync(componentSourceDir);
+          
+          for (const file of componentFiles) {
+            if (file.endsWith('.html') || file.endsWith('.css') || file.endsWith('.js')) {
+              const sourcePath = path.join(componentSourceDir, file);
+              const targetPath = path.join(componentTargetDir, file);
+              fs.copyFileSync(sourcePath, targetPath);
+              console.log('Copied: ' + file + ' to ' + componentTargetDir);
+            }
+          }
         }
-      });
+        
+        // 复制styles文件夹
+        const stylesTargetDir = path.resolve(__dirname, 'dist/styles');
+        if (!fs.existsSync(stylesTargetDir)) {
+          fs.mkdirSync(stylesTargetDir, { recursive: true });
+        }
+        
+        const stylesSourceDir = path.resolve(__dirname, 'src/styles');
+        const stylesFiles = fs.readdirSync(stylesSourceDir);
+        
+        for (const file of stylesFiles) {
+          if (file.endsWith('.css')) {
+            const sourcePath = path.join(stylesSourceDir, file);
+            const targetPath = path.join(stylesTargetDir, file);
+            fs.copyFileSync(sourcePath, targetPath);
+            console.log('Copied: ' + file + ' to ' + stylesTargetDir);
+          }
+        }
+      } catch (error) {
+        console.error('Error in copyComponentFiles:', error);
+      }
     }
   };
 }

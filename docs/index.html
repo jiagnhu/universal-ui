@@ -205,9 +205,11 @@
       if (document.body.classList.contains('dark-theme')) {
         document.documentElement.setAttribute('data-theme', 'dark');
         sendThemeToIframe('dark');
+        themeToggle.textContent = '切换亮色模式';
       } else {
         document.documentElement.removeAttribute('data-theme');
         sendThemeToIframe('light');
+        themeToggle.textContent = '切换暗色模式';
       }
     });
     

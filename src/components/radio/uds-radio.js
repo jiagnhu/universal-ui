@@ -7,7 +7,7 @@ class UdsRadio extends HTMLElement {
   _input = null;
   
   static get observedAttributes() {
-    return ['type', 'size', 'disabled', 'checked', 'name', 'value', 'text', 'ghost', 'outline', 'solid'];
+    return ['size', 'disabled', 'checked', 'name', 'value', 'text', 'ghost', 'outline', 'solid'];
   }
 
   constructor() {
@@ -46,6 +46,17 @@ class UdsRadio extends HTMLElement {
       delete this[prop];
       this[prop] = value;
     }
+  }
+  
+  // 自动检测是否有 counter 内容
+  get hasCounter() {
+    const slot = this.shadowRoot.querySelector('slot[name="counter"]');
+    return slot && slot.assignedNodes().length > 0;
+  }
+  
+  // 自动检测是否有描述内容
+  get hasDescription() {
+    return this.getAttribute('description') && this.getAttribute('description').trim() !== '';
   }
 
   async _render() {
@@ -128,6 +139,18 @@ class UdsRadio extends HTMLElement {
     
     if (this.hasAttribute('value')) {
       this._input.value = this.getAttribute('value');
+    }
+    
+    // 更新描述
+    this._updateDescription();
+  }
+  
+  
+  _updateDescription() {
+    const descriptionElement = this.shadowRoot.querySelector('.description');
+    if (descriptionElement) {
+      const description = this.getAttribute('description') || '';
+      descriptionElement.textContent = description;
     }
   }
 

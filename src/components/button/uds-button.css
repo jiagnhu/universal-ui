@@ -3,6 +3,25 @@
   box-sizing: border-box;
 }
 
+slot:not([name]) {
+  display: inline-block;
+}
+
+/* Counter styles */
+.counter {
+  margin-left: 4px;
+}
+
+:host([focused]) .button:focus-visible {
+  outline: 2px solid var(--uds-focus-ring);
+  outline-offset: 3px;
+}
+
+:host([focused]) .button:focus {
+  outline: 2px solid var(--uds-focus-ring);
+  outline-offset: 3px;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -242,10 +261,6 @@
 }
 
 /* States */
-.button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--uds-focus-ring, #2563eb);
-}
 
 .button[disabled], .button--loading {
   cursor: not-allowed;

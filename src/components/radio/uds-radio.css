@@ -29,6 +29,32 @@
   background-color: var(--uds-color-bg-subtle, #f7f7f8);
 }
 
+/* Counter styles */
+.counter {
+  margin-left: 4px;
+}
+
+/* Description styles */
+.description {
+  font-size: 0.85em;
+  color: var(--uds-color-text-subtle, #6b7280);
+  margin-top: 2px;
+}
+
+.icon-right {
+  margin-left: 8px;
+}
+
+.description:empty {
+  display: block;
+}
+
+/* Label content layout */
+.label-content {
+  display: flex;
+  align-items: center;
+}
+
 .radio-container.style-outline {
   padding: 4px 8px;
   border-radius: 6px;
@@ -122,6 +148,10 @@
   color: var(--uds-color-primary);
 }
 
+.radio-container.primary .radio-checkmark {
+  border-color: var(--uds-color-primary);
+}
+
 .radio-container.primary .radio-checkmark:after {
   background: var(--uds-color-primary);
 }
@@ -183,24 +213,28 @@
 
 /* Secondary 类型 */
 .radio-container.secondary {
-  color: var(--uds-color-secondary);
+  color: var(--uds-color-secondary-text);
 }
 
+.radio-container.secondary .radio-checkmark {
+  border-color: var(--uds-color-secondary-active);
+}
+
+
 .radio-container.secondary .radio-checkmark:after {
-  background: var(--uds-color-secondary);
+  background: var(--uds-color-secondary-active);
 }
 
 .radio-container.secondary .radio-input:checked ~ .radio-checkmark {
-  border-color: var(--uds-color-secondary);
+  border-color: var(--uds-color-secondary-active);
 }
 
-.radio-container.secondary:hover .radio-checkmark, .radio-container.secondary:hover .radio-label {
+.radio-container.secondary:hover .radio-checkmark {
   border-color: var(--uds-color-secondary-hover);
-  color: var(--uds-color-secondary-hover);
 }
 
 .radio-container.secondary:active .radio-label {
-  color: var(--uds-color-secondary-active);
+  color: var(--uds-color-secondary-text-active);
 }
 
 .radio-container.secondary:active .radio-checkmark {
@@ -211,15 +245,15 @@
 
 /* Secondary 类型的样式变体 */
 .radio-container.secondary.style-ghost:hover {
-  background-color: var(--uds-color-secondary-ghost-hover-rgb, rgba(var(--uds-color-secondary-rgb), 0.1));
+  background-color: var(--uds-color-secondary-ghost-hover-rgb);
 }
 
 .radio-container.secondary.style-ghost:active {
-  background-color: var(--uds-color-secondary-ghost-active-rgb, rgba(var(--uds-color-secondary-rgb), 0.2));
+  background-color: var(--uds-color-secondary-ghost-active-rgb);
 }
 
 .radio-container.secondary.style-outline {
-  border-color: var(--uds-color-secondary);
+  border-color: var(--uds-color-secondary-active);
 }
 
 .radio-container.secondary.style-outline:hover {
@@ -231,7 +265,7 @@
 }
 
 .radio-container.secondary.style-solid {
-  background-color: var(--uds-color-secondary);
+  background-color: var(--uds-color-secondary-active);
   color: var(--uds-color-bg);
 }
 
@@ -253,6 +287,12 @@
 .radio-container.danger {
   color: var(--uds-color-danger);
 }
+
+.radio-container.danger .radio-checkmark {
+  border-color: var(--uds-color-danger);
+}
+
+
 
 .radio-container.danger .radio-checkmark:after {
   background: var(--uds-color-danger);

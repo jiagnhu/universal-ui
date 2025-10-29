@@ -6,7 +6,7 @@ class UdsButton extends HTMLElement {
   _button = null;
   
   static get observedAttributes() {
-    return ['size', 'disabled', 'loading', 'type', 'round', 'outline', 'text', 'ghost'];
+    return ['type', 'outline', 'text', 'ghost', 'size', 'round', 'disabled', 'loading', 'focused'];
   }
 
   constructor() {
@@ -262,6 +262,26 @@ class UdsButton extends HTMLElement {
       this.removeAttribute('ghost');
     }
     this._updateState();
+  }
+  
+
+  
+  // 自动检测是否有 counter 内容
+  get hasCounter() {
+    const slot = this.shadowRoot.querySelector('slot[name="counter"]');
+    return slot && slot.assignedNodes().length > 0;
+  }
+  
+  get focused() {
+    return this.hasAttribute('focused');
+  }
+  
+  set focused(value) {
+    if (value) {
+      this.setAttribute('focused', '');
+    } else {
+      this.removeAttribute('focused');
+    }
   }
 }
 

@@ -160,6 +160,62 @@
       </div>
       
       <div class="demo-block">
+        <div class="demo-title">带计数器</div>
+        <uds-radio-group name="demo-counter" value="1">
+          <uds-radio value="1" hasCounter>选项1<span slot="counter">(5)</span></uds-radio>
+          <uds-radio value="2" hasCounter>选项2<span slot="counter">(10)</span></uds-radio>
+          <uds-radio value="3" hasCounter>选项3<span slot="counter">(15)</span></uds-radio>
+        </uds-radio-group>
+        <div class="code-block">&lt;uds-radio-group name="demo-counter" value="1"&gt;
+  &lt;uds-radio value="1" hasCounter&gt;选项1&lt;span slot="counter"&gt;(5)&lt;/span&gt;&lt;/uds-radio&gt;
+  &lt;uds-radio value="2" hasCounter&gt;选项2&lt;span slot="counter"&gt;(10)&lt;/span&gt;&lt;/uds-radio&gt;
+  &lt;uds-radio value="3" hasCounter&gt;选项3&lt;span slot="counter"&gt;(15)&lt;/span&gt;&lt;/uds-radio&gt;
+&lt;/uds-radio-group&gt;</div>
+      </div>
+      
+      <div class="demo-block">
+        <div class="demo-title">带描述</div>
+        <uds-radio-group name="demo-desc" value="1">
+          <uds-radio value="1" hasDescription description="这是选项1的详细描述">选项1</uds-radio>
+          <uds-radio value="2" hasDescription description="这是选项2的详细描述">选项2</uds-radio>
+          <uds-radio value="3" hasDescription description="这是选项3的详细描述">选项3</uds-radio>
+        </uds-radio-group>
+        <div class="code-block">&lt;uds-radio-group name="demo-desc" value="1"&gt;
+  &lt;uds-radio value="1" hasDescription description="这是选项1的详细描述"&gt;选项1&lt;/uds-radio&gt;
+  &lt;uds-radio value="2" hasDescription description="这是选项2的详细描述"&gt;选项2&lt;/uds-radio&gt;
+  &lt;uds-radio value="3" hasDescription description="这是选项3的详细描述"&gt;选项3&lt;/uds-radio&gt;
+&lt;/uds-radio-group&gt;</div>
+      </div>
+      
+      <div class="demo-block">
+        <div class="demo-title">带右侧图标</div>
+        <uds-radio-group name="demo-icon" value="1">
+          <uds-radio value="1">选项1 <span slot="icon-right">🔍</span></uds-radio>
+          <uds-radio value="2">选项2 <span slot="icon-right">📌</span></uds-radio>
+          <uds-radio value="3">选项3 <span slot="icon-right">⭐</span></uds-radio>
+        </uds-radio-group>
+        <div class="code-block">&lt;uds-radio-group name="demo-icon" value="1"&gt;
+  &lt;uds-radio value="1"&gt;选项1 &lt;span slot="icon-right"&gt;🔍&lt;/span&gt;&lt;/uds-radio&gt;
+  &lt;uds-radio value="2"&gt;选项2 &lt;span slot="icon-right"&gt;📌&lt;/span&gt;&lt;/uds-radio&gt;
+  &lt;uds-radio value="3"&gt;选项3 &lt;span slot="icon-right"&gt;⭐&lt;/span&gt;&lt;/uds-radio&gt;
+&lt;/uds-radio-group&gt;</div>
+      </div>
+      
+      <div class="demo-block">
+        <div class="demo-title">聚焦状态</div>
+        <uds-radio-group name="demo-focus" value="1">
+          <uds-radio value="1">选项1</uds-radio>
+          <uds-radio value="2">选项2</uds-radio>
+          <uds-radio value="3" disabled>选项3（禁用）</uds-radio>
+        </uds-radio-group>
+        <div class="code-block">&lt;uds-radio-group name="demo-focus" value="1"&gt;
+  &lt;uds-radio value="1"&gt;选项1&lt;/uds-radio&gt;
+  &lt;uds-radio value="2"&gt;选项2&lt;/uds-radio&gt;
+  &lt;uds-radio value="3" disabled&gt;选项3（禁用）&lt;/uds-radio&gt;
+&lt;/uds-radio-group&gt;</div>
+      </div>
+      
+      <div class="demo-block">
         <div class="demo-title">不同样式</div>
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
           <div>
@@ -424,6 +480,37 @@
             <td>单选框值</td>
             <td>string</td>
             <td>-</td>
+          </tr>
+
+          <tr>
+            <td>description</td>
+            <td>描述文本，用于提供额外信息</td>
+            <td>string</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Slots</h3>
+      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>default</td>
+            <td>默认插槽，单选框的文本内容</td>
+          </tr>
+          <tr>
+            <td>counter</td>
+            <td>计数器插槽，用于显示数量信息</td>
+          </tr>
+          <tr>
+            <td>icon-right</td>
+            <td>右侧图标插槽</td>
           </tr>
         </tbody>
       </table>
