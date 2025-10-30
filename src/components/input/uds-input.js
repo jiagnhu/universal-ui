@@ -237,6 +237,9 @@ class UdsInput extends HTMLElement {
     if (this._input) {
       this._input.placeholder = this.placeholder || '';
     }
+    if (this._textarea) {
+      this._textarea.placeholder = this.placeholder || '';
+    }
   }
 
   _updateValue() {

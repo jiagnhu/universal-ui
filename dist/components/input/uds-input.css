@@ -10,9 +10,9 @@
 .input-container {
   display: flex;
   align-items: center;
-  border: 1px solid var(--uds-color-border, #d9d9d9);
+  border: 1px solid var(--uds-color-secondary-text);
   border-radius: var(--uds-radius-md);
-  background-color: var(--uds-color-bg, #fff);
+  background-color: var(--uds-color-bg);
   transition: all 0.2s;
   overflow: hidden;
   box-sizing: border-box;
@@ -34,14 +34,14 @@
 }
 
 :host([disabled]) .input-container {
-  background-color: var(--uds-color-bg-disabled, #f5f5f5);
-  border-color: var(--uds-color-border, #d9d9d9);
+  background-color: var(--uds-color-secondary-outline-hover-rgb);
+  border-color: var(--uds-color-secondary-ghost-active-rgb);
   cursor: not-allowed;
   opacity: 0.7;
 }
 
 :host([error]) .input-container {
-  border-color: var(--uds-color-danger, #ff4d4f);
+  border-color: var(--uds-color-danger);
 }
 
 :host([error]:focus-within) .input-container {
@@ -78,6 +78,10 @@
   justify-content: center;
 }
 
+.input-prefix {
+  padding-left: 8px;
+}
+
 .input-suffix {
   position: absolute;
   right: 8px;
@@ -111,12 +115,12 @@
 
 .number-up-button:hover,
 .number-down-button:hover {
-  color: var(--uds-color-primary, #0066ff);
+  color: var(--uds-color-secondary-text-active);
 }
 
 .number-up-button:active,
 .number-down-button:active {
-  color: var(--uds-color-primary-dark, #0052cc);
+  color: var(--uds-color-secondary-text-active);
 }
 
 /* 隐藏原生的数字输入框加减组件 */
@@ -145,7 +149,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .textarea:focus {
   outline: none;
-  border-color: var(--uds-color-primary, #0066ff);
+  border-color: var(--uds-color-primary);
   box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
 }
 
@@ -163,7 +167,7 @@ input[type="number"] {
 }
 
 .clear-button:hover {
-  color: var(--uds-color-text, #333);
+  color: var(--uds-color-secondary-text-active);
 }
 
 :host([size="sm"]) .input-container {

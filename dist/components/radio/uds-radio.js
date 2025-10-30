@@ -149,8 +149,13 @@ class UdsRadio extends HTMLElement {
   _updateDescription() {
     const descriptionElement = this.shadowRoot.querySelector('.description');
     if (descriptionElement) {
-      const description = this.getAttribute('description') || '';
-      descriptionElement.textContent = description;
+      if (this.hasAttribute('description')) {
+        const description = this.getAttribute('description') || '';
+        descriptionElement.textContent = description;
+        descriptionElement.style.display = 'block';
+      } else {
+        descriptionElement.style.display = 'none';
+      }
     }
   }
 

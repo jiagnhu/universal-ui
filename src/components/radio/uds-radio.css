@@ -14,6 +14,10 @@
   pointer-events: auto;
 }
 
+.radio-container:has(.description:not(:empty)) {
+  align-items: flex-start;
+}
+
 /* 样式变体 */
 
 .radio-container.style-ghost {

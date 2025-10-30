@@ -14,6 +14,11 @@
   pointer-events: auto;
 }
 
+/* 当有description时，勾选框与第一行文字水平对齐 */
+.checkbox-container:has(.description:not(:empty)) {
+  align-items: flex-start;
+}
+
 /* 样式变体 */
 
 .checkbox-container.style-ghost {
