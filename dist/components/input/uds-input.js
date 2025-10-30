@@ -198,7 +198,15 @@ class UdsInput extends HTMLElement {
     if (!this._input) return;
     
     const type = this.getAttribute('type') || 'text';
-    this._input.type = type;
+    
+    // 处理email类型，在HTML中使用email类型
+    if (type === 'email') {
+      this._input.type = 'email';
+      this._input.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}');
+      this._input.setAttribute('inputmode', 'email');
+    } else {
+      this._input.type = type;
+    }
     
     // 获取数字控制按钮容器
     const numberControls = this.shadowRoot.querySelector('.number-controls');
@@ -265,8 +273,18 @@ class UdsInput extends HTMLElement {
       if (this.error) {
         this._errorMessage.textContent = this.error;
         this._errorMessage.hidden = false;
+        // 添加错误样式类到输入框容器
+        const container = this.shadowRoot.querySelector('.input-container');
+        if (container) {
+          container.classList.add('error');
+        }
       } else {
         this._errorMessage.hidden = true;
+        // 移除错误样式类
+        const container = this.shadowRoot.querySelector('.input-container');
+        if (container) {
+          container.classList.remove('error');
+        }
       }
     }
   }
@@ -310,6 +328,45 @@ class UdsInput extends HTMLElement {
   }
 
   _onBlur(event) {
+    // 邮箱验证
+    if (this.getAttribute('type') === 'email' && this._input) {
+      console.log('验证邮箱:', this._input.value);
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      
+      if (this._input.value && !emailRegex.test(this._input.value)) {
+        console.log('邮箱格式无效');
+        // 使用setAttribute方法设置错误
+        this.setAttribute('error', '请输入有效的邮箱地址');
+        
+        // 直接添加错误样式
+        const container = this.shadowRoot.querySelector('.input-container');
+        if (container) {
+          container.classList.add('error');
+        }
+        
+        // 显示错误消息
+        if (this._errorMessage) {
+          this._errorMessage.textContent = '请输入有效的邮箱地址';
+          this._errorMessage.hidden = false;
+        }
+      } else if (this._input.value) {
+        console.log('邮箱格式有效');
+        // 移除错误属性
+        this.removeAttribute('error');
+        
+        // 移除错误样式
+        const container = this.shadowRoot.querySelector('.input-container');
+        if (container) {
+          container.classList.remove('error');
+        }
+        
+        // 隐藏错误消息
+        if (this._errorMessage) {
+          this._errorMessage.hidden = true;
+        }
+      }
+    }
+    
     this.dispatchEvent(new CustomEvent('blur', {
       bubbles: true,
       composed: true

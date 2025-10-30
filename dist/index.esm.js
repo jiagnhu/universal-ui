@@ -270,7 +270,7 @@ class g extends HTMLElement {
   }
 }
 customElements.define("uds-radio", g);
-class I extends HTMLElement {
+class r extends HTMLElement {
   constructor() {
     super();
     // Define private properties
@@ -366,8 +366,8 @@ class I extends HTMLElement {
     t ? this.setAttribute("horizontal", "") : this.removeAttribute("horizontal");
   }
 }
-customElements.define("uds-radio-group", I);
-class r extends HTMLElement {
+customElements.define("uds-radio-group", r);
+class I extends HTMLElement {
   static get observedAttributes() {
     return ["size", "disabled", "checked", "indeterminate", "name", "value", "text", "ghost", "outline", "solid"];
   }
@@ -499,8 +499,8 @@ class r extends HTMLElement {
     return this.getAttribute("description") && this.getAttribute("description").trim() !== "";
   }
 }
-customElements.define("uds-checkbox", r);
-class Z extends HTMLElement {
+customElements.define("uds-checkbox", I);
+class m extends HTMLElement {
   static get observedAttributes() {
     return ["type", "size", "disabled", "horizontal", "all-checked", "value"];
   }
@@ -651,8 +651,8 @@ class Z extends HTMLElement {
     }), e;
   }
 }
-customElements.define("uds-checkbox-group", Z);
-class m extends HTMLElement {
+customElements.define("uds-checkbox-group", m);
+class Z extends HTMLElement {
   constructor() {
     super();
     // 定义私有属性
@@ -741,7 +741,7 @@ class m extends HTMLElement {
   _updateType() {
     if (!this._input) return;
     const t = this.getAttribute("type") || "text";
-    this._input.type = t;
+    t === "email" ? (this._input.type = "email", this._input.setAttribute("pattern", "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"), this._input.setAttribute("inputmode", "email")) : this._input.type = t;
     const i = this.shadowRoot.querySelector(".number-controls");
     if (console.log("type", t, i), t === "number") {
       if (i) {
@@ -764,7 +764,16 @@ class m extends HTMLElement {
   _updateSize() {
   }
   _updateError() {
-    this._errorMessage && (this.error ? (this._errorMessage.textContent = this.error, this._errorMessage.hidden = !1) : this._errorMessage.hidden = !0);
+    if (this._errorMessage)
+      if (this.error) {
+        this._errorMessage.textContent = this.error, this._errorMessage.hidden = !1;
+        const t = this.shadowRoot.querySelector(".input-container");
+        t && t.classList.add("error");
+      } else {
+        this._errorMessage.hidden = !0;
+        const t = this.shadowRoot.querySelector(".input-container");
+        t && t.classList.remove("error");
+      }
   }
   _updateClearButton() {
     if (!this._clearButton) return;
@@ -790,6 +799,19 @@ class m extends HTMLElement {
     }));
   }
   _onBlur(t) {
+    if (this.getAttribute("type") === "email" && this._input) {
+      console.log("验证邮箱:", this._input.value);
+      const i = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (this._input.value && !i.test(this._input.value)) {
+        console.log("邮箱格式无效"), this.setAttribute("error", "请输入有效的邮箱地址");
+        const s = this.shadowRoot.querySelector(".input-container");
+        s && s.classList.add("error"), this._errorMessage && (this._errorMessage.textContent = "请输入有效的邮箱地址", this._errorMessage.hidden = !1);
+      } else if (this._input.value) {
+        console.log("邮箱格式有效"), this.removeAttribute("error");
+        const s = this.shadowRoot.querySelector(".input-container");
+        s && s.classList.remove("error"), this._errorMessage && (this._errorMessage.hidden = !0);
+      }
+    }
     this.dispatchEvent(new CustomEvent("blur", {
       bubbles: !0,
       composed: !0
@@ -921,10 +943,10 @@ class m extends HTMLElement {
     t ? this.setAttribute("error", t) : this.removeAttribute("error");
   }
 }
-customElements.define("uds-input", m);
+customElements.define("uds-input", Z);
 console.log("Universal UI initialized");
 export {
-  r as UdsCheckbox,
-  Z as UdsCheckboxGroup
+  I as UdsCheckbox,
+  m as UdsCheckboxGroup
 };
 //# sourceMappingURL=index.esm.js.map

@@ -238,7 +238,70 @@ uds-button::part(base) {
 
 ---
 
-### 7.3 Switch `<uds-switch>`
+### 7.3 Checkbox `<uds-checkbox>`
+
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| checked | boolean | 是否选中 |
+| disabled | boolean | 禁用状态 |
+| size | sm / md / lg | 尺寸 |
+| name | string | 表单名称 |
+| description | string | 描述文本，提供额外说明 |
+
+#### 事件
+
+| 事件名 | 描述 |
+|--------|------|
+| uds-change | 复选框状态变化时触发 |
+
+```html
+<uds-checkbox checked>
+  接受服务条款
+  <span slot="description">包括隐私政策和用户协议</span>
+</uds-checkbox>
+```
+
+#### 样式规范
+
+- 当存在`description`属性时，容器使用`align-items: flex-start`对齐
+- 当不存在`description`属性时，容器使用`align-items: center`对齐
+- 当不存在`description`属性时，不显示description元素
+
+---
+
+### 7.4 Radio `<uds-radio>`
+
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| checked | boolean | 是否选中 |
+| disabled | boolean | 禁用状态 |
+| size | sm / md / lg | 尺寸 |
+| name | string | 表单名称 |
+| value | string | 单选框的值 |
+| description | string | 描述文本，提供额外说明 |
+
+#### 事件
+
+| 事件名 | 描述 |
+|--------|------|
+| uds-change | 单选框状态变化时触发 |
+
+```html
+<uds-radio name="plan" value="basic" checked>
+  基础版
+  <span slot="description">适合个人用户使用</span>
+</uds-radio>
+```
+
+#### 样式规范
+
+- 当存在`description`属性时，容器使用`align-items: flex-start`对齐
+- 当不存在`description`属性时，容器使用`align-items: center`对齐
+- 当不存在`description`属性时，不显示description元素
+
+---
+
+### 7.5 Switch `<uds-switch>`
 
 | 属性 | 类型 | 描述 |
 |------|------|------|
@@ -368,6 +431,145 @@ this.attachShadow({ mode: 'open' });
 - 基础组件：Button / Input / Select / Switch / Dialog。
 - 文档：Markdown + Playground。
 - 可访问性测试：axe / keyboard。
+
+---
+
+## 12. 测试框架与用法
+
+### 12.1 测试技术栈
+
+Universal Design System 使用以下测试技术栈确保组件质量：
+
+| 工具 | 用途 | 版本 |
+|------|------|------|
+| Vitest | 单元测试框架 | 0.34.x+ |
+| Testing Library | DOM测试工具 | 14.x+ |
+| Playwright | E2E测试 | 1.40.x+ |
+| Axe-core | 可访问性测试 | 4.8.x+ |
+
+### 12.2 测试环境配置
+
+项目根目录下的 `vitest.config.js` 文件配置了测试环境：
+
+```js
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./test/setup.js'],
+    include: ['./test/**/*.test.js'],
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+      exclude: ['node_modules/']
+    },
+    globals: true
+  }
+});
+```
+
+### 12.3 组件测试规范
+
+每个组件应包含以下测试类型：
+
+1. **单元测试**：测试组件API和功能
+2. **可访问性测试**：确保组件符合WCAG标准
+3. **视觉回归测试**：确保UI外观一致性
+4. **集成测试**：测试组件与其他组件的交互
+
+### 12.4 测试示例
+
+#### 12.4.1 Button组件测试示例
+
+```js
+// test/components/button/uds-button.test.js
+import { describe, it, expect, beforeEach } from 'vitest';
+import { screen, render, fireEvent } from '@testing-library/dom';
+import '@testing-library/jest-dom';
+import '../../../src/components/button/uds-button.js';
+
+describe('uds-button', () => {
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <uds-button>Click me</uds-button>
+    `;
+  });
+
+  it('renders with correct text content', () => {
+    const button = document.querySelector('uds-button');
+    expect(button).toHaveTextContent('Click me');
+  });
+
+  it('emits click event when clicked', () => {
+    const button = document.querySelector('uds-button');
+    const clickSpy = vi.fn();
+    button.addEventListener('click', clickSpy);
+    
+    button.click();
+    expect(clickSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('applies disabled state correctly', () => {
+    const button = document.querySelector('uds-button');
+    button.setAttribute('disabled', '');
+    
+    expect(button.shadowRoot.querySelector('button')).toHaveAttribute('disabled');
+    expect(button).toHaveAttribute('aria-disabled', 'true');
+  });
+});
+```
+
+#### 12.4.2 可访问性测试示例
+
+```js
+// test/a11y/button.test.js
+import { describe, it, expect, beforeEach } from 'vitest';
+import { axe, toHaveNoViolations } from 'jest-axe';
+import '../../../src/components/button/uds-button.js';
+
+expect.extend(toHaveNoViolations);
+
+describe('uds-button accessibility', () => {
+  it('should not have accessibility violations', async () => {
+    document.body.innerHTML = `
+      <uds-button>Accessible Button</uds-button>
+    `;
+    
+    const results = await axe(document.body);
+    expect(results).toHaveNoViolations();
+  });
+});
+```
+
+### 12.5 测试最佳实践
+
+1. **测试覆盖率目标**：核心组件 ≥ 90%，非核心组件 ≥ 80%
+2. **测试命名规范**：`[组件名].[测试类型].test.js`
+3. **测试优先级**：
+   - 高：核心交互功能、可访问性
+   - 中：边界情况、性能
+   - 低：视觉样式细节
+
+### 12.6 持续集成
+
+项目使用GitHub Actions进行持续集成，每次提交都会运行以下测试：
+
+```yaml
+# 测试工作流示例
+name: Test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:a11y
+```
 
 ---
 

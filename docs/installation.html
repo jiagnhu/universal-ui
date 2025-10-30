@@ -6,7 +6,7 @@
   <title>安装指南 - Universal Design System</title>
   <link rel="stylesheet" href="../dist/styles/tokens.css">
   <script>
-    // 立即检查父窗口主题，避免闪动
+    // 立即检查主题设置，避免闪动
     (function() {
       try {
         // 尝试从localStorage获取主题
@@ -104,126 +104,215 @@
       line-height: 30px;
       margin-right: 10px;
     }
+    
+    .uds-form-group {
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
   <h1>安装指南</h1>
   
   <div class="demo-section">
-    <p>Universal Design System (UDS) 是一个基于 Web Components 的组件库，可以在任何现代浏览器中使用，无需依赖特定的前端框架。</p>
+    <h2>环境准备</h2>
     
-    <div class="installation-steps">
-      <div class="step">
-        <h2><span class="step-number">1</span>安装组件库</h2>
-        <p>使用 npm 安装组件库：</p>
-        <div class="code-block">
-          <pre><code>npm install universal-design-system</code></pre>
-        </div>
-      </div>
-      
-      <div class="step">
-        <h2><span class="step-number">2</span>在项目中引入组件</h2>
-        
-        <h3>方式一：引入整个组件库</h3>
-        <p>在项目入口文件中引入整个组件库：</p>
-        <div class="code-block">
-          <pre><code>// 在项目入口文件中引入
-import 'universal-design-system';</code></pre>
-        </div>
-        
-        <h3>方式二：按需引入单个组件</h3>
-        <p>只引入需要的组件，减小打包体积：</p>
-        <div class="code-block">
-          <pre><code>// 只引入按钮组件
-import 'universal-design-system/dist/components/button';</code></pre>
-        </div>
-      </div>
-      
-      <div class="step">
-        <h2><span class="step-number">3</span>在原生环境中使用组件</h2>
-        <p>在原生HTML/JavaScript环境中使用组件库有两种方式：</p>
-        
-        <h3>方式一：通过CDN引入</h3>
-        <p>可以通过CDN直接在HTML中引入组件库：</p>
-        <div class="code-block">
-          <pre><code>&lt;!-- 在HTML头部引入样式和脚本 --&gt;
-&lt;head&gt;
-  &lt;!-- 引入样式文件 --&gt;
-  &lt;link rel="stylesheet" href="https://unpkg.com/universal-design-system/dist/styles/tokens.css"&gt;
-  &lt;!-- 引入组件库 --&gt;
-  &lt;script src="https://unpkg.com/universal-design-system/dist/index.umd.js"&gt;&lt;/script&gt;
-&lt;/head&gt;</code></pre>
-        </div>
-        
-        <h3>方式二：本地引入</h3>
-        <p>如果已通过npm安装，可以直接引用本地文件：</p>
-        <div class="code-block">
-          <pre><code>&lt;!-- 在HTML头部引入样式和脚本 --&gt;
-&lt;head&gt;
-  &lt;!-- 引入样式文件 --&gt;
-  &lt;link rel="stylesheet" href="./node_modules/universal-design-system/dist/styles/tokens.css"&gt;
-  &lt;!-- 引入组件库 --&gt;
-  &lt;script src="./node_modules/universal-design-system/dist/index.umd.js"&gt;&lt;/script&gt;
-&lt;/head&gt;</code></pre>
-        </div>
-        
-        <h3>使用组件</h3>
-        <p>引入组件库后，可以直接在HTML中使用组件：</p>
-        <div class="code-block">
-          <pre><code>&lt;!-- 基础按钮 --&gt;
-&lt;uds-button&gt;默认按钮&lt;/uds-button&gt;
-
-&lt;!-- 不同类型的按钮 --&gt;
-&lt;uds-button type="primary"&gt;主要按钮&lt;/uds-button&gt;
-&lt;uds-button type="secondary"&gt;次要按钮&lt;/uds-button&gt;
-&lt;uds-button type="danger"&gt;危险按钮&lt;/uds-button&gt;
-
-&lt;!-- 轮廓按钮 --&gt;
-&lt;uds-button type="primary" outline&gt;主要轮廓按钮&lt;/uds-button&gt;
-
-&lt;!-- 超小尺寸按钮（适用于移动端） --&gt;
-&lt;uds-button size="xs"&gt;超小按钮&lt;/uds-button&gt;
-
-&lt;!-- 带图标的按钮 --&gt;
-&lt;uds-button&gt;
-  &lt;svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em"&gt;
-    &lt;!-- 图标路径 --&gt;
-  &lt;/svg&gt;
-  带图标的按钮
-&lt;/uds-button&gt;</code></pre>
-        </div>
-        
-        <h3>JavaScript交互</h3>
-        <p>在原生JavaScript中监听组件事件：</p>
-        <div class="code-block">
-          <pre><code>// 获取按钮元素
-const button = document.querySelector('uds-button');
-
-// 添加点击事件监听
-button.addEventListener('click', () => {
-  console.log('按钮被点击了');
-});
-
-// 动态修改属性
-button.setAttribute('type', 'primary');
-button.setAttribute('disabled', 'true');
-
-// 或者直接设置属性
-button.type = 'primary';
-button.disabled = true;</code></pre>
-        </div>
-      </div>
+    <h3>项目初始化</h3>
+    <p>首先，我们创建了一个新的项目目录并初始化 npm 项目：</p>
+    <div class="code-block">
+      <pre><code>mkdir universal-ui-test
+cd universal-ui-test
+npm init -y</code></pre>
     </div>
     
-    <h2>浏览器兼容性</h2>
-    <p>Universal Design System 支持所有现代浏览器，包括：</p>
-    <ul>
-      <li>Chrome (最新版)</li>
-      <li>Firefox (最新版)</li>
-      <li>Safari (最新版)</li>
-      <li>Edge (最新版)</li>
-    </ul>
-    <p>由于使用了 Web Components 技术，不支持 IE11 及以下版本。</p>
+    <h3>安装依赖</h3>
+    <p>安装 Universal Design System 组件库：</p>
+    <div class="code-block">
+      <pre><code>npm install universal-design-system</code></pre>
+    </div>
+    
+    <p>安装 HTTP 服务器用于本地预览：</p>
+    <div class="code-block">
+      <pre><code>npm install -g http-server</code></pre>
+    </div>
+    
+    <h2>创建基础 HTML 文件</h2>
+    <p>创建了一个基础的 HTML 文件 <code>index.html</code>，引入 Universal Design System 的样式和脚本：</p>
+    <div class="code-block">
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Universal Design System 示例&lt;/title&gt;
+    &lt;!-- 引入 Universal Design System 样式 --&gt;
+    &lt;link rel="stylesheet" href="node_modules/universal-design-system/dist/styles/tokens.css"&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .demo-section {
+            margin-bottom: 30px;
+        }
+        .uds-form-group {
+            margin-bottom: 15px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Universal Design System 组件演示&lt;/h1&gt;
+    
+    &lt;!-- 引入 Universal Design System 脚本 --&gt;
+    &lt;script src="node_modules/universal-design-system/dist/index.umd.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+    
+    <h2>添加组件示例</h2>
+    
+    <h3>按钮组件</h3>
+    <p>添加了不同类型和状态的按钮组件：</p>
+    <div class="code-block">
+      <pre><code>&lt;div class="demo-section"&gt;
+    &lt;h2&gt;按钮组件&lt;/h2&gt;
+    &lt;uds-button&gt;默认按钮&lt;/uds-button&gt;
+    &lt;uds-button variant="primary"&gt;主要按钮&lt;/uds-button&gt;
+    &lt;uds-button variant="secondary"&gt;次要按钮&lt;/uds-button&gt;
+    &lt;uds-button variant="danger"&gt;危险按钮&lt;/uds-button&gt;
+    &lt;uds-button disabled&gt;禁用按钮&lt;/uds-button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    
+    <h3>表单元素</h3>
+    <p>添加了各种表单元素，包括输入框、单选框和复选框：</p>
+    <div class="code-block">
+      <pre><code>&lt;div class="demo-section"&gt;
+    &lt;h2&gt;表单元素&lt;/h2&gt;
+    &lt;div class="uds-form-group"&gt;
+        &lt;label class="uds-label"&gt;用户名&lt;/label&gt;
+        &lt;uds-input placeholder="请输入用户名"&gt;&lt;/uds-input&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="uds-form-group"&gt;
+        &lt;label class="uds-label"&gt;密码&lt;/label&gt;
+        &lt;uds-input type="password" placeholder="请输入密码"&gt;&lt;/uds-input&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- 单选框组 - 水平模式 --&gt;
+    &lt;div class="uds-form-group"&gt;
+        &lt;label class="uds-label"&gt;性别&lt;/label&gt;
+        &lt;uds-radio-group name="gender" value="male" horizontal&gt;
+            &lt;uds-radio value="male"&gt;男&lt;/uds-radio&gt;
+            &lt;uds-radio value="female"&gt;女&lt;/uds-radio&gt;
+            &lt;uds-radio value="other"&gt;其他&lt;/uds-radio&gt;
+        &lt;/uds-radio-group&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- 复选框组 - 水平模式 --&gt;
+    &lt;div class="uds-form-group"&gt;
+        &lt;label class="uds-label"&gt;兴趣爱好&lt;/label&gt;
+        &lt;uds-checkbox-group name="hobbies" horizontal&gt;
+            &lt;uds-checkbox value="reading"&gt;阅读&lt;/uds-checkbox&gt;
+            &lt;uds-checkbox value="sports" checked&gt;运动&lt;/uds-checkbox&gt;
+            &lt;uds-checkbox value="music"&gt;音乐&lt;/uds-checkbox&gt;
+            &lt;uds-checkbox value="travel"&gt;旅行&lt;/uds-checkbox&gt;
+        &lt;/uds-checkbox-group&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    
+    <h2>组件优化过程</h2>
+    
+    <h3>单选框和复选框组件改进</h3>
+    <p>最初，我们使用单独的 <code>&lt;uds-radio&gt;</code> 和 <code>&lt;uds-checkbox&gt;</code> 元素，后来改进为使用 <code>&lt;uds-radio-group&gt;</code> 和 <code>&lt;uds-checkbox-group&gt;</code> 组件：</p>
+    
+    <h4>改进前：</h4>
+    <div class="code-block">
+      <pre><code>&lt;!-- 单选框 --&gt;
+&lt;div class="uds-form-group"&gt;
+    &lt;label class="uds-label"&gt;性别&lt;/label&gt;
+    &lt;div&gt;
+        &lt;uds-radio name="gender" value="male" checked&gt;男&lt;/uds-radio&gt;
+        &lt;uds-radio name="gender" value="female"&gt;女&lt;/uds-radio&gt;
+        &lt;uds-radio name="gender" value="other"&gt;其他&lt;/uds-radio&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 复选框 --&gt;
+&lt;div class="uds-form-group"&gt;
+    &lt;label class="uds-label"&gt;兴趣爱好&lt;/label&gt;
+    &lt;div&gt;
+        &lt;uds-checkbox name="hobbies" value="reading"&gt;阅读&lt;/uds-checkbox&gt;
+        &lt;uds-checkbox name="hobbies" value="sports" checked&gt;运动&lt;/uds-checkbox&gt;
+        &lt;uds-checkbox name="hobbies" value="music"&gt;音乐&lt;/uds-checkbox&gt;
+        &lt;uds-checkbox name="hobbies" value="travel"&gt;旅行&lt;/uds-checkbox&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    
+    <h4>改进后：</h4>
+    <div class="code-block">
+      <pre><code>&lt;!-- 单选框组 --&gt;
+&lt;div class="uds-form-group"&gt;
+    &lt;label class="uds-label"&gt;性别&lt;/label&gt;
+    &lt;uds-radio-group name="gender" value="male"&gt;
+        &lt;uds-radio value="male"&gt;男&lt;/uds-radio&gt;
+        &lt;uds-radio value="female"&gt;女&lt;/uds-radio&gt;
+        &lt;uds-radio value="other"&gt;其他&lt;/uds-radio&gt;
+    &lt;/uds-radio-group&gt;
+&lt;/div&gt;
+
+&lt;!-- 复选框组 --&gt;
+&lt;div class="uds-form-group"&gt;
+    &lt;label class="uds-label"&gt;兴趣爱好&lt;/label&gt;
+    &lt;uds-checkbox-group name="hobbies"&gt;
+        &lt;uds-checkbox value="reading"&gt;阅读&lt;/uds-checkbox&gt;
+        &lt;uds-checkbox value="sports" checked&gt;运动&lt;/uds-checkbox&gt;
+        &lt;uds-checkbox value="music"&gt;音乐&lt;/uds-checkbox&gt;
+        &lt;uds-checkbox value="travel"&gt;旅行&lt;/uds-checkbox&gt;
+    &lt;/uds-checkbox-group&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    
+    <h3>添加水平布局</h3>
+    <p>为了使单选框和复选框在同一行显示，我们添加了 <code>horizontal</code> 属性：</p>
+    <div class="code-block">
+      <pre><code>&lt;uds-radio-group name="gender" value="male" horizontal&gt;
+    &lt;!-- 单选框内容 --&gt;
+&lt;/uds-radio-group&gt;
+
+&lt;uds-checkbox-group name="hobbies" horizontal&gt;
+    &lt;!-- 复选框内容 --&gt;
+&lt;/uds-checkbox-group&gt;</code></pre>
+    </div>
+    
+    <h2>本地预览</h2>
+    <p>使用 HTTP 服务器在本地预览页面：</p>
+    <div class="code-block">
+      <pre><code>npx http-server -p 8082 -o</code></pre>
+    </div>
+    <p>页面可以在浏览器中通过 http://127.0.0.1:8082 访问。</p>
+    
+    <h2>总结</h2>
+    <p>通过本次实践，我们成功使用 Universal Design System 创建了一个包含按钮、输入框、单选框和复选框的示例页面。组件库提供了丰富的功能和灵活的配置选项，使界面开发变得简单高效。</p>
+    
+    <p>主要收获：</p>
+    <ol>
+      <li>了解了 Universal Design System 的基本使用方法</li>
+      <li>掌握了各种组件的属性和配置选项</li>
+      <li>学习了组件的组合使用和布局调整</li>
+      <li>体验了组件库如何提高开发效率和界面一致性</li>
+    </ol>
+    
+    <h2>后续改进方向</h2>
+    <ol>
+      <li>探索更多高级组件（如表格、模态框、导航等）</li>
+      <li>尝试自定义主题和样式</li>
+      <li>实现响应式布局</li>
+      <li>添加表单验证和交互功能</li>
+    </ol>
   </div>
   
   <script>

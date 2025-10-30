@@ -149,7 +149,7 @@
       <div class="nav-title">入门</div>
       <ul class="nav-items">
         <li class="nav-item">
-          <a href="#" class="nav-link" data-page="intro">介绍</a>
+          <a href="#" class="nav-link" data-page="introduction">介绍</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link" data-page="installation">安装指南</a>
@@ -240,7 +240,7 @@
         const page = link.getAttribute('data-page');
         
         // button、installation、radio和checkbox页面实际存在
-        if (page === 'button' || page === 'installation' || page === 'radio' || page === 'checkbox' || page === 'input') {
+        if (page === 'button' || page === 'installation' || page === 'radio' || page === 'checkbox' || page === 'input' || page === 'introduction') {
           // 先移除iframe，然后重新创建并添加到DOM中
           const parentElement = contentFrame.parentElement;
           const currentTheme = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';
