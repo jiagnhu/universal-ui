@@ -1,0 +1,29 @@
+<div class="input-container">
+  <div class="input-prefix">
+    <slot name="prefix"></slot>
+  </div>
+  <input class="input-field" />
+  <textarea class="textarea"></textarea>
+  <div class="input-suffix">
+    <div class="clear-button">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M15 9L9 15M9 9l6 6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="number-controls">
+      <button class="number-up-button" type="button" aria-label="增加数值">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="number-down-button" type="button" aria-label="减少数值">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <slot name="suffix"></slot>
+  </div>
+</div>
+<div class="error-message"></div>

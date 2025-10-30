@@ -1,0 +1,195 @@
+/* UDS Input Component Styles */
+:host {
+  display: inline-block;
+  font-family: var(--uds-font-sans, sans-serif);
+  font-size: var(--uds-font-size-md, 14px);
+  color: var(--uds-color-text, #333);
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--uds-color-border, #d9d9d9);
+  border-radius: var(--uds-radius-md);
+  background-color: var(--uds-color-bg, #fff);
+  transition: all 0.2s;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 36px; /* 中尺寸高度（包含边框） */
+  position: relative;
+}
+
+:host([multiline]) .input-container {
+  height: auto;
+}
+
+:host([resizer]) .textarea {
+  resize: vertical;
+}
+
+:host(:focus-within) .input-container {
+  border-color: var(--uds-color-primary, #1890ff);
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+:host([disabled]) .input-container {
+  background-color: var(--uds-color-bg-disabled, #f5f5f5);
+  border-color: var(--uds-color-border, #d9d9d9);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+:host([error]) .input-container {
+  border-color: var(--uds-color-danger, #ff4d4f);
+}
+
+:host([error]:focus-within) .input-container {
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.input-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 8px 12px;
+  font-size: inherit;
+  color: var(--uds-color-secondary-text);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-field::placeholder {
+  color: var(--uds-color-secondary-text-active);
+}
+
+.input-field:disabled {
+  cursor: not-allowed;
+  color: var(--uds-color-secondary-disabled-rgb);
+}
+
+
+.input-prefix,
+.input-suffix {
+  display: flex;
+  align-items: center;
+  color: var(--uds-color-secondary-text);
+  justify-content: center;
+}
+
+.input-suffix {
+  position: absolute;
+  right: 8px;
+  top: 10%;
+  height: 80%;
+  padding-right: 8px;
+  background-color: transparent;
+}
+
+/* 数字输入框控件样式 */
+.number-controls {
+  display: flex;
+  flex-direction: row;
+  margin-left: 4px;
+  height: 100%;
+}
+
+.number-up-button,
+.number-down-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  height: 100%;
+  color: var(--uds-color-secondary-text);
+  transition: color 0.2s;
+}
+
+.number-up-button:hover,
+.number-down-button:hover {
+  color: var(--uds-color-primary, #0066ff);
+}
+
+.number-up-button:active,
+.number-down-button:active {
+  color: var(--uds-color-primary-dark, #0052cc);
+}
+
+/* 隐藏原生的数字输入框加减组件 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 多行文本框样式 */
+.textarea {
+  display: none;
+  width: 100%;
+  min-height: 30px;
+  padding: 8px 12px;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--uds-color-text);
+  background-color: var(--uds-color-background);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--uds-color-primary, #0066ff);
+  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.clear-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px;
+  color: var(--uds-color-secondary-text);
+}
+
+.clear-button:hover {
+  color: var(--uds-color-text, #333);
+}
+
+:host([size="sm"]) .input-container {
+  border-radius: var(--uds-radius-sm);
+  height: 28px; /* 小尺寸高度（包含边框） */
+  box-sizing: border-box;
+}
+
+:host([size="sm"]) .input-field {
+  padding: 4px 8px;
+  font-size: var(--uds-font-size-sm);
+}
+
+:host([size="lg"]) .input-container {
+  border-radius: var(--uds-radius-lg);
+  height: 44px; /* 大尺寸高度（包含边框） */
+  box-sizing: border-box;
+}
+
+:host([size="lg"]) .input-field {
+  padding: 12px 16px;
+  font-size: var(--uds-font-size-lg);
+}
+
+.error-message {
+  margin-top: 4px;
+  color: var(--uds-color-danger);
+  font-size: var(--uds-font-size-sm);
+}

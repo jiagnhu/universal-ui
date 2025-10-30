@@ -15,9 +15,6 @@
 }
 
 /* 样式变体 */
-.radio-container.style-text {
-  /* 默认样式，不需要额外设置 */
-}
 
 .radio-container.style-ghost {
   padding: 4px 8px;

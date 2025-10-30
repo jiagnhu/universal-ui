@@ -166,9 +166,9 @@
         <li class="nav-item">
           <a href="#" class="nav-link" data-page="input">Input 输入框</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="#" class="nav-link" data-page="select">Select 选择器</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a href="#" class="nav-link" data-page="checkbox">Checkbox 复选框</a>
         </li>
@@ -240,7 +240,7 @@
         const page = link.getAttribute('data-page');
         
         // button、installation、radio和checkbox页面实际存在
-        if (page === 'button' || page === 'installation' || page === 'radio' || page === 'checkbox') {
+        if (page === 'button' || page === 'installation' || page === 'radio' || page === 'checkbox' || page === 'input') {
           // 先移除iframe，然后重新创建并添加到DOM中
           const parentElement = contentFrame.parentElement;
           const currentTheme = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';

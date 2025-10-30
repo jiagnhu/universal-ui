@@ -55,13 +55,19 @@
   /* Spacing and Radius */
   --uds-space-2: 8px;
   --uds-space-4: 16px;
-  --uds-radius-md: 12px;
+  --uds-radius-lg: 12px;
+  --uds-radius-md: 10px;
+  --uds-radius-sm: 8px;
   
   /* Controls */
   --uds-cntl-h: 40px;
   
   /* Density */
   --uds-density: 0;
+
+  --uds-font-size-sm: 12px;
+  --uds-font-size-md: 14px;
+  --uds-font-size-lg: 16px;
 }
 
 [data-density="mobile"] {
