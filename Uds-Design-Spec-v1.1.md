@@ -175,7 +175,7 @@
 > 注意：之前的`variant`属性已被移除，请使用`type`和`plain`属性组合来控制按钮样式
 
 ```html
-<uds-button type="primary" size="md">
+<uds-button type="primary" size="medium">
   <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em"></svg>
   保存
 </uds-button>

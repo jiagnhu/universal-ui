@@ -1,0 +1,127 @@
+/* 抽屉样式 */
+.drawer-toggle-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 8px 16px;
+  background: var(--uds-color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--uds-radius-md);
+  cursor: pointer;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.drawer.open {
+  right: 0;
+}
+
+.drawer-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--uds-color-border);
+  margin-bottom: 16px;
+}
+
+.drawer-header h3 {
+  margin: 0;
+}
+
+.drawer-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--uds-color-text);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* 控件组样式 */
+.drawer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-group label {
+  font-weight: 500;
+  color: var(--uds-color-text);
+}
+
+.control-select {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--uds-color-border);
+  background-color: var(--uds-color-bg);
+  color: var(--uds-color-text);
+  font-size: 14px;
+  width: 100%;
+}
+
+/* 按钮预览区域 */
+.button-preview {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid var(--uds-color-border);
+  border-radius: 4px;
+  background-color: var(--uds-color-bg);
+}
+
+.button-preview h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--uds-color-text);
+}
+
+.button-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  padding: 16px;
+  background-color: var(--uds-color-bg);
+}
+
+/* 暗黑模式适配 */
+[data-theme="dark"] .drawer {
+  background-color: #000;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .drawer-header {
+  border-bottom-color: var(--uds-color-border);
+}
+
+[data-theme="dark"] .drawer-close {
+  color: var(--uds-color-text);
+}

@@ -1,0 +1,304 @@
+:root {
+  /* ===== Primary - Filled ===== */
+  --uds-filled-primary-bg: #2F80ED;
+  --uds-filled-primary-bg-hover: #2F80ED; /* 未提供 hover，等同 Default */
+  --uds-filled-primary-bg-active: #1D51B0; /* Pressed */
+  --uds-filled-primary-bg-loading: #2F80ED; /* Loading */
+  --uds-filled-primary-bg-disabled:rgba(47, 128, 237, 0.3); /* 按文件 Disabled */
+  --uds-filled-primary-text: #FFFFFF;
+  --uds-filled-primary-text-hover: #FFFFFF;
+  --uds-filled-primary-text-active: #FFFFFF;
+  --uds-filled-primary-text-loading: #FFFFFF;
+  --uds-filled-primary-text-disabled: #FFFFFF;
+  --uds-filled-primary-border: transparent;
+  --uds-filled-primary-border-hover: transparent;
+  --uds-filled-primary-border-active: transparent;
+  --uds-filled-primary-border-disabled: transparent;
+  --uds-filled-primary-border-loading: transparent;
+
+  /* ===== Primary - Outline =====
+     按通用规范：背景透明，文字/边框用 token 的颜色；
+     Pressed 时文字变为文件中的 button-text（#1D51B0），边框保持主题色。 */
+  --uds-outline-primary-bg: transparent;
+  --uds-outline-primary-bg-hover: rgba(47, 128, 237, 0.1);
+  --uds-outline-primary-bg-active: rgba(47, 128, 237, 0.2);
+  --uds-outline-primary-bg-loading: transparent;
+  --uds-outline-primary-bg-disabled: transparent;
+  --uds-outline-primary-text: #2F80ED;
+  --uds-outline-primary-text-hover: #1C63D9;
+  --uds-outline-primary-text-active: #1D51B0; /* Pressed text */
+  --uds-outline-primary-text-loading: #2F80ED;
+  --uds-outline-primary-text-disabled: rgba(47, 128, 237, 0.2);
+  --uds-outline-primary-border: #2F80ED;
+  --uds-outline-primary-border-hover: #2F80ED;
+  --uds-outline-primary-border-active: #2F80ED;
+  --uds-outline-primary-border-loading: #2F80ED;
+  --uds-outline-primary-border-disabled: rgba(47, 128, 237, 0.3);
+  
+
+  /* ===== Primary - Ghost =====
+     背景透明，文字使用 token；Pressed 同上。 */
+  --uds-ghost-primary-bg: transparent;
+  --uds-ghost-primary-bg-hover: rgba(47, 128, 237, 0.1);
+  --uds-ghost-primary-bg-active: rgba(47, 128, 237, 0.2);
+  --uds-ghost-primary-bg-loading: transparent;
+  --uds-ghost-primary-bg-disabled: transparent;
+  --uds-ghost-primary-text: #2F80ED;
+  --uds-ghost-primary-text-hover: #1C63D9;
+  --uds-ghost-primary-text-active: #1D51B0; /* Pressed text */
+  --uds-ghost-primary-text-loading: #2F80ED;
+  --uds-ghost-primary-text-disabled: rgba(47, 128, 237, 0.3);
+  --uds-ghost-primary-border: transparent;
+  --uds-ghost-primary-border-hover: transparent;
+  --uds-ghost-primary-border-active: transparent;
+  --uds-ghost-primary-border-loading: transparent;
+  --uds-ghost-primary-border-disabled: transparent;
+  
+
+  /* ===== Primary - Text ===== */
+  --uds-text-primary-bg: transparent;
+  --uds-text-primary-bg-hover: transparent;
+  --uds-text-primary-bg-active: transparent;
+  --uds-text-primary-bg-loading: transparent;
+  --uds-text-primary-bg-disabled: transparent;
+  --uds-text-primary-text: #2F80ED;
+  --uds-text-primary-text-hover: #1C63D9;
+  --uds-text-primary-text-active: #1D51B0; /* Pressed text */
+  --uds-text-primary-text-loading: #2F80ED;
+  --uds-text-primary-text-disabled: rgba(47, 128, 237, 0.3);
+  --uds-text-primary-border: transparent;
+  --uds-text-primary-border-hover: transparent;
+  --uds-text-primary-border-active: transparent;
+  --uds-text-primary-border-loading: transparent;
+  --uds-text-primary-border-disabled: transparent;
+
+  /* ===== Secondary - Filled ===== */
+  --uds-filled-secondary-bg: #EDEDED;      /* Default */
+  --uds-filled-secondary-bg-hover: #EDEDED;/* 未提供 hover */
+  --uds-filled-secondary-bg-active: #C8C8C8;/* Pressed */
+  --uds-filled-secondary-bg-loading: #EDEDED;
+  --uds-filled-secondary-bg-disabled: rgba(103, 103, 103, 0.1);/* 文件 Disabled */
+  --uds-filled-secondary-text: #545454;    /* Default */
+  --uds-filled-secondary-text-hover: #545454;
+  --uds-filled-secondary-text-active: #363636;/* Pressed */
+  --uds-filled-secondary-text-loading: #545454;
+  --uds-filled-secondary-text-disabled: rgba(103, 103, 103, 0.3);/* 文件 Disabled */
+  --uds-filled-secondary-border: transparent;
+  --uds-filled-secondary-border-hover: transparent;
+  --uds-filled-secondary-border-active: transparent;
+  --uds-filled-secondary-border-loading: transparent;
+  --uds-filled-secondary-border-disabled: transparent;
+
+  /* ===== Secondary - Outline =====
+     文件的 Outline/ Ghost/ Text 对 Secondary 给的是中灰值：
+     我们采用文字/边框随 token，背景透明；Pressed 时按 Pressed 行为。 */
+  --uds-outline-secondary-bg: transparent;
+  --uds-outline-secondary-bg-hover: rgba(103, 103, 103, 0.1);
+  --uds-outline-secondary-bg-active: rgba(103, 103, 103, 0.2);
+  --uds-outline-secondary-bg-loading: transparent;
+  --uds-outline-secondary-bg-disabled: transparent;
+  --uds-outline-secondary-text: #545454;      /* Default/Loading */
+  --uds-outline-secondary-text-hover: #545454;
+  --uds-outline-secondary-text-active: #363636;/* Pressed */
+  --uds-outline-secondary-text-loading: #545454;
+  --uds-outline-secondary-text-disabled: rgba(103, 103, 103, 0.2);
+  --uds-outline-secondary-border: #C8C8C8;
+  --uds-outline-secondary-border-hover: #C8C8C8;
+  --uds-outline-secondary-border-active: #C8C8C8;
+  --uds-outline-secondary-border-loading: #C8C8C8;
+  --uds-outline-secondary-border-disabled: rgba(103, 103, 103, 0.3);
+
+  /* ===== Secondary - Ghost ===== */
+  --uds-ghost-secondary-bg: transparent;
+  --uds-ghost-secondary-bg-hover: rgba(103, 103, 103, 0.1);
+  --uds-ghost-secondary-bg-active: rgba(103, 103, 103, 0.2);
+  --uds-ghost-secondary-bg-loading: transparent;
+  --uds-ghost-secondary-bg-disabled: transparent;
+  --uds-ghost-secondary-text: #545454;
+  --uds-ghost-secondary-text-hover: #545454;
+  --uds-ghost-secondary-text-active: #363636;
+  --uds-ghost-secondary-text-loading: #545454;
+  --uds-ghost-secondary-text-disabled: rgba(103, 103, 103, 0.3);
+  --uds-ghost-secondary-border: transparent;
+  --uds-ghost-secondary-border-hover: transparent;
+  --uds-ghost-secondary-border-active: transparent;
+  --uds-ghost-secondary-border-loading: transparent;
+  --uds-ghost-secondary-border-disabled: transparent;
+
+  /* ===== Secondary - Text ===== */
+  --uds-text-secondary-bg: transparent;
+  --uds-text-secondary-bg-hover: transparent;
+  --uds-text-secondary-bg-active: transparent;
+  --uds-text-secondary-bg-loading: transparent;
+  --uds-text-secondary-bg-disabled: transparent;
+  --uds-text-secondary-text: #545454;
+  --uds-text-secondary-text-hover: #545454;
+  --uds-text-secondary-text-active: #363636;
+  --uds-text-secondary-text-loading: #545454;
+  --uds-text-secondary-text-disabled: rgba(103, 103, 103, 0.3);
+  --uds-text-secondary-border: transparent;
+  --uds-text-secondary-border-hover: transparent;
+  --uds-text-secondary-border-active: transparent;
+  --uds-text-secondary-border-loading: transparent;
+  --uds-text-secondary-border-disabled: transparent;
+
+  /* ===== Danger - Filled ===== */
+  --uds-filled-danger-bg: #EB5757;          /* Default */
+  --uds-filled-danger-bg-hover: #D62C2C;    /* 未提供 hover */
+  --uds-filled-danger-bg-active: #B42121;   /* Pressed */
+  --uds-filled-danger-bg-loading: #EB5757;
+  --uds-filled-danger-bg-disabled: rgba(235, 87, 87, 0.3); /* 文件 Disabled */
+  --uds-filled-danger-text: #FFFFFF;
+  --uds-filled-danger-text-hover: #FFFFFF;
+  --uds-filled-danger-text-active: #FFFFFF;
+  --uds-filled-danger-text-loading: #FFFFFF;
+  --uds-filled-danger-text-disabled: #FFFFFF;
+  --uds-filled-danger-border: transparent;
+  --uds-filled-danger-border-hover: transparent;
+  --uds-filled-danger-border-active: transparent;
+  --uds-filled-danger-border-loading: transparent;
+  --uds-filled-danger-border-disabled: transparent;
+
+  /* ===== Danger - Outline ===== */
+  --uds-outline-danger-bg: transparent;
+  --uds-outline-danger-bg-hover: rgba(235, 87, 87, 0.1);
+  --uds-outline-danger-bg-active: rgba(235, 87, 87, 0.2);
+  --uds-outline-danger-bg-loading: transparent;
+  --uds-outline-danger-bg-disabled: rgba(235, 87, 87, 0.3);
+  --uds-outline-danger-text: #EB5757;        /* Default */
+  --uds-outline-danger-text-hover: #D62C2C;
+  --uds-outline-danger-text-active: #B42121; /* Pressed text */
+  --uds-outline-danger-text-loading: #EB5757;
+  --uds-outline-danger-text-disabled: rgba(235, 87, 87, 0.3);
+  --uds-outline-danger-border: #EB5757;
+  --uds-outline-danger-border-hover: #EB5757;
+  --uds-outline-danger-border-active: #EB5757;
+  --uds-outline-danger-border-loading: #EB5757;
+  --uds-outline-danger-border-disabled: rgba(235, 87, 87, 0.2);
+
+  /* ===== Danger - Ghost ===== */
+  --uds-ghost-danger-bg: transparent;
+  --uds-ghost-danger-bg-hover: rgba(235, 87, 87, 0.1);
+  --uds-ghost-danger-bg-active: rgba(235, 87, 87, 0.2);
+  --uds-ghost-danger-bg-loading: transparent;
+  --uds-ghost-danger-bg-disabled: transparent;
+  --uds-ghost-danger-text: #EB5757;
+  --uds-ghost-danger-text-hover: #D62C2C;
+  --uds-ghost-danger-text-active: #B42121;   /* Pressed text */
+  --uds-ghost-danger-text-loading: #EB5757;
+  --uds-ghost-danger-text-disabled: rgba(235, 87, 87, 0.3);
+  --uds-ghost-danger-border: transparent;
+  --uds-ghost-danger-border-hover: transparent;
+  --uds-ghost-danger-border-active: transparent;
+  --uds-ghost-danger-border-loading: transparent;
+  --uds-ghost-danger-border-disabled: transparent;
+
+  /* ===== Danger - Text ===== */
+  --uds-text-danger-bg: transparent;
+  --uds-text-danger-bg-hover: transparent;
+  --uds-text-danger-bg-active: transparent;
+  --uds-text-danger-bg-loading: transparent;
+  --uds-text-danger-bg-disabled: transparent;
+  --uds-text-danger-text: #EB5757;
+  --uds-text-danger-text-hover: #EB5757;
+  --uds-text-danger-text-active: #B42121;    /* Pressed text */
+  --uds-text-danger-text-loading: #EB5757;
+  --uds-text-danger-text-disabled: rgba(235, 87, 87, 0.3);
+  --uds-text-danger-border: transparent;
+  --uds-text-danger-border-hover: transparent;
+  --uds-text-danger-border-active: transparent;
+  --uds-text-danger-border-loading: transparent;
+  --uds-text-danger-border-disabled: transparent;
+
+  /* Radius */
+  --uds-radius-sm: 8px;
+  --uds-radius-md: 10px;
+  --uds-radius-lg: 12px;
+
+  /* Padding */
+  --uds-padding-sm: 4px;
+  --uds-padding-md: 8px;
+  --uds-padding-lg: 12px;
+
+  /* Font Size */
+  --uds-font-size-xs: 10px;
+  --uds-font-size-sm: 12px;
+  --uds-font-size-md: 14px;
+  --uds-font-size-lg: 16px;
+
+  /* height */
+  --uds-height-xs: 24px;
+  --uds-height-sm: 28px;
+  --uds-height-md: 36px;
+  --uds-height-lg: 44px;
+
+
+  /* Font Family */
+  --uds-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+}
+
+[data-theme="dark"] {
+  /* Filled */
+  --uds-filled-primary-bg: #60a5fa;
+  --uds-filled-primary-bg-hover: #2F80ED;
+  --uds-filled-primary-bg-active: #1C63D9;
+
+  --uds-filled-danger-bg: #f87171;
+  --uds-filled-danger-bg-hover: #ef4444;
+  --uds-filled-danger-bg-active: #dc2626;
+
+  --uds-filled-secondary-bg: #374151;
+  --uds-filled-secondary-bg-hover: #4b5563;
+  --uds-filled-secondary-bg-active: #525c6b;
+  --uds-filled-secondary-text: #e5e7eb;
+  --uds-filled-secondary-text-hover: #e5e7eb;
+  --uds-filled-secondary-text-active: #f9fafb;
+
+  /* Outline */
+  --uds-outline-primary-text: #60a5fa;
+  --uds-outline-primary-text-hover: #2F80ED;
+  --uds-outline-primary-text-active: #1C63D9;
+  --uds-outline-primary-border: #60a5fa;
+  --uds-outline-primary-border-hover: #2F80ED;
+  --uds-outline-primary-border-active: #1C63D9;
+
+  --uds-outline-danger-text: #f87171;
+  --uds-outline-danger-text-hover: #ef4444;
+  --uds-outline-danger-text-active: #dc2626;
+  --uds-outline-danger-border: #f87171;
+  --uds-outline-danger-border-hover: #ef4444;
+  --uds-outline-danger-border-active: #dc2626;
+
+  --uds-outline-secondary-text: #e5e7eb;
+  --uds-outline-secondary-text-hover: #e5e7eb;
+  --uds-outline-secondary-text-active: #f9fafb;
+  --uds-outline-secondary-border: #374151;
+  --uds-outline-secondary-border-hover: #4b5563;
+  --uds-outline-secondary-border-active: #525c6b;
+
+  /* Ghost */
+  --uds-ghost-primary-text: #60a5fa;
+  --uds-ghost-primary-text-hover: #2F80ED;
+  --uds-ghost-primary-text-active: #1C63D9;
+
+  --uds-ghost-danger-text: #f87171;
+  --uds-ghost-danger-text-hover: #ef4444;
+  --uds-ghost-danger-text-active: #dc2626;
+
+  --uds-ghost-secondary-text: #e5e7eb;
+  --uds-ghost-secondary-text-hover: #e5e7eb;
+  --uds-ghost-secondary-text-active: #f9fafb;
+
+  /* Text */
+  --uds-text-primary-text: #60a5fa;
+  --uds-text-primary-text-hover: #2F80ED;
+  --uds-text-primary-text-active: #1C63D9;
+
+  --uds-text-danger-text: #f87171;
+  --uds-text-danger-text-hover: #ef4444;
+  --uds-text-danger-text-active: #dc2626;
+
+  --uds-text-secondary-text: #e5e7eb;
+  --uds-text-secondary-text-hover: #e5e7eb;
+  --uds-text-secondary-text-active: #f9fafb;
+}

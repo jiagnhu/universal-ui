@@ -202,7 +202,8 @@ class UdsInput extends HTMLElement {
     // 处理email类型，在HTML中使用email类型
     if (type === 'email') {
       this._input.type = 'email';
-      this._input.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}');
+      // 在HTML属性中需要四重转义点号，因为字符串和正则表达式都需要转义
+      this._input.setAttribute('pattern', '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}');
       this._input.setAttribute('inputmode', 'email');
     } else {
       this._input.type = type;
@@ -210,7 +211,6 @@ class UdsInput extends HTMLElement {
     
     // 获取数字控制按钮容器
     const numberControls = this.shadowRoot.querySelector('.number-controls');
-    console.log('type', type, numberControls);
     // 如果是数字类型，显示加减按钮
     if (type === 'number') {
       if (numberControls) {
@@ -330,11 +330,10 @@ class UdsInput extends HTMLElement {
   _onBlur(event) {
     // 邮箱验证
     if (this.getAttribute('type') === 'email' && this._input) {
-      console.log('验证邮箱:', this._input.value);
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      // 修复正则表达式
+      const emailRegex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
       
       if (this._input.value && !emailRegex.test(this._input.value)) {
-        console.log('邮箱格式无效');
         // 使用setAttribute方法设置错误
         this.setAttribute('error', '请输入有效的邮箱地址');
         
@@ -350,7 +349,6 @@ class UdsInput extends HTMLElement {
           this._errorMessage.hidden = false;
         }
       } else if (this._input.value) {
-        console.log('邮箱格式有效');
         // 移除错误属性
         this.removeAttribute('error');
         

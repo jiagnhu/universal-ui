@@ -1,0 +1,93 @@
+/* 代码示例共用样式 */
+.example {
+  margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.example-preview {
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #f9fafb;
+}
+
+.example-code {
+  position: relative;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px;
+  margin: 0;
+  display: none; /* 默认隐藏代码 */
+}
+
+.example-code.show {
+  display: block; /* 显示代码 */
+}
+
+.example-code pre {
+  margin: 0;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.example-code code {
+  white-space: pre;
+}
+
+.copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.2s;
+}
+
+.toggle-code-button {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  text-align: center;
+  background-color: #f3f4f6;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.toggle-code-button:hover {
+  background-color: #e5e7eb;
+}
+
+.toggle-code-button::after {
+  content: "显示代码";
+}
+
+.toggle-code-button.active::after {
+  content: "隐藏代码";
+}
+
+.section-title {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .example-preview {
+    padding: 16px;
+  }
+}

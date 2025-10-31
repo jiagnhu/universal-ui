@@ -17,7 +17,7 @@
 |------|------|-------|------|
 | type | `primary` \| `secondary` \| `danger` \| `text` \| `ghost` | `ghost` | 按钮类型，决定按钮的颜色和样式 |
 | plain | `boolean` | `false` | 是否使用轮廓样式，设置为true时会应用outline样式 |
-| size | `xs` \| `sm` \| `md` \| `lg` | `md` | 按钮尺寸，其中xs为超小尺寸，适用于移动端 |
+| size | `small` \| `medium` \| `large` | `medium` | 按钮尺寸，分别为小/中/大 |
 | round | `boolean` | `false` | 是否使用圆角，默认为直角 |
 | disabled | `boolean` | `false` | 是否禁用 |
 | loading | `boolean` | `false` | 是否显示加载状态 |
@@ -47,7 +47,6 @@
 按钮组件针对移动端做了特殊适配：
 
 1. **移除hover效果**：在移动设备（屏幕宽度 ≤ 768px）上，所有按钮的hover效果都被移除，以提供更好的触摸体验。
-2. **超小尺寸按钮**：提供了xs尺寸的超小按钮，专为移动端紧凑布局设计。
 
 ## 示例
 
@@ -85,13 +84,10 @@
 ### 不同尺寸
 
 ```html
-<uds-button size="xs">超小按钮</uds-button>
-<uds-button size="sm">小按钮</uds-button>
-<uds-button size="md">中按钮</uds-button>
-<uds-button size="lg">大按钮</uds-button>
+<uds-button size="small">小按钮</uds-button>
+<uds-button size="medium">中按钮</uds-button>
+<uds-button size="large">大按钮</uds-button>
 ```
-
-> 注意：超小尺寸(xs)按钮专为移动端设计，在移动端使用时不会显示hover效果。
 
 ### 禁用状态
 

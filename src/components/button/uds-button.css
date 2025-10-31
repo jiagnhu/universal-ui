@@ -28,248 +28,64 @@ slot:not([name]) {
   justify-content: center;
   gap: 4px;
   font-family: var(--uds-font-sans);
-  font-size: var(--uds-fs-md, 16px);
-  line-height: var(--uds-line, 1.5);
   padding: 0 8px;
-  height: calc(var(--uds-cntl-h, 40px) - 8px);
   cursor: pointer;
   border: 1px solid rgb(220, 223, 230);
   transition: background-color 0.2s, transform 0.12s, opacity 0.2s;
   position: relative;
   overflow: hidden;
   user-select: none;
-  font-size: var(--uds-fs-md);
 }
 
-/* Button shapes */
-.button {
-  border-radius: 6px; /* 默认所有按钮都有圆角 */
+/* 默认激活状态下不应用缩放效果 */
+.button:active:not(.button--scale) {
+  transform: none;
 }
 
-.button--sm {
-  border-radius: 4px;
-}
-
-.button--lg {
-  border-radius: 8px;
+/* 当添加scale属性时，激活状态下应用缩放效果 */
+.button.button--scale:active {
+  transform: scale(0.98);
 }
 
 /* 当添加round属性时，设置为圆形 */
 .button--round {
-  border-radius: 20px;
+  border-radius: 20px !important;
 }
 
-/* Icon slots styling */
-/* ::slotted([slot="icon"]) {
-  margin-right: 4px;
-}
-
-::slotted([slot="icon-right"]) {
-  margin-left: 4px;
-} */
 
 /* Variants */
-.button--solid {
-  background-color: var(--uds-btn-bg, var(--uds-color-primary));
-  color: var(--uds-btn-fg, #ffffff);
+.button--filled {
   border: none;
-}
-
-.button--solid:hover {
-  background-color: var(--uds-btn-bg-hover, var(--uds-color-primary-hover));
-}
-
-.button--solid:active {
-  background-color: var(--uds-btn-bg-active, var(--uds-color-primary-active));
-  transform: scale(0.98);
 }
 
 .button--outline {
   background-color: transparent;
-  color: var(--uds-btn-outline-color);
-  border-color: var(--uds-btn-outline-border, var(--uds-color-border));
-}
-
-.button--outline:hover {
-  background-color: var(--uds-color-bg-subtle, #f7f7f8);
-}
-
-.button--outline:active {
-  background-color: var(--uds-color-border, #e5e7eb);
-  transform: scale(0.98);
-}
-
-/* 轮廓按钮类型特殊处理 */
-.button--outline.button--primary {
-  --uds-btn-outline-color: var(--uds-color-primary);
-  --uds-btn-outline-border: var(--uds-color-primary);
-}
-
-.button--outline.button--primary:hover {
-  background-color: var(--uds-color-primary-outline-hover-rgb);
-  border-color: var(--uds-color-primary-outline-hover-rgb);
-}
-
-.button--outline.button--secondary {
-  --uds-btn-outline-color: var(--uds-color-secondary);
-  --uds-btn-outline-border: var(--uds-color-secondary-active);
-  --uds-btn-outline-color: var(--uds-color-secondary-text);
-
-}
-
-.button--outline.button--secondary:hover {
-  background-color: var(--uds-color-secondary-outline-hover-rgb);
-  border-color: var(--uds-color-secondary-outline-hover-rgb);
-}
-
-.button--outline.button--danger {
-  --uds-btn-outline-color: var(--uds-color-danger);
-  --uds-btn-outline-border: var(--uds-color-danger);
-}
-
-.button--outline.button--danger:hover {
-  background-color: var(--uds-color-danger-outline-hover-rgb);
-  border-color: var(--uds-color-danger-outline-hover-rgb);
 }
 
 .button--ghost {
   background-color: transparent;
-  color: var(--uds-btn-ghost-color, var(--uds-color-text, #111827));
   border: none;
-}
-
-.button--ghost:hover {
-  background-color: var(--uds-color-bg-subtle, #f7f7f8);
-}
-
-.button--ghost:active {
-  background-color: var(--uds-color-border, #e5e7eb);
-  transform: scale(0.98);
-}
-
-/* 不同类型幽灵按钮的hover和active效果 */
-.button--ghost.button--primary:hover {
-  background-color: var(--uds-color-primary-ghost-hover-rgb);
-}
-
-.button--ghost.button--primary:active {
-  background-color: var(--uds-color-primary-ghost-active-rgb);
-}
-
-.button--ghost.button--secondary:hover {
-  background-color: var(--uds-color-secondary-ghost-hover-rgb);
-}
-
-.button--ghost.button--secondary:active {
-  background-color: var(--uds-color-secondary-ghost-active-rgb);
-}
-
-.button--ghost.button--danger:hover {
-  background-color: var(--uds-color-danger-ghost-hover-rgb);  
-}
-
-.button--ghost.button--danger:active {
-  background-color: var(--uds-color-danger-ghost-active-rgb);
-}
-
-/* 幽灵按钮类型特殊处理 */
-.button--ghost.button--primary {
-  --uds-btn-ghost-color: var(--uds-color-primary);
-}
-
-.button--ghost.button--secondary {
-  --uds-btn-ghost-color: var(--uds-color-secondary-text);
-}
-
-.button--ghost.button--danger {
-  --uds-btn-ghost-color: var(--uds-color-danger);
 }
 
 .button--text {
   background-color: transparent;
-  color: var(--uds-btn-text-color, var(--uds-color-text, #111827));
   padding: 0;
   height: auto;
   border: none;
 }
 
-/* .button--text:hover {
-  text-decoration: underline;
-} */
 
-.button--text:active {
-  /* opacity: 0.8; */
-  transform: scale(0.98);
-}
-
-/* 不同类型文本按钮的hover和active效果 */
-.button--text.button--primary:hover {
-  color: var(--uds-color-primary-hover);
-}
-
-.button--text.button--primary:active {
-  color: var(--uds-color-primary-active);
-}
-
-.button--text.button--secondary:hover {
-  color:var(--uds-color-secondary-text-hover);
-}
-
-.button--text.button--secondary:active {
-  color: var(--uds-color-secondary-text-active);
-}
-
-.button--text.button--danger:hover {
-  color: var(--uds-color-danger-hover);
-}
-
-.button--text.button--danger:active {
-  color: var(--uds-color-danger-active);
-}
-
-/* 文本按钮类型特殊处理 */
-.button--text.button--primary {
-  --uds-btn-text-color: var(--uds-color-primary);
-}
-
-.button--text.button--secondary {
-  --uds-btn-text-color: var(--uds-color-secondary-text);
-}
-
-.button--text.button--danger {
-  --uds-btn-text-color: var(--uds-color-danger);
-}
-
-/* Sizes */
-.button--sm {
-  height: calc(var(--uds-cntl-h, 40px) - 12px);
-  font-size: var(--uds-fs-md);
-  padding: 0 4px;
-}
-
-.button--lg {
-  height: calc(var(--uds-cntl-h, 40px) + 4px);
-  font-size: var(--uds-fs-md);
-  padding: 0 12px;
-}
-
-.button--xs {
-  height: calc(var(--uds-cntl-h, 40px) - 16px);
-  font-size: var(--uds-fs-sm, 14px);
-  padding: 0 4px;
-  border-radius: 4px;
-}
 
 /* States */
 
-.button[disabled], .button--loading {
+.button[disabled] {
   cursor: not-allowed;
-  color: var(--uds-color-text-muted);
   transform: none;
 }
 
 .button--loading {
   position: relative;
+  pointer-events: none;
 }
 
 .button--loading > * {
@@ -291,45 +107,21 @@ slot:not([name]) {
   animation: button-loading-spinner 0.8s linear infinite;
 }
 
-/* 实心按钮加载状态图标颜色 */
-.button--solid.button--loading::after {
-  border-color: #ffffff;
-  border-top-color: transparent;
+.button--sm.button--loading::after {
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  margin-left: -6px;
 }
 
-/* 描边按钮加载状态图标颜色 */
-.button--outline.button--loading::after {
-  border-color: var(--uds-btn-outline-color);
-  border-top-color: transparent;
+.button--lg.button--loading::after {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
 }
 
-/* 文本按钮加载状态图标颜色 */
-.button--text.button--loading::after {
-  border-color: var(--uds-btn-text-color);
-  border-top-color: transparent;
-}
 
-/* 幽灵按钮加载状态图标颜色 */
-.button--ghost.button--loading::after {
-  border-color: var(--uds-btn-ghost-color);
-  border-top-color: transparent;
-}
-
-/* 不同类型描边按钮的加载状态图标颜色 */
-.button--outline.button--primary.button--loading::after {
-  border-color: var(--uds-color-primary);
-  border-top-color: transparent;
-}
-
-.button--outline.button--secondary.button--loading::after {
-  border-color: var(--uds-color-secondary-text);
-  border-top-color: transparent;
-}
-
-.button--outline.button--danger.button--loading::after {
-  border-color: var(--uds-color-danger);
-  border-top-color: transparent;
-}
 
 @keyframes button-loading-spinner {
   from {
@@ -340,126 +132,18 @@ slot:not([name]) {
   }
 }
 
-/* 实心按钮禁用状态 */
-.button--solid[disabled] {
-  background-color: #c0c4cc;
-  border-color: #c0c4cc;
-  color: #ffffff;
-}
-
-.button--solid.button--primary[disabled] {
-  background-color: var(--uds-color-primary-disabled-rgb);
-  border-color: none;
-}
-
-.button--solid.button--secondary[disabled] {
-  background-color: var(--uds-color-secondary-disabled-rgb);
-  border-color: none;
-}
-
-.button--solid.button--danger[disabled] {
-  background-color: var(--uds-color-danger-disabled-rgb);
-  border-color: none;
-}
-
-/* 描边按钮禁用状态 */
-.button--outline[disabled] {
-  background-color: #f5f7fa;
-  border-color: #e4e7ed;
-  color: #ffffff;
-}
-
-.button--outline.button--primary[disabled] {
-  border-color: var(--uds-color-primary-disabled-rgb);
-  color: var(--uds-color-primary-disabled-rgb);
-  background-color: transparent;
-}
-
-/* 文本按钮禁用状态 */
-.button--text[disabled] {
-  color: var(--uds-color-text-muted);
-  background-color: transparent;
-  text-decoration: none;
-}
-
-.button--text.button--primary[disabled] {
-  color: var(--uds-color-primary-disabled-rgb);
-}
-
-.button--text.button--secondary[disabled] {
-  color: var(--uds-color-secondary-disabled-rgb);
-}
-
-.button--text.button--danger[disabled] {
-  color: var(--uds-color-danger-disabled-rgb);
-}
-
-/* 幽灵按钮禁用状态 */
-.button--ghost[disabled] {
-  color: var(--uds-color-text-muted);
-  background-color: transparent;
-}
-
-.button--ghost.button--primary[disabled] {
-  color: var(--uds-color-primary-disabled-rgb);
-}
-
-.button--ghost.button--secondary[disabled] {
-  color: var(--uds-color-secondary-disabled-rgb);
-}
-
-.button--ghost.button--danger[disabled] {
-  color: var(--uds-color-danger-disabled-rgb);
-}
-
-.button--outline.button--secondary[disabled] {
-  border-color: var(--uds-color-secondary-disabled-rgb);
-  color: var(--uds-color-secondary-disabled-rgb);
-  background-color: transparent;
-}
-
-.button--outline.button--danger[disabled] {
-  border-color: var(--uds-color-danger-disabled-rgb);
-  color: var(--uds-color-danger-disabled-rgb);
-  background-color: transparent;
-}
-
-/* 文本按钮的禁用状态 */
-.button--text[disabled] {
-  color: var(--uds-color-text-muted);
-  text-decoration: none;
-}
 
 /* Loading spinner已移至::after伪元素中 */
 
-/* Button Types */
-.button--primary {
-  --uds-btn-bg: var(--uds-color-primary);
-  --uds-btn-bg-hover: var(--uds-color-primary-hover);
-  --uds-btn-bg-active: var(--uds-color-primary-active);
-  --uds-btn-fg: var(--uds-color-primary-text);
-}
 
-.button--secondary {
-  --uds-btn-bg: var(--uds-color-secondary);
-  --uds-btn-bg-hover: var(--uds-color-secondary-hover);
-  --uds-btn-bg-active: var(--uds-color-secondary-active);
-  --uds-btn-fg: var(--uds-color-secondary-text);
-}
-
-.button--danger {
-  --uds-btn-bg: var(--uds-color-danger);
-  --uds-btn-bg-hover: var(--uds-color-danger-hover);
-  --uds-btn-bg-active: var(--uds-color-danger-active);
-  --uds-btn-fg: var(--uds-color-danger-text);
-}
 
 /* Slots */
-::slotted([slot="icon"]) {
+::slotted([slot="icon"]), ::slotted([slot="icon-right"]) {
   width: 1em;
   height: 1em;
   display: inline-flex;
 }
+
 
 /* 移动端媒体查询 - 移除hover效果 */
 @media (max-width: 768px) {
@@ -468,20 +152,270 @@ slot:not([name]) {
     border-color: inherit;
     text-decoration: none;
   }
-  
-  .button--solid:hover {
-    background-color: var(--uds-btn-bg, var(--uds-color-primary));
-  }
-  
-  .button--outline:hover {
-    background-color: transparent;
-  }
-  
-  .button--ghost:hover {
-    background-color: transparent;
-  }
-  
-  .button--text:hover {
-    text-decoration: none;
-  }
+
 }
+
+/* Tokens2 remap for UDS Button */
+.button {
+  font-size: var(--uds-font-size-md);
+  border-radius: var(--uds-radius-md);
+  padding: var(--uds-padding-md);
+  height: var(--uds-height-md);
+}
+
+.button--sm {
+  border-radius: var(--uds-radius-sm);
+  font-size: var(--uds-font-size-sm);
+  padding: var(--uds-padding-sm);
+  height: var(--uds-height-sm); 
+}
+
+.button--lg {
+  border-radius: var(--uds-radius-lg);
+  font-size: var(--uds-font-size-lg);
+  padding: var(--uds-padding-lg);
+  height: var(--uds-height-lg);
+}
+
+/* Normalize hover backgrounds per tokens2 */
+.button--outline:hover { background-color: var(--uds-outline-primary-bg-hover); }
+.button--outline:active { background-color: var(--uds-outline-primary-bg-active); }
+.button--ghost:hover { background-color: var(--uds-ghost-primary-bg-hover); }
+.button--ghost:active { background-color: var(--uds-ghost-primary-bg-active); }
+
+/* 实心按钮 Filled variant mapped to tokens2 */
+.button--filled.button--primary {
+  background-color: var(--uds-filled-primary-bg);
+  color: var(--uds-filled-primary-text);
+  border-color: var(--uds-filled-primary-border);
+}
+.button--filled.button--primary:hover {
+  background-color: var(--uds-filled-primary-bg-hover);
+  color: var(--uds-filled-primary-text-hover);
+  border-color: var(--uds-filled-primary-border-hover);
+}
+.button--filled.button--primary:active {
+  background-color: var(--uds-filled-primary-bg-active);
+  color: var(--uds-filled-primary-text-active);
+  border-color: var(--uds-filled-primary-border-active);
+}
+
+.button--filled.button--secondary {
+  background-color: var(--uds-filled-secondary-bg);
+  color: var(--uds-filled-secondary-text);
+  border-color: var(--uds-filled-secondary-border);
+}
+.button--filled.button--secondary:hover {
+  background-color: var(--uds-filled-secondary-bg-hover);
+  color: var(--uds-filled-secondary-text-hover);
+  border-color: var(--uds-filled-secondary-border-hover);
+}
+.button--filled.button--secondary:active {
+  background-color: var(--uds-filled-secondary-bg-active);
+  color: var(--uds-filled-secondary-text-active);
+  border-color: var(--uds-filled-secondary-border-active);
+}
+
+.button--filled.button--danger {
+  background-color: var(--uds-filled-danger-bg);
+  color: var(--uds-filled-danger-text);
+  border-color: var(--uds-filled-danger-border);
+}
+.button--filled.button--danger:hover {
+  background-color: var(--uds-filled-danger-bg-hover);
+  color: var(--uds-filled-danger-text-hover);
+  border-color: var(--uds-filled-danger-border-hover);
+}
+.button--filled.button--danger:active {
+  background-color: var(--uds-filled-danger-bg-active);
+  color: var(--uds-filled-danger-text-active);
+  border-color: var(--uds-filled-danger-border-active);
+}
+
+/* 空心按钮 Outline variant mapped to tokens2 */
+.button--outline.button--primary {
+  color: var(--uds-outline-primary-text);
+  border-color: var(--uds-outline-primary-border);
+  background-color: var(--uds-outline-primary-bg);
+}
+.button--outline.button--primary:hover {
+  color: var(--uds-outline-primary-text-hover);
+  border-color: var(--uds-outline-primary-border-hover);
+  background-color: var(--uds-outline-primary-bg-hover);
+}
+.button--outline.button--primary:active {
+  color: var(--uds-outline-primary-text-active);
+  border-color: var(--uds-outline-primary-border-active);
+  background-color: var(--uds-outline-primary-bg-active);
+}
+
+.button--outline.button--secondary {
+  color: var(--uds-outline-secondary-text);
+  border-color: var(--uds-outline-secondary-border);
+  background-color: var(--uds-outline-secondary-bg);
+}
+.button--outline.button--secondary:hover {
+  color: var(--uds-outline-secondary-text-hover);
+  border-color: var(--uds-outline-secondary-border-hover);
+  background-color: var(--uds-outline-secondary-bg-hover);
+}
+.button--outline.button--secondary:active {
+  color: var(--uds-outline-secondary-text-active);
+  border-color: var(--uds-outline-secondary-border-active);
+  background-color: var(--uds-outline-secondary-bg-active);
+}
+
+.button--outline.button--danger {
+  color: var(--uds-outline-danger-text);
+  border-color: var(--uds-outline-danger-border);
+  background-color: var(--uds-outline-danger-bg);
+}
+.button--outline.button--danger:hover {
+  color: var(--uds-outline-danger-text-hover);
+  border-color: var(--uds-outline-danger-border-hover);
+  background-color: var(--uds-outline-danger-bg-hover);
+}
+.button--outline.button--danger:active {
+  color: var(--uds-outline-danger-text-active);
+  border-color: var(--uds-outline-danger-border-active);
+  background-color: var(--uds-outline-danger-bg-active);
+}
+
+/* 幽灵按钮 Ghost variant mapped to tokens2 */
+.button--ghost.button--primary {
+  color: var(--uds-ghost-primary-text);
+  background-color: var(--uds-ghost-primary-bg);
+  border-color: var(--uds-ghost-primary-border);
+}
+.button--ghost.button--primary:hover {
+  color: var(--uds-ghost-primary-text-hover);
+  background-color: var(--uds-ghost-primary-bg-hover);
+  border-color: var(--uds-ghost-primary-border-hover);
+}
+.button--ghost.button--primary:active {
+  color: var(--uds-ghost-primary-text-active);
+  background-color: var(--uds-ghost-primary-bg-active);
+  border-color: var(--uds-ghost-primary-border-active);
+}
+
+.button--ghost.button--secondary {
+  color: var(--uds-ghost-secondary-text);
+  background-color: var(--uds-ghost-secondary-bg);
+  border-color: var(--uds-ghost-secondary-border);
+}
+.button--ghost.button--secondary:hover {
+  color: var(--uds-ghost-secondary-text-hover);
+  background-color: var(--uds-ghost-secondary-bg-hover);
+  border-color: var(--uds-ghost-secondary-border-hover);
+}
+.button--ghost.button--secondary:active {
+  color: var(--uds-ghost-secondary-text-active);
+  background-color: var(--uds-ghost-secondary-bg-active);
+  border-color: var(--uds-ghost-secondary-border-active);
+}
+
+.button--ghost.button--danger {
+  color: var(--uds-ghost-danger-text);
+  background-color: var(--uds-ghost-danger-bg);
+  border-color: var(--uds-ghost-danger-border);
+}
+.button--ghost.button--danger:hover {
+  color: var(--uds-ghost-danger-text-hover);
+  background-color: var(--uds-ghost-danger-bg-hover);
+  border-color: var(--uds-ghost-danger-border-hover);
+}
+.button--ghost.button--danger:active {
+  color: var(--uds-ghost-danger-text-active);
+  background-color: var(--uds-ghost-danger-bg-active);
+  border-color: var(--uds-ghost-danger-border-active);
+}
+
+/*文字按钮  Text variant mapped to tokens2 */
+.button--text.button--primary {
+  color: var(--uds-text-primary-text);
+  background-color: var(--uds-text-primary-bg);
+  border-color: var(--uds-text-primary-border);
+}
+.button--text.button--primary:hover {
+  color: var(--uds-text-primary-text-hover);
+  background-color: var(--uds-text-primary-bg-hover);
+  border-color: var(--uds-text-primary-border-hover);
+}
+.button--text.button--primary:active {
+  color: var(--uds-text-primary-text-active);
+  background-color: var(--uds-text-primary-bg-active);
+  border-color: var(--uds-text-primary-border-active);
+}
+
+.button--text.button--secondary {
+  color: var(--uds-text-secondary-text);
+  background-color: var(--uds-text-secondary-bg);
+  border-color: var(--uds-text-secondary-border);
+}
+.button--text.button--secondary:hover {
+  color: var(--uds-text-secondary-text-hover);
+  background-color: var(--uds-text-secondary-bg-hover);
+  border-color: var(--uds-text-secondary-border-hover);
+}
+.button--text.button--secondary:active {
+  color: var(--uds-text-secondary-text-active);
+  background-color: var(--uds-text-secondary-bg-active);
+  border-color: var(--uds-text-secondary-border-active);
+}
+
+.button--text.button--danger {
+  color: var(--uds-text-danger-text);
+  background-color: var(--uds-text-danger-bg);
+  border-color: var(--uds-text-danger-border);
+}
+.button--text.button--danger:hover {
+  color: var(--uds-text-danger-text-hover);
+  background-color: var(--uds-text-danger-bg-hover);
+  border-color: var(--uds-text-danger-border-hover);
+}
+.button--text.button--danger:active {
+  color: var(--uds-text-danger-text-active);
+  background-color: var(--uds-text-danger-bg-active);
+  border-color: var(--uds-text-danger-border-active);
+}
+
+/* 禁用 Disabled states mapped to tokens2 */
+.button--filled.button--primary[disabled] {
+  background-color: var(--uds-filled-primary-bg-disabled);
+  color: var(--uds-filled-primary-text-disabled);
+}
+.button--filled.button--secondary[disabled] {
+  background-color: var(--uds-filled-secondary-bg-disabled);
+  color: var(--uds-filled-secondary-text-disabled);
+}
+.button--filled.button--danger[disabled] {
+  background-color: var(--uds-filled-danger-bg-disabled);
+  color: var(--uds-filled-danger-text-disabled);
+}
+
+.button--outline.button--primary[disabled] {
+  background-color: var(--uds-outline-primary-bg-disabled);
+  color: var(--uds-outline-primary-text-disabled);
+  border-color: var(--uds-outline-primary-border-disabled);
+}
+.button--outline.button--secondary[disabled] {
+  background-color: var(--uds-outline-secondary-bg-disabled);
+  color: var(--uds-outline-secondary-text-disabled);
+  border-color: var(--uds-outline-secondary-border-disabled);
+}
+.button--outline.button--danger[disabled] {
+  background-color: var(--uds-outline-danger-bg-disabled);
+  color: var(--uds-outline-danger-text-disabled);
+  border-color: var(--uds-outline-danger-border-disabled);
+}
+
+.button--ghost.button--primary[disabled] { color: var(--uds-ghost-primary-text-disabled); }
+.button--ghost.button--secondary[disabled] { color: var(--uds-ghost-secondary-text-disabled); }
+.button--ghost.button--danger[disabled] { color: var(--uds-ghost-danger-text-disabled); }
+
+.button--text.button--primary[disabled] { color: var(--uds-text-primary-text-disabled); }
+.button--text.button--secondary[disabled] { color: var(--uds-text-secondary-text-disabled); }
+.button--text.button--danger[disabled] { color: var(--uds-text-danger-text-disabled); }
+
+/* Loading spinner rely on currentColor */
+.button--loading::after { border-color: currentColor; border-top-color: transparent; }

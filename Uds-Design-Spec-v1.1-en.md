@@ -175,7 +175,7 @@
 > Note: The previous `variant` attribute has been removed, please use the `type` and `plain` attributes combination to control button style
 
 ```html
-<uds-button type="primary" size="md">
+<uds-button type="primary" size="medium">
   <svg slot="icon" viewBox="0 0 24 24" width="1em" height="1em"></svg>
   Save
 </uds-button>

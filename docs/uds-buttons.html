@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Universal UI - Button Demo</title>
+  <link rel="stylesheet" href="../dist/styles/tokens2.css">
+  <link rel="stylesheet" href="./css/examples.css">
+  <link rel="stylesheet" href="./css/drawer.css">
+  <style>
+    .button-display {
+      margin-top: 20px;
+    }
+    
+    .button-templates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .button-template {
+      display: none;
+    }
+    
+    .button-template.active {
+      display: block;
+    }
+    
+    :root {
+      --bg-color: #ffffff;
+      --text-color: var(--uds-color-text);
+      --heading-color: var(--uds-color-heading);
+      --border-color: var(--uds-color-border);
+      --code-bg: #f5f5f5;
+    }
+    
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #e0e0e0;
+      --heading-color: #ffffff;
+      --border-color: #444444;
+      --code-bg: #2a2a2a;
+    }
+    
+    body {
+      font-family: var(--uds-font-sans);
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    h1, h2, h3, p {
+      color: var(--text-color);
+    }
+
+    header {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    h1,
+    h2 {
+      margin-bottom: 16px;
+    }
+
+    .demo-section {
+      margin-bottom: 32px;
+    }
+
+    .demo-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background: var(--uds-color-bg-subtle);
+      border: 1px filled var(--uds-color-border);
+      border-radius: var(--uds-radius-md);
+      cursor: pointer;
+      color: var(--uds-color-text);
+    }
+    
+
+
+
+
+    .flex-table {
+      display: flex;
+      flex-direction: column;
+      border-radius: 6px;
+      overflow: hidden;
+      width: max-content;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .cell {
+      min-width: 150px;
+      height: 60px;
+      display: flex;
+      align-items: top;
+      justify-content: left;
+    }
+
+    .row:last-child .cell {
+      border-bottom: none;
+    }
+
+    .row-title {
+      min-width: 100px;
+    }
+
+    .cell:last-child {
+      border-right: none;
+    }
+
+    .header {
+      font-weight: 600;
+      height: 30px;
+      margin-bottom: 20px;
+    }
+
+    .period {
+      margin-bottom: 50px;
+    }
+
+    .group {
+      margin-right: 40px;
+      display: flex;
+    }
+  </style>
+  <!-- 引入本地构建的universal-design-system包 -->
+  <script src="../dist/index.umd.js"></script>
+  <!-- 引用共用JS文件 -->
+  <script src="js/common.js"></script>
+  <script src="js/drawer.js"></script>
+  <!-- 添加主题切换消息监听 -->
+  
+</head>
+
+<body>
+  <button class="theme-toggle" id="theme-toggle"></button>
+
+  <header>
+    <h1>UDS Button Component</h1>
+    <p>A demo of the Universal Design System button component</p>
+    <uds-button id="drawer-toggle" text class="drawer-toggle-btn">组件状态对照表</uds-button>
+  </header>
+  
+  <!-- 抽屉组件 -->
+  <div id="drawer" class="drawer">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <button class="drawer-close">&times;</button>
+        <h3>按钮配置</h3>
+      </div>
+      <div class="drawer-body">
+        <div class="drawer-controls">
+          <div class="control-group">
+            <label for="button-type">类型</label>
+            <select id="button-type" class="control-select">
+              <option value="primary" selected>Primary</option>
+              <option value="secondary">Secondary</option>
+              <option value="danger">Danger</option>
+            </select>
+          </div>
+          
+          <div class="control-group">
+            <label for="button-style">样式</label>
+            <select id="button-style" class="control-select">
+              <option value="filled" selected>Filled</option>
+              <option value="outline">Outline</option>
+              <option value="ghost">Ghost</option>
+              <option value="text">Text</option>
+            </select>
+          </div>
+          
+          <div class="control-group">
+            <label for="button-size">大小</label>
+            <select id="button-size" class="control-select">
+              <option value="small" selected>Small</option>
+              <option value="medium">Medium</option>
+              <option value="large" >Large</option>
+            </select>
+          </div>
+          
+
+        </div>
+        
+        <div class="button-preview">
+            <h4>按钮预览</h4>
+            <div class="button-display">
+              <!-- 按钮模板容器 -->
+              <div class="button-templates">
+                <!-- 主要按钮模板 -->
+                <div id="primary-filled-medium" class="button-template"><uds-button>按钮</uds-button></div>
+                <div id="primary-outline-medium" class="button-template"><uds-button outline>按钮</uds-button></div>
+                <div id="primary-text-medium" class="button-template"><uds-button text>按钮</uds-button></div>
+                <div id="primary-ghost-medium" class="button-template"><uds-button ghost>按钮</uds-button></div>
+                <div id="primary-filled-small" class="button-template"><uds-button size="small">按钮</uds-button></div>
+                <div id="primary-outline-small" class="button-template"><uds-button outline size="small">按钮</uds-button></div>
+                <div id="primary-text-small" class="button-template"><uds-button text size="small">按钮</uds-button></div>
+                <div id="primary-ghost-small" class="button-template"><uds-button ghost size="small">按钮</uds-button></div>
+                <div id="primary-filled-large" class="button-template"><uds-button size="large">按钮</uds-button></div>
+                <div id="primary-outline-large" class="button-template"><uds-button outline size="large">按钮</uds-button></div>
+                <div id="primary-text-large" class="button-template"><uds-button text size="large">按钮</uds-button></div>
+                <div id="primary-ghost-large" class="button-template"><uds-button ghost size="large">按钮</uds-button></div>
+                
+                <!-- 次要按钮模板 -->
+                <div id="secondary-filled-medium" class="button-template"><uds-button type="secondary">按钮</uds-button></div>
+                <div id="secondary-outline-medium" class="button-template"><uds-button type="secondary" outline>按钮</uds-button></div>
+                <div id="secondary-text-medium" class="button-template"><uds-button type="secondary" text>按钮</uds-button></div>
+                <div id="secondary-ghost-medium" class="button-template"><uds-button type="secondary" ghost>按钮</uds-button></div>
+                <div id="secondary-filled-small" class="button-template"><uds-button type="secondary" size="small">按钮</uds-button></div>
+                <div id="secondary-outline-small" class="button-template"><uds-button type="secondary" outline size="small">按钮</uds-button></div>
+                <div id="secondary-text-small" class="button-template"><uds-button type="secondary" text size="small">按钮</uds-button></div>
+                <div id="secondary-ghost-small" class="button-template"><uds-button type="secondary" ghost size="small">按钮</uds-button></div>
+                <div id="secondary-filled-large" class="button-template"><uds-button type="secondary" size="large">按钮</uds-button></div> 
+                <div id="secondary-outline-large" class="button-template"><uds-button type="secondary" outline size="large">按钮</uds-button></div>
+                <div id="secondary-text-large" class="button-template"><uds-button type="secondary" text size="large">按钮</uds-button></div>
+                <div id="secondary-ghost-large" class="button-template"><uds-button type="secondary" ghost size="large">按钮</uds-button></div>
+                
+                <!-- 危险按钮模板 -->
+                <div id="danger-filled-medium" class="button-template"><uds-button type="danger">按钮</uds-button></div>
+                <div id="danger-outline-medium" class="button-template"><uds-button type="danger" outline>按钮</uds-button></div>
+                <div id="danger-text-medium" class="button-template"><uds-button type="danger" text>按钮</uds-button></div>
+                <div id="danger-ghost-medium" class="button-template"><uds-button type="danger" ghost>按钮</uds-button></div>
+                <div id="danger-filled-small" class="button-template"><uds-button type="danger" size="small">按钮</uds-button></div>
+                <div id="danger-outline-small" class="button-template"><uds-button type="danger" outline size="small">按钮</uds-button></div>
+                <div id="danger-text-small" class="button-template"><uds-button type="danger" text size="small">按钮</uds-button></div>
+                <div id="danger-ghost-small" class="button-template"><uds-button type="danger" ghost size="small">按钮</uds-button></div>
+                <div id="danger-filled-large" class="button-template"><uds-button type="danger" size="large">按钮</uds-button></div>
+                <div id="danger-outline-large" class="button-template"><uds-button type="danger" outline size="large">按钮</uds-button></div>
+                <div id="danger-text-large" class="button-template"><uds-button type="danger" text size="large">按钮</uds-button></div>
+                <div id="danger-ghost-large" class="button-template"><uds-button type="danger" ghost size="large">按钮</uds-button></div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="demo-section">
+      <h2>Default button</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button scale>Default button</uds-button>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button scale&gt;Default button&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Types</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button type="primary">Primary</uds-button>
+          <uds-button type="secondary">Secondary</uds-button>
+          <uds-button type="danger">Danger</uds-button>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button type="primary"&gt;Primary&lt;/uds-button&gt;
+&lt;uds-button type="secondary"&gt;Secondary&lt;/uds-button&gt;
+&lt;uds-button type="danger"&gt;Danger&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Styles</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button>Solid button</uds-button>
+          <uds-button outline>Outline button</uds-button>
+          <uds-button ghost>Ghost button</uds-button>
+          <uds-button text>Text button</uds-button>
+        </div>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button&gt;Solid button&lt;/uds-button&gt;
+&lt;uds-button outline&gt;Outline button&lt;/uds-button&gt;
+&lt;uds-button ghost&gt;Ghost button&lt;/uds-button&gt;
+&lt;uds-button text&gt;Text button&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Sizes</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button size="small">Small Button</uds-button>
+          <uds-button>Medium Button</uds-button>
+          <uds-button size="large">Large Button</uds-button>
+        </div>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button size="small"&gt;Small Button&lt;/uds-button&gt;
+&lt;uds-button&gt;Medium Button&lt;/uds-button&gt;
+&lt;uds-button size="large"&gt;Large Button&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>States</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button disabled>Disabled Button</uds-button>
+          <uds-button loading>Loading Button</uds-button>
+        </div>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button disabled&gt;Disabled Button&lt;/uds-button&gt;
+&lt;uds-button loading&gt;Loading Button&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Buttons with Icons</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button>
+            <i data-lucide="Replace"  slot="icon" ></i>
+            Add Item
+          </uds-button>
+
+          <uds-button outline>
+            <i data-lucide="Download" slot="icon-right" ></i>
+            Download
+          </uds-button>
+
+          <uds-button outline>
+            <i data-lucide="Copy"  slot="icon" ></i>
+            <i data-lucide="Router" slot="icon-right" ></i>
+            Hello
+          </uds-button>
+        </div>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button&gt;
+  &lt;i data-lucide="Plus" slot="icon"&gt;&lt;/i&gt;
+  Add Item
+&lt;/uds-button&gt;
+
+&lt;uds-button&gt;
+  &lt;i data-lucide="Download" slot="icon-right"&gt;&lt;/i&gt;
+  Download
+&lt;/uds-button&gt;
+
+&lt;uds-button outline&gt;
+  &lt;i data-lucide="Copy" slot="icon"&gt;&lt;/i&gt;
+  &lt;i data-lucide="Router" slot="icon-right"&gt;&lt;/i&gt;
+  Hello
+&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>圆角按钮</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button type="primary" round>主要圆角按钮</uds-button>
+          <uds-button type="secondary" round>次要圆角按钮</uds-button>
+          <uds-button type="danger" round>危险圆角按钮</uds-button>
+          <uds-button type="primary" outline round>描边圆角按钮</uds-button>
+          <uds-button type="primary" ghost round>幽灵圆角按钮</uds-button>
+        </div>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button type="primary" round&gt;主要圆角按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" round&gt;次要圆角按钮&lt;/uds-button&gt;
+&lt;uds-button type="danger" round&gt;危险圆角按钮&lt;/uds-button&gt;
+&lt;uds-button type="primary" outline round&gt;描边圆角按钮&lt;/uds-button&gt;
+&lt;uds-button type="primary" ghost round&gt;幽灵圆角按钮&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="demo-section">
+      <h2>计数器示例</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-button type="primary">普通按钮</uds-button>
+          <uds-button type="primary" counter="5">带计数器的按钮</uds-button>
+          <uds-button type="secondary" counter="99+">带计数器的按钮</uds-button>
+        </div>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-button type="primary"&gt;普通按钮&lt;/uds-button&gt;
+&lt;uds-button type="primary" counter="5"&gt;带计数器的按钮&lt;/uds-button&gt;
+&lt;uds-button type="secondary" counter="99+"&gt;带计数器的按钮&lt;/uds-button&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Table</h2>
+      <div class="example">
+        <div class="example-preview">
+          <div class="flex-table">
+            <div class="row header">
+              <div class="cell row-title"></div>
+
+              <div class="group">
+                <div class="cell">Primary</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Secondary</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Danger</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+              </div>
+            </div>
+
+            <div class="row header">
+              <div class="cell row-title"></div>
+
+              <div class="group">
+                <div class="cell">Small</div>
+                <div class="cell">Medium</div>
+                <div class="cell">Large</div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Small</div>
+                <div class="cell">Medium</div>
+                <div class="cell">Large</div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Small</div>
+                <div class="cell">Medium</div>
+                <div class="cell">Large</div>
+              </div>
+            </div>
+
+            <!-- Filled -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" >Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="medium" >Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="large" >Action button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" >Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="medium" >Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" >Action
+                      button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" >Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="medium" >Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="large" >Action button</uds-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Loading</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small"  loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="medium"  loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="large"  loading>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small"  loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary" size="medium"  loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary" size="large"  loading>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small"  loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="medium"  loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="danger" size="large"  loading>Action
+                      button</uds-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small"  disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="medium"  disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="large"  disabled>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small"  disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary" size="medium"  disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary" size="large"  disabled>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small"  disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="danger" size="medium"  disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="danger" size="large"  disabled>Action
+                      button</uds-button></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Outline -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" outline>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="medium" outline>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="large" outline>Action button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" outline>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="medium" outline>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" outline>Action
+                      button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" outline>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="medium" outline>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="large" outline>Action button</uds-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Loading</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" outline loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="medium" outline loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="large" outline loading>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" outline loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary" size="medium" outline loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary" size="large" outline loading>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" outline loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="danger" size="medium" outline loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="danger" size="large" outline loading>Action
+                      button</uds-button></div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" outline disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary"  outline disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="large" outline disabled>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" outline disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary"  outline disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary" size="large" outline disabled>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" outline disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="danger"  outline disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="large" outline disabled>Action
+                      button</uds-button></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ghost -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" ghost>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary"  ghost>Action button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="large" ghost>Action button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" ghost>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary"  ghost>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" ghost>Action button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" ghost>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger"  ghost>Action button</uds-button></div>
+                  <div class="cell"><uds-button type="danger" size="large" ghost>Action button</uds-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Loading</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" ghost loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary"  ghost loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="large" ghost loading>Action
+                      button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" ghost loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary"  ghost loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" ghost loading>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" ghost loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger"  ghost loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="large" ghost loading>Action
+                      button</uds-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" ghost disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="primary"  ghost disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="large" ghost disabled>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" ghost disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary"  ghost disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" ghost disabled>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" ghost disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger"  ghost disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="large" ghost disabled>Action
+                      button</uds-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Text -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" text>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary"  text>Action button</uds-button></div>
+                  <div class="cell"><uds-button type="primary" size="large" text>Action button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" text>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary"  text>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" text>Action button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" text>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger"  text>Action button</uds-button></div>
+                  <div class="cell"><uds-button type="danger" size="large" text>Action button</uds-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Loading</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" text loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary"  text loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="large" text loading>Action
+                      button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" text loading>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary"  text loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" text loading>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" text loading>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger"  text loading>Action button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="large" text loading>Action
+                      button</uds-button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="primary" size="small" text disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary"  text disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="primary" size="large" text disabled>Action
+                      button</uds-button>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="secondary" size="small" text disabled>Action
+                      button</uds-button></div>
+                  <div class="cell"><uds-button type="secondary"  text disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="secondary" size="large" text disabled>Action
+                      button</uds-button></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-button type="danger" size="small" text disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger"  text disabled>Action
+                      button</uds-button>
+                  </div>
+                  <div class="cell"><uds-button type="danger" size="large" text disabled>Action
+                      button</uds-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="example-code">
+          <uds-button text  class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;!-- 不同尺寸的文本按钮 --&gt;
+&lt;div class="flex-table"&gt;
+  &lt;div class="row header"&gt;
+    &lt;div class="cell"&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;Small&lt;/div&gt;
+    &lt;div class="cell"&gt;Medium&lt;/div&gt;
+    &lt;div class="cell"&gt;Large&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="cell"&gt;Default&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button size="small" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button  text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button size="large" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="cell"&gt;Primary&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="primary" size="small" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="primary"  text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="primary" size="large" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="cell"&gt;Secondary&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="secondary" size="small" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="secondary"  text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="secondary" size="large" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="cell"&gt;Danger&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="danger" size="small" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="danger"  text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="danger" size="large" text&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="cell"&gt;Disabled&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="danger" size="small" text disabled&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="danger"  text disabled&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+    &lt;div class="cell"&gt;&lt;uds-button type="danger" size="large" text disabled&gt;Action button&lt;/uds-button&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>API</h2>
+
+      <h3>属性</h3>
+      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th>属性</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>type</td>
+            <td>按钮类型，决定按钮的颜色和样式</td>
+            <td>primary | secondary | danger</td>
+            <td>primary</td>
+          </tr>
+          <tr>
+            <td>outline</td>
+            <td>是否使用轮廓样式，设置为true时会应用outline样式</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>text</td>
+            <td>是否为文本按钮</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>ghost</td>
+            <td>是否为幽灵按钮，透明背景</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>按钮尺寸</td>
+            <td>small | medium | large</td>
+            <td>md</td>
+          </tr>
+          <tr>
+            <td>round</td>
+            <td>是否使用圆角，默认为直角</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td>是否禁用</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>loading</td>
+            <td>是否加载中</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>focused</td>
+            <td>是否处于聚焦状态</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>scale</td>
+            <td>是否启用按钮点击时的缩放效果</td>
+            <td>boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>counter</td>
+            <td>设置按钮右侧的计数器数值</td>
+            <td>string | number</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>插槽</h3>
+      <table border="1" cellspacing="0" cellpadding="10"
+        style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>默认</td>
+            <td>按钮内容</td>
+          </tr>
+          <tr>
+            <td>icon</td>
+            <td>按钮左侧图标</td>
+          </tr>
+          <tr>
+            <td>icon-right</td>
+            <td>按钮右侧图标</td>
+          </tr>
+          <tr>
+            <td>counter</td>
+            <td>计数器插槽，用于显示数量信息（推荐使用counter属性代替）</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    // Theme toggle functionality
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+    });
+
+    // Log button clicks
+    document.addEventListener('uds-click', (e) => {
+      if (e.target.tagName.toLowerCase() === 'uds-button') {
+        console.log('Button clicked:', e.target.textContent.trim());
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // 为所有示例添加展开/隐藏按钮
+      const examples = document.querySelectorAll('.example');
+
+      examples.forEach(example => {
+        // 检查是否已有按钮，如果没有则添加
+        if (!example.querySelector('.toggle-code-button')) {
+          const toggleButton = document.createElement('button');
+          toggleButton.className = 'toggle-code-button';
+
+          const codeSection = example.querySelector('.example-code');
+          if (codeSection) {
+            // 在代码区域前插入按钮
+            codeSection.parentNode.insertBefore(toggleButton, codeSection);
+          }
+        }
+      });
+
+      // 添加展开/隐藏代码的功能
+      const toggleButtons = document.querySelectorAll('.toggle-code-button');
+
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const codeSection = this.nextElementSibling;
+          if (codeSection && codeSection.classList.contains('example-code')) {
+            // 切换代码区域的显示状态
+            codeSection.classList.toggle('show');
+            // 切换按钮的激活状态
+            this.classList.toggle('active');
+          }
+        });
+      });
+
+      // 复制按钮功能
+      const copyButtons = document.querySelectorAll('.copy-button');
+
+      copyButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const codeBlock = this.nextElementSibling.textContent;
+          navigator.clipboard.writeText(codeBlock)
+            .then(() => {
+              // 更改按钮文本为"已复制"
+              const originalText = this.textContent;
+              this.textContent = '已复制!';
+
+              // 2秒后恢复原始文本
+              setTimeout(() => {
+                this.textContent = originalText;
+              }, 2000);
+            })
+            .catch(err => {
+              console.error('复制失败:', err);
+            });
+        });
+      });
+    });
+  </script>
+
+  <script src="js/lucide.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <script>
+    // 监听来自父窗口的主题切换消息
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'themeChange') {
+        if (event.data.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -35,12 +35,11 @@ import 'universal-design-system/dist/components/button';
 <uds-button type="primary" plain>主要轮廓按钮</uds-button>
 
 <!-- 不同尺寸 -->
-<uds-button size="xs">超小按钮</uds-button>
-<uds-button size="sm">小按钮</uds-button>
-<uds-button size="md">中按钮</uds-button>
-<uds-button size="lg">大按钮</uds-button>
-
-<!-- 禁用状态 -->
+<uds-button size="small">小按钮</uds-button>
+ <uds-button size="medium">中按钮</uds-button>
+ <uds-button size="large">大按钮</uds-button>
+  
+ <!-- 禁用状态 -->
 <uds-button disabled>禁用按钮</uds-button>
 
 <!-- 加载状态 -->

@@ -160,8 +160,11 @@
     <div class="nav-group">
       <div class="nav-title">组件</div>
       <ul class="nav-items">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="#" class="nav-link active" data-page="button">Button 按钮</a>
+        </li> -->
+        <li class="nav-item">
+          <a href="#" class="nav-link active" data-page="uds-buttons">Button 按钮</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link" data-page="input">Input 输入框</a>
@@ -180,7 +183,7 @@
   </div>
   
   <div class="content">
-    <iframe id="content-frame" src="button.html"></iframe>
+    <iframe id="content-frame" src="uds-buttons.html"></iframe>
   </div>
 
   <script>
@@ -240,7 +243,7 @@
         const page = link.getAttribute('data-page');
         
         // button、installation、radio和checkbox页面实际存在
-        if (page === 'button' || page === 'installation' || page === 'radio' || page === 'checkbox' || page === 'input' || page === 'introduction') {
+        if (page === 'button' || page === 'installation' || page === 'radio' || page === 'checkbox' || page === 'input' || page === 'introduction' || page === 'uds-buttons') {
           // 先移除iframe，然后重新创建并添加到DOM中
           const parentElement = contentFrame.parentElement;
           const currentTheme = document.documentElement.hasAttribute('data-theme') ? 'dark' : 'light';

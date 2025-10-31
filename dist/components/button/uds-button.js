@@ -6,7 +6,7 @@ class UdsButton extends HTMLElement {
   _button = null;
   
   static get observedAttributes() {
-    return ['type', 'outline', 'text', 'ghost', 'size', 'round', 'disabled', 'loading', 'focused'];
+    return ['type', 'outline', 'text', 'ghost', 'size', 'round', 'disabled', 'loading', 'focused', 'scale', 'counter'];
   }
 
   constructor() {
@@ -26,6 +26,7 @@ class UdsButton extends HTMLElement {
     this._upgradeProperty('outline');
     this._upgradeProperty('text');
     this._upgradeProperty('ghost');
+    this._upgradeProperty('counter');
 
     this.setAttribute('role', 'button');
     this.tabIndex = this.disabled ? -1 : 0;
@@ -78,26 +79,20 @@ class UdsButton extends HTMLElement {
   _updateState() {
     if (!this._button) return;
     
-    // 处理variant属性（优先）
-    this._button.classList.remove('button--solid', 'button--outline', 'button--ghost', 'button--text');
-    if (this.hasAttribute('variant')) {
-      const variant = this.getAttribute('variant');
-      this._button.classList.add(`button--${variant}`);
-    } else if (this.text) {
+    // 处理按钮样式
+    this._button.classList.remove('button--filled', 'button--outline', 'button--ghost', 'button--text');
+    if (this.text) {
       // 如果有text属性，应用文本按钮样式
       this._button.classList.add('button--text');
     } else if (this.ghost) {
       // 如果有ghost属性，应用幽灵按钮样式
       this._button.classList.add('button--ghost');
     } else if (this.outline) {
-      // 如果没有variant但有outline属性
+      // 如果有outline属性
       this._button.classList.add('button--outline');
-    } else if (this.hasAttribute('type')) {
-      // 如果有type属性但没有variant和outline
-      this._button.classList.add('button--solid');
     } else {
-      // 默认为solid（实心按钮）
-      this._button.classList.add('button--solid');
+      // 默认为filled（实心按钮）
+      this._button.classList.add('button--filled');
     }
     
     // Update type
@@ -110,10 +105,19 @@ class UdsButton extends HTMLElement {
       this._button.classList.add('button--primary');
     }
     
-    // Update size
+    // Update size (small/medium/large)
     this._button.classList.remove('button--sm', 'button--lg');
-    if (this.size && this.size !== 'md') {
-      this._button.classList.add(`button--${this.size}`);
+    
+    // 如果是文本按钮，强制设置为 medium 尺寸（不添加任何尺寸类）
+    if (this.hasAttribute('text')) {
+      // medium 尺寸不需要添加额外的类
+    } else {
+      const size = this.size;
+      if (size === 'small') {
+        this._button.classList.add('button--sm');
+      } else if (size === 'large') {
+        this._button.classList.add('button--lg');
+      } // medium 或未设置时使用默认样式
     }
     
     // Update shape
@@ -133,6 +137,23 @@ class UdsButton extends HTMLElement {
     } else {
       this._button.classList.remove('button--loading');
       this._button.removeAttribute('aria-busy');
+    }
+    
+    // Update scale state
+    if (this.scale) {
+      this._button.classList.add('button--scale');
+    } else {
+      this._button.classList.remove('button--scale');
+    }
+    
+    // Update counter
+    const counterElement = this.shadowRoot.getElementById('counter-element');
+    if (this.counter) {
+      counterElement.textContent = this.counter;
+      counterElement.style.display = 'inline-flex';
+    } else {
+      counterElement.textContent = '';
+      counterElement.style.display = 'none';
     }
   }
 
@@ -281,6 +302,30 @@ class UdsButton extends HTMLElement {
       this.setAttribute('focused', '');
     } else {
       this.removeAttribute('focused');
+    }
+  }
+  
+  get scale() {
+    return this.hasAttribute('scale');
+  }
+  
+  set scale(value) {
+    if (value) {
+      this.setAttribute('scale', '');
+    } else {
+      this.removeAttribute('scale');
+    }
+  }
+  
+  get counter() {
+    return this.getAttribute('counter');
+  }
+
+  set counter(value) {
+    if (value === null || value === undefined) {
+      this.removeAttribute('counter');
+    } else {
+      this.setAttribute('counter', value);
     }
   }
 }
