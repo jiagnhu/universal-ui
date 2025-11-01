@@ -42,7 +42,7 @@
   background-color: var(--uds-color-bg-subtle, #f7f7f8);
 }
 
-.checkbox-container.style-solid {
+.checkbox-container.style-filled {
   padding: 4px 8px;
   border-radius: 6px;
   background-color: var(--uds-color-primary-light, rgba(var(--uds-color-primary-rgb), 0.1));
@@ -208,20 +208,20 @@
   background-color: var(--uds-color-primary-ghost-active-rgb);
 }
 
-.checkbox-container.primary.style-solid {
+.checkbox-container.primary.style-filled {
   background-color: var(--uds-color-primary);
   color: var(--uds-color-bg);
 }
 
-.checkbox-container.primary.style-solid:hover {
+.checkbox-container.primary.style-filled:hover {
   background-color: var(--uds-color-primary-hover);
 }
 
-.checkbox-container.primary.style-solid:active {
+.checkbox-container.primary.style-filled:active {
   background-color: var(--uds-color-primary-active);
 }
 
-.checkbox-container.primary.style-solid:hover .checkbox-label {
+.checkbox-container.primary.style-filled:hover .checkbox-label {
   color: var(--uds-color-bg);
 }
 
@@ -271,20 +271,20 @@
   background-color: var(--uds-color-secondary-ghost-active-rgb);
 }
 
-.checkbox-container.secondary.style-solid {
+.checkbox-container.secondary.style-filled {
   background-color: var(--uds-color-secondary);
   color: var(--uds-color-bg);
 }
 
-.checkbox-container.secondary.style-solid:hover {
+.checkbox-container.secondary.style-filled:hover {
   background-color: var(--uds-color-secondary-hover);
 }
 
-.checkbox-container.secondary.style-solid:active {
+.checkbox-container.secondary.style-filled:active {
   background-color: var(--uds-color-secondary-active);
 }
 
-.checkbox-container.secondary.style-solid:hover .checkbox-label {
+.checkbox-container.secondary.style-filled:hover .checkbox-label {
   color: var(--uds-color-bg);
 }
 
@@ -338,20 +338,20 @@
   background-color: var(--uds-color-danger-ghost-active-rgb);
 }
 
-.checkbox-container.danger.style-solid {
+.checkbox-container.danger.style-filled {
   background-color: var(--uds-color-danger);
   color: var(--uds-color-bg);
 }
 
-.checkbox-container.danger.style-solid:hover {
+.checkbox-container.danger.style-filled:hover {
   background-color: var(--uds-color-danger-hover);
 }
 
-.checkbox-container.danger.style-solid:active {
+.checkbox-container.danger.style-filled:active {
   background-color: var(--uds-color-danger-active);
 }
 
-.checkbox-container.danger.style-solid:hover .checkbox-label {
+.checkbox-container.danger.style-filled:hover .checkbox-label {
   color: var(--uds-color-bg);
 }
 
@@ -411,14 +411,14 @@
 }
 
 /* 样式变体的类型特定颜色 */
-.checkbox-container.style-solid.primary {
+.checkbox-container.style-filled.primary {
   background-color: var(--uds-color-primary);
 }
 
-.checkbox-container.style-solid.secondary {
+.checkbox-container.style-filled.secondary {
   background-color: var(--uds-color-secondary-active);
 }
 
-.checkbox-container.style-solid.danger {
+.checkbox-container.style-filled.danger {
   background-color: var(--uds-color-danger);
 }

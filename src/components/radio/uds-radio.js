@@ -7,7 +7,7 @@ class UdsRadio extends HTMLElement {
   _input = null;
   
   static get observedAttributes() {
-    return ['size', 'disabled', 'checked', 'name', 'value', 'text', 'ghost', 'outline', 'solid'];
+    return ['size', 'disabled', 'checked', 'name', 'value', 'text', 'ghost', 'outline', 'filled', 'counter'];
   }
 
   constructor() {
@@ -27,7 +27,8 @@ class UdsRadio extends HTMLElement {
     this._upgradeProperty('text');
     this._upgradeProperty('ghost');
     this._upgradeProperty('outline');
-    this._upgradeProperty('solid');
+    this._upgradeProperty('filled');
+    this._upgradeProperty('counter');
 
     this.addEventListener('click', this._onClick);
   }
@@ -48,10 +49,17 @@ class UdsRadio extends HTMLElement {
     }
   }
   
-  // 自动检测是否有 counter 内容
-  get hasCounter() {
-    const slot = this.shadowRoot.querySelector('slot[name="counter"]');
-    return slot && slot.assignedNodes().length > 0;
+  // 获取counter属性
+  get counter() {
+    return this.getAttribute('counter');
+  }
+  
+  set counter(value) {
+    if (value) {
+      this.setAttribute('counter', value);
+    } else {
+      this.removeAttribute('counter');
+    }
   }
   
   // 自动检测是否有描述内容
@@ -94,30 +102,40 @@ class UdsRadio extends HTMLElement {
       const type = this.getAttribute('type');
       this._container.classList.add(type);
     } else {
-      this._container.classList.add('primary'); // 默认为primary
+      this._container.classList.add('secondary'); // 默认为secondary
+    }
+    
+    // 更新counter
+    const counterElement = this.shadowRoot.getElementById('counter-element');
+    if (this.counter) {
+      counterElement.textContent = this.counter;
+      counterElement.style.display = 'inline-flex';
+    } else {
+      counterElement.textContent = '';
+      counterElement.style.display = 'none';
     }
     
     // 处理样式
-    this._container.classList.remove('style-text', 'style-ghost', 'style-outline', 'style-solid');
+    this._container.classList.remove('style-text', 'style-ghost', 'style-outline', 'style-filled');
     if (this.hasAttribute('text')) {
       this._container.classList.add('style-text');
     } else if (this.hasAttribute('ghost')) {
       this._container.classList.add('style-ghost');
     } else if (this.hasAttribute('outline')) {
       this._container.classList.add('style-outline');
-    } else if (this.hasAttribute('solid')) {
-      this._container.classList.add('style-solid');
+    } else if (this.hasAttribute('filled')) {
+      this._container.classList.add('style-filled');
     } else {
       this._container.classList.add('style-text'); // 默认为text样式
     }
     
     // 处理尺寸
-    this._container.classList.remove('size-sm', 'size-md', 'size-lg');
+    this._container.classList.remove('size-small', 'size-medium', 'size-large');
     if (this.hasAttribute('size')) {
       const size = this.getAttribute('size');
       this._container.classList.add(`size-${size}`);
     } else {
-      this._container.classList.add('size-md'); // 默认为中等尺寸
+      this._container.classList.add('size-medium'); // 默认为中等尺寸
     }
     
     // 处理禁用状态
@@ -224,15 +242,15 @@ class UdsRadio extends HTMLElement {
     }
   }
   
-  get solid() {
-    return this.hasAttribute('solid');
+  get filled() {
+    return this.hasAttribute('filled');
   }
   
-  set solid(value) {
+  set filled(value) {
     if (value) {
-      this.setAttribute('solid', '');
+      this.setAttribute('filled', '');
     } else {
-      this.removeAttribute('solid');
+      this.removeAttribute('filled');
     }
   }
   

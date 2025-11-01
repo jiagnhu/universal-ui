@@ -3,7 +3,7 @@
 // UDS Checkbox Component
 class UdsCheckbox extends HTMLElement {
   static get observedAttributes() {
-    return ['size', 'disabled', 'checked', 'indeterminate', 'name', 'value', 'text', 'ghost', 'outline', 'solid'];
+    return ['size', 'disabled', 'checked', 'indeterminate', 'name', 'value', 'text', 'ghost', 'outline', 'filled'];
   }
 
   constructor() {
@@ -26,7 +26,7 @@ class UdsCheckbox extends HTMLElement {
     this._upgradeProperty('text');
     this._upgradeProperty('ghost');
     this._upgradeProperty('outline');
-    this._upgradeProperty('solid');
+    this._upgradeProperty('filled');
 
     this.addEventListener('click', this._onClick);
   }
@@ -86,15 +86,15 @@ class UdsCheckbox extends HTMLElement {
     }
     
     // 处理样式
-    this._container.classList.remove('style-text', 'style-ghost', 'style-outline', 'style-solid');
+    this._container.classList.remove('style-text', 'style-ghost', 'style-outline', 'style-filled');
     if (this.hasAttribute('text')) {
       this._container.classList.add('style-text');
     } else if (this.hasAttribute('ghost')) {
       this._container.classList.add('style-ghost');
     } else if (this.hasAttribute('outline')) {
       this._container.classList.add('style-outline');
-    } else if (this.hasAttribute('solid')) {
-      this._container.classList.add('style-solid');
+    } else if (this.hasAttribute('filled')) {
+      this._container.classList.add('style-filled');
     } else {
       this._container.classList.add('style-text'); // 默认为text样式
     }
@@ -252,15 +252,15 @@ class UdsCheckbox extends HTMLElement {
     this.setAttribute('value', value);
   }
   
-  get solid() {
-    return this.hasAttribute('solid');
+  get filled() {
+    return this.hasAttribute('filled');
   }
   
-  set solid(value) {
+  set filled(value) {
     if (value) {
-      this.setAttribute('solid', '');
+      this.setAttribute('filled', '');
     } else {
-      this.removeAttribute('solid');
+      this.removeAttribute('filled');
     }
   }
   

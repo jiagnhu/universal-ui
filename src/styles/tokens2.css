@@ -2,6 +2,9 @@
   /* ===== Primary - Filled ===== */
   --uds-filled-primary-bg: #2F80ED;
   --uds-filled-primary-bg-hover: #2F80ED; /* 未提供 hover，等同 Default */
+  --uds-filled-primary-radio-bg-hover: rgba(250, 250, 250, 0.8);/* 未提供 hover */
+  --uds-filled-primary-radio-bg-active: rgba(250, 250, 250, 0.9);/* 未提供 hover */
+  --uds-filled-primary-radio-bg-disabled: rgba(250, 250, 250, 0.3);/* 未提供 hover */
   --uds-filled-primary-bg-active: #1D51B0; /* Pressed */
   --uds-filled-primary-bg-loading: #2F80ED; /* Loading */
   --uds-filled-primary-bg-disabled:rgba(47, 128, 237, 0.3); /* 按文件 Disabled */
@@ -75,6 +78,8 @@
   /* ===== Secondary - Filled ===== */
   --uds-filled-secondary-bg: #EDEDED;      /* Default */
   --uds-filled-secondary-bg-hover: #EDEDED;/* 未提供 hover */
+  --uds-filled-secondary-radio-bg-hover: #E0E0E0;/* 未提供 hover */
+  --uds-filled-secondary-radio-bg-active: rgba(250, 250, 250, 0.8);/* 未提供 hover */
   --uds-filled-secondary-bg-active: #C8C8C8;/* Pressed */
   --uds-filled-secondary-bg-loading: #EDEDED;
   --uds-filled-secondary-bg-disabled: rgba(103, 103, 103, 0.1);/* 文件 Disabled */
@@ -89,11 +94,10 @@
   --uds-filled-secondary-border-loading: transparent;
   --uds-filled-secondary-border-disabled: transparent;
 
-  /* ===== Secondary - Outline =====
-     文件的 Outline/ Ghost/ Text 对 Secondary 给的是中灰值：
-     我们采用文字/边框随 token，背景透明；Pressed 时按 Pressed 行为。 */
+  /* ===== Secondary - Outline ===== */
   --uds-outline-secondary-bg: transparent;
   --uds-outline-secondary-bg-hover: rgba(103, 103, 103, 0.1);
+  --uds-outline-secondary-radio-bg-hover: #999999;
   --uds-outline-secondary-bg-active: rgba(103, 103, 103, 0.2);
   --uds-outline-secondary-bg-loading: transparent;
   --uds-outline-secondary-bg-disabled: transparent;
@@ -105,6 +109,7 @@
   --uds-outline-secondary-border: #C8C8C8;
   --uds-outline-secondary-border-hover: #C8C8C8;
   --uds-outline-secondary-border-active: #C8C8C8;
+  --uds-outline-secondary-radio-border-active: #888888;
   --uds-outline-secondary-border-loading: #C8C8C8;
   --uds-outline-secondary-border-disabled: rgba(103, 103, 103, 0.3);
 
@@ -141,6 +146,8 @@
   --uds-text-secondary-border-active: transparent;
   --uds-text-secondary-border-loading: transparent;
   --uds-text-secondary-border-disabled: transparent;
+   --uds-text-secondary-input-checked: #ADADAD;
+
 
   /* ===== Danger - Filled ===== */
   --uds-filled-danger-bg: #EB5757;          /* Default */

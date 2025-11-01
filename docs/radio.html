@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radio 单选框 - Universal Design System</title>
-  <link rel="stylesheet" href="../dist/styles/tokens.css">
-  <!-- 引用共用JS文件 -->
-  <script src="js/common.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Universal UI - Radio Demo</title>
+  <link rel="stylesheet" href="../dist/styles/tokens2.css">
+  <link rel="stylesheet" href="./css/examples.css">
+  <link rel="stylesheet" href="./css/drawer.css">
   <style>
+    .radio-display {
+      margin-top: 20px;
+    }
+    
+    .radio-templates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .radio-template {
+      display: none;
+    }
+    
+    .radio-template.active {
+      display: block;
+    }
+    
     :root {
       --bg-color: #ffffff;
       --text-color: var(--uds-color-text);
@@ -22,573 +42,960 @@
       --heading-color: #ffffff;
       --border-color: #444444;
       --code-bg: #2a2a2a;
+      
+      /* 暗黑模式下的UDS变量覆盖 */
+      --uds-color-text: #e0e0e0;
+      --uds-color-heading: #ffffff;
+      --uds-color-border: #444444;
+      --uds-color-bg-subtle: #2a2a2a;
+      --uds-color-bg: #1a1a1a;
     }
     
     body {
-      font-family: var(--uds-font-family);
-      color: var(--text-color);
-      line-height: 1.5;
+      font-family: var(--uds-font-sans);
       margin: 0;
       padding: 20px;
       background-color: var(--bg-color);
+      color: var(--text-color);
       transition: background-color 0.3s, color 0.3s;
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    h1, h2, h3 {
-      color: var(--heading-color);
-    }
-    .demo-section {
-      margin: 32px 0;
-      padding: 24px;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-    }
-    .demo-block {
-      margin-bottom: 24px;
-    }
-    .demo-title {
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-    .code-block {
-      background-color: var(--code-bg);
-      padding: 16px;
-      border-radius: 4px;
-      margin: 16px 0;
-      font-family: monospace;
-      white-space: pre-wrap;
-      display: none; /* 默认隐藏代码块 */
-    }
     
-    .code-block-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--code-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      padding: 8px 16px;
-      margin: 16px 0;
-      font-family: var(--uds-font-family);
-      font-size: 14px;
+    h1, h2, h3, p {
       color: var(--text-color);
     }
-    
-    .code-toggle-btn {
-      background: none;
-      border: none;
-      color: var(--uds-color-primary);
-      cursor: pointer;
-      font-size: 14px;
+
+    header {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    h1,
+    h2 {
+      margin-bottom: 16px;
+    }
+
+    .demo-section {
+      margin-bottom: 32px;
+    }
+
+    .demo-row {
       display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
       align-items: center;
-      gap: 4px;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background: var(--uds-color-bg-subtle);
+      border: 1px filled var(--uds-color-border);
+      border-radius: var(--uds-radius-md);
+      cursor: pointer;
+      color: var(--uds-color-text);
     }
     
-    .code-toggle-btn:hover {
-      text-decoration: underline;
+    .flex-table {
+      display: flex;
+      flex-direction: column;
+      border-radius: 6px;
+      overflow: hidden;
+      width: max-content;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .cell {
+      min-width: 150px;
+      height: 60px;
+      display: flex;
+      align-items: top;
+      justify-content: left;
+    }
+
+    .row:last-child .cell {
+      border-bottom: none;
+    }
+
+    .row-title {
+      min-width: 100px;
+    }
+
+    .cell:last-child {
+      border-right: none;
+    }
+
+    .header {
+      font-weight: 600;
+      height: 30px;
+      margin-bottom: 20px;
+    }
+
+    .period {
+      margin-bottom: 50px;
+    }
+
+    .group {
+      margin-right: 40px;
+      display: flex;
     }
     
-    .code-toggle-btn svg {
-      width: 16px;
-      height: 16px;
-      transition: transform 0.2s;
-    }
-    
-    .code-toggle-btn.expanded svg {
-      transform: rotate(180deg);
-    }
-    table {
+    .api-table {
       width: 100%;
       border-collapse: collapse;
+      margin: 20px 0;
     }
-    th, td {
+    
+    .api-table th, .api-table td {
       border: 1px solid var(--border-color);
-      padding: 12px;
+      padding: 10px;
       text-align: left;
     }
-    th {
-      background-color: #f5f5f5;
-    }
-    .nav {
-      margin-bottom: 24px;
-    }
-    .nav a {
-      margin-right: 16px;
-      color: var(--uds-color-primary);
-      text-decoration: none;
-    }
-    .nav a:hover {
-      text-decoration: underline;
+    
+    .api-table th {
+      background-color: var(--uds-color-bg-subtle);
     }
   </style>
-  <script>
-    // 监听来自父窗口的主题切换消息
-    window.addEventListener('message', (event) => {
-      if (event.data && event.data.type === 'themeChange') {
-        if (event.data.theme === 'dark') {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        } else {
-          document.documentElement.removeAttribute('data-theme');
-        }
-      }
-    });
-  </script>
+  <!-- 引入本地构建的universal-design-system包 -->
+  <script src="../dist/index.umd.js"></script>
+  <!-- 引用共用JS文件 -->
+  <script src="js/common.js"></script>
+  <script src="js/drawer.js"></script>
+  <script src="js/lucide.js"></script>
 </head>
-<body>
-  <div class="container">
-    <h1>Radio 单选框</h1>
-    <p>Radio 单选框用于在一组备选项中进行单选。</p>
 
-    <section class="demo-section">
-      <h2>基础用法</h2>
-      <div class="demo-block">
-        <div class="demo-title">基础单选框</div>
-        <uds-radio-group name="demo1" value="1">
-          <uds-radio value="1">选项1</uds-radio>
-          <uds-radio value="2">选项2</uds-radio>
-          <uds-radio value="3">选项3</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo1" value="1"&gt;
-  &lt;uds-radio value="1"&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3"&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
+<body>
+  <button class="theme-toggle" id="theme-toggle">切换主题</button>
+
+  <header>
+    <h1>UDS Radio Component</h1>
+    <p>Universal Design System 单选框组件演示</p>
+    <uds-button id="drawer-toggle" text class="drawer-toggle-btn">组件状态对照表</uds-button>
+  </header>
+  
+  <!-- 抽屉组件 -->
+  <div id="drawer" class="drawer">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <button class="drawer-close">&times;</button>
+        <h3>单选框配置</h3>
       </div>
-      
-      <div class="demo-block">
-        <div class="demo-title">带计数器</div>
-        <uds-radio-group name="demo-counter" value="1">
-          <uds-radio value="1" hasCounter>选项1<span slot="counter">(5)</span></uds-radio>
-          <uds-radio value="2" hasCounter>选项2<span slot="counter">(10)</span></uds-radio>
-          <uds-radio value="3" hasCounter>选项3<span slot="counter">(15)</span></uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo-counter" value="1"&gt;
-  &lt;uds-radio value="1" hasCounter&gt;选项1&lt;span slot="counter"&gt;(5)&lt;/span&gt;&lt;/uds-radio&gt;
-  &lt;uds-radio value="2" hasCounter&gt;选项2&lt;span slot="counter"&gt;(10)&lt;/span&gt;&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" hasCounter&gt;选项3&lt;span slot="counter"&gt;(15)&lt;/span&gt;&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-      
-      <div class="demo-block">
-        <div class="demo-title">带描述</div>
-        <uds-radio-group name="demo-desc" value="1">
-          <uds-radio value="1" hasDescription description="这是选项1的详细描述">选项1</uds-radio>
-          <uds-radio value="2" hasDescription description="这是选项2的详细描述">选项2</uds-radio>
-          <uds-radio value="3" hasDescription description="这是选项3的详细描述">选项3</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo-desc" value="1"&gt;
-  &lt;uds-radio value="1" hasDescription description="这是选项1的详细描述"&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2" hasDescription description="这是选项2的详细描述"&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" hasDescription description="这是选项3的详细描述"&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-      
-      <div class="demo-block">
-        <div class="demo-title">带右侧图标</div>
-        <uds-radio-group name="demo-icon" value="1">
-          <uds-radio value="1">选项1 <span slot="icon-right">🔍</span></uds-radio>
-          <uds-radio value="2">选项2 <span slot="icon-right">📌</span></uds-radio>
-          <uds-radio value="3">选项3 <span slot="icon-right">⭐</span></uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo-icon" value="1"&gt;
-  &lt;uds-radio value="1"&gt;选项1 &lt;span slot="icon-right"&gt;🔍&lt;/span&gt;&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;选项2 &lt;span slot="icon-right"&gt;📌&lt;/span&gt;&lt;/uds-radio&gt;
-  &lt;uds-radio value="3"&gt;选项3 &lt;span slot="icon-right"&gt;⭐&lt;/span&gt;&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-      
-      <div class="demo-block">
-        <div class="demo-title">聚焦状态</div>
-        <uds-radio-group name="demo-focus" value="1">
-          <uds-radio value="1">选项1</uds-radio>
-          <uds-radio value="2">选项2</uds-radio>
-          <uds-radio value="3" disabled>选项3（禁用）</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo-focus" value="1"&gt;
-  &lt;uds-radio value="1"&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" disabled&gt;选项3（禁用）&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-      
-      <div class="demo-block">
-        <div class="demo-title">不同样式</div>
-        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-          <div>
-            <p>Text样式（默认）</p>
-            <uds-radio-group name="style-text" value="1">
-              <uds-radio value="1" text>选项1</uds-radio>
-              <uds-radio value="3" type="danger">选项3</uds-radio>
-              <uds-radio value="2" type="secondary">选项2</uds-radio>
-            </uds-radio-group>
+      <div class="drawer-body">
+        <div class="drawer-controls">
+          <div class="control-group">
+            <label for="radio-type">类型</label>
+            <select id="radio-type" class="control-select">
+              <option value="primary">Primary</option>
+              <option value="secondary" selected>Secondary</option>
+              <option value="danger">Danger</option>
+            </select>
           </div>
-          <div>
-            <p>Ghost样式</p>
-            <uds-radio-group name="style-ghost" value="1">
-              <uds-radio value="1" ghost>选项1</uds-radio>
-              <uds-radio value="2" type="danger" ghost>选项2</uds-radio>
-              <uds-radio value="3" type="secondary" ghost>选项3</uds-radio>
-            </uds-radio-group>
+          
+          <div class="control-group">
+            <label for="radio-style">样式</label>
+            <select id="radio-style" class="control-select">
+              <option value="text" selected>Text</option>
+              <option value="outline">Outline</option>
+              <option value="ghost">Ghost</option>
+              <option value="filled">Filled</option>
+            </select>
           </div>
-          <div>
-            <p>Outline样式</p>
-            <uds-radio-group name="style-outline" value="1">
-              <uds-radio value="1" outline>选项1</uds-radio>
-              <uds-radio value="2" type="danger" outline>选项2</uds-radio>
-              <uds-radio value="3" type="secondary" outline>选项3</uds-radio>
-            </uds-radio-group>
-          </div>
-          <div>
-            <p>Solid样式</p>
-            <uds-radio-group name="style-solid" value="1">
-              <uds-radio value="1" solid>选项1</uds-radio>
-              <uds-radio value="2" type="danger" solid>选项2</uds-radio>
-              <uds-radio value="3" type="secondary" solid>选项3</uds-radio>
-            </uds-radio-group>
+          
+          <div class="control-group">
+            <label for="radio-size">大小</label>
+            <select id="radio-size" class="control-select">
+              <option value="small">Small</option>
+              <option value="medium" selected>Medium</option>
+              <option value="large">Large</option>
+            </select>
           </div>
         </div>
-        <div class="code-block">&lt;!-- Text样式（默认） --&gt;
-&lt;uds-radio-group name="style-text" value="1"&gt;
-  &lt;uds-radio value="1" text&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2" type="danger" text&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" type="secondary" text&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;
-
-&lt;!-- Ghost样式 --&gt;
-&lt;uds-radio-group name="style-ghost" value="1"&gt;
-  &lt;uds-radio value="1" ghost&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2" type="danger" ghost&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" type="secondary" ghost&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;
-
-&lt;!-- Outline样式 --&gt;
-&lt;uds-radio-group name="style-outline" value="1"&gt;
-  &lt;uds-radio value="1" outline&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2" type="danger" outline&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" type="secondary" outline&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;
-
-&lt;!-- Solid样式 --&gt;
-&lt;uds-radio-group name="style-solid" value="1"&gt;
-  &lt;uds-radio value="1" solid&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2" type="danger" solid&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" type="secondary" solid&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
+        
+        <div class="radio-preview">
+          <h4>单选框预览</h4>
+          <div class="radio-display">
+            <!-- 单选框模板容器 -->
+            <div class="radio-templates">
+              <!-- 主要单选框模板 -->
+              <div id="primary-text-medium" class="radio-template"><uds-radio type="primary">选项</uds-radio></div>
+              <div id="primary-outline-medium" class="radio-template"><uds-radio type="primary" outline>选项</uds-radio></div>
+<div id="primary-ghost-medium" class="radio-template"><uds-radio type="primary" ghost>选项</uds-radio></div>
+<div id="primary-filled-medium" class="radio-template"><uds-radio type="primary" filled>选项</uds-radio></div>
+              <div id="primary-text-small" class="radio-template"><uds-radio type="primary" size="small">选项</uds-radio></div>
+              <div id="primary-outline-small" class="radio-template"><uds-radio type="primary" outline size="small">选项</uds-radio></div>
+              <div id="primary-ghost-small" class="radio-template"><uds-radio type="primary" ghost size="small">选项</uds-radio></div>
+              <div id="primary-filled-small" class="radio-template"><uds-radio type="primary" filled size="small">选项</uds-radio></div>
+              <div id="primary-text-large" class="radio-template"><uds-radio type="primary" size="large">选项</uds-radio></div>
+              <div id="primary-outline-large" class="radio-template"><uds-radio type="primary" outline size="large">选项</uds-radio></div>
+              <div id="primary-ghost-large" class="radio-template"><uds-radio type="primary" ghost size="large">选项</uds-radio></div>
+              <div id="primary-filled-large" class="radio-template"><uds-radio type="primary" filled size="large">选项</uds-radio></div>
+              
+              <!-- 次要单选框模板 -->
+              <div id="secondary-text-medium" class="radio-template"><uds-radio type="secondary">选项</uds-radio></div>
+              <div id="secondary-outline-medium" class="radio-template"><uds-radio type="secondary" outline>选项</uds-radio></div>
+              <div id="secondary-ghost-medium" class="radio-template"><uds-radio type="secondary" ghost>选项</uds-radio></div>
+              <div id="secondary-filled-medium" class="radio-template"><uds-radio type="secondary" filled>选项</uds-radio></div>
+              <div id="secondary-text-small" class="radio-template"><uds-radio type="secondary" size="small">选项</uds-radio></div>
+              <div id="secondary-outline-small" class="radio-template"><uds-radio type="secondary" outline size="small">选项</uds-radio></div>
+              <div id="secondary-ghost-small" class="radio-template"><uds-radio type="secondary" ghost size="small">选项</uds-radio></div>
+              <div id="secondary-filled-small" class="radio-template"><uds-radio type="secondary" filled size="small">选项</uds-radio></div>
+              <div id="secondary-text-large" class="radio-template"><uds-radio type="secondary" size="large">选项</uds-radio></div>
+              <div id="secondary-outline-large" class="radio-template"><uds-radio type="secondary" outline size="large">选项</uds-radio></div>
+              <div id="secondary-ghost-large" class="radio-template"><uds-radio type="secondary" ghost size="large">选项</uds-radio></div>
+              <div id="secondary-filled-large" class="radio-template"><uds-radio type="secondary" filled size="large">选项</uds-radio></div>
+              
+              <!-- 危险单选框模板 -->
+              <div id="danger-text-medium" class="radio-template"><uds-radio type="danger">选项</uds-radio></div>
+              <div id="danger-outline-medium" class="radio-template"><uds-radio type="danger" outline>选项</uds-radio></div>
+              <div id="danger-ghost-medium" class="radio-template"><uds-radio type="danger" ghost>选项</uds-radio></div>
+              <div id="danger-filled-medium" class="radio-template"><uds-radio type="danger" filled>选项</uds-radio></div>
+              <div id="danger-text-small" class="radio-template"><uds-radio type="danger" size="small">选项</uds-radio></div>
+              <div id="danger-outline-small" class="radio-template"><uds-radio type="danger" outline size="small">选项</uds-radio></div>
+              <div id="danger-ghost-small" class="radio-template"><uds-radio type="danger" ghost size="small">选项</uds-radio></div>
+              <div id="danger-filled-small" class="radio-template"><uds-radio type="danger" filled size="small">选项</uds-radio></div>
+              <div id="danger-text-large" class="radio-template"><uds-radio type="danger" size="large">选项</uds-radio></div>
+              <div id="danger-outline-large" class="radio-template"><uds-radio type="danger" outline size="large">选项</uds-radio></div>
+              <div id="danger-ghost-large" class="radio-template"><uds-radio type="danger" ghost size="large">选项</uds-radio></div>
+              <div id="danger-filled-large" class="radio-template"><uds-radio type="danger" filled size="large">选项</uds-radio></div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="demo-block">
-        <div class="demo-title">禁用状态</div>
-        <uds-radio-group name="demo2" value="2">
-          <uds-radio value="1" disabled>正常选项</uds-radio>
-          <uds-radio value="2" disabled>禁用选项</uds-radio>
-          <uds-radio value="3" disabled type="danger">禁用选项</uds-radio>
-          <uds-radio value="4" disabled type="secondary">禁用选项</uds-radio>
-        </uds-radio-group>
-
-        <div class="code-block">&lt;uds-radio-group name="demo2" value="2"&gt;
-  &lt;uds-radio value="1"&gt;正常选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="2" disabled&gt;禁用选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="3" disabled type="danger"&gt;禁用选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="4" disabled type="secondary"&gt;禁用选项&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
+  <main>
+    <section class="demo-section">
+      <h2>默认单选框</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio>默认单选框</uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio&gt;默认单选框&lt;/uds-radio&gt;</code></pre>
+        </div>
       </div>
     </section>
 
     <section class="demo-section">
-      <h2>不同类型</h2>
-      <div class="demo-block">
-        <div class="demo-title">主要类型</div>
-        <uds-radio-group name="demo3" type="primary" value="1">
-          <uds-radio value="1">Primary 选项</uds-radio>
-          <uds-radio value="2">Primary 选项</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo3" type="primary" value="1"&gt;
-  &lt;uds-radio value="1"&gt;Primary 选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;Primary 选项&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-
-      <div class="demo-block">
-        <div class="demo-title">次要类型</div>
-        <uds-radio-group name="demo4" type="secondary" value="1">
-          <uds-radio value="1">Secondary 选项</uds-radio>
-          <uds-radio value="2">Secondary 选项</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo4" type="secondary" value="1"&gt;
-  &lt;uds-radio value="1"&gt;Secondary 选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;Secondary 选项&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-
-      <div class="demo-block">
-        <div class="demo-title">危险类型</div>
-        <uds-radio-group name="demo5" type="danger" value="1">
-          <uds-radio value="1">Danger 选项</uds-radio>
-          <uds-radio value="2">Danger 选项</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo5" type="danger" value="1"&gt;
-  &lt;uds-radio value="1"&gt;Danger 选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;Danger 选项&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
+      <h2>类型</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio type="primary">Primary</uds-radio>
+          <uds-radio type="secondary">Secondary</uds-radio>
+          <uds-radio type="danger">Danger</uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio type="primary"&gt;Primary&lt;/uds-radio&gt;
+&lt;uds-radio type="secondary"&gt;Secondary&lt;/uds-radio&gt;
+&lt;uds-radio type="danger"&gt;Danger&lt;/uds-radio&gt;</code></pre>
+        </div>
       </div>
     </section>
 
     <section class="demo-section">
-      <h2>不同尺寸</h2>
-      <div class="demo-block">
-        <div class="demo-title">小尺寸</div>
-        <uds-radio-group name="demo6" size="sm" value="1">
-          <uds-radio value="1">小尺寸选项</uds-radio>
-          <uds-radio value="2">小尺寸选项</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo6" size="sm" value="1"&gt;
-  &lt;uds-radio value="1"&gt;小尺寸选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;小尺寸选项&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-
-      <div class="demo-block">
-        <div class="demo-title">中等尺寸（默认）</div>
-        <uds-radio-group name="demo7" value="1">
-          <uds-radio value="1">中等尺寸选项</uds-radio>
-          <uds-radio value="2">中等尺寸选项</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo7" value="1"&gt;
-  &lt;uds-radio value="1"&gt;中等尺寸选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;中等尺寸选项&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-
-      <div class="demo-block">
-        <div class="demo-title">大尺寸</div>
-        <uds-radio-group name="demo8" size="lg" value="1">
-          <uds-radio value="1">大尺寸选项</uds-radio>
-          <uds-radio value="2">大尺寸选项</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo8" size="lg" value="1"&gt;
-  &lt;uds-radio value="1"&gt;大尺寸选项&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;大尺寸选项&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
+      <h2>样式</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio>Text radio</uds-radio>
+          <uds-radio outline>Outline radio</uds-radio>
+          <uds-radio ghost>Ghost radio</uds-radio>
+          <uds-radio filled>Filled radio</uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio&gt;Text radio&lt;/uds-radio&gt;
+&lt;uds-radio outline&gt;Outline radio&lt;/uds-radio&gt;
+&lt;uds-radio ghost&gt;Ghost radio&lt;/uds-radio&gt;
+&lt;uds-radio filled&gt;Filled radio&lt;/uds-radio&gt;</code></pre>
+        </div>
       </div>
     </section>
 
     <section class="demo-section">
-      <h2>布局方式</h2>
-      <div class="demo-block">
-        <div class="demo-title">垂直布局（默认）</div>
-        <uds-radio-group name="demo9" value="1">
-          <uds-radio value="1">选项1</uds-radio>
-          <uds-radio value="2">选项2</uds-radio>
-          <uds-radio value="3">选项3</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo9" value="1"&gt;
+      <h2>尺寸</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio size="small">Small Radio</uds-radio>
+          <uds-radio>Medium Radio</uds-radio>
+          <uds-radio size="large">Large Radio</uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio size="small"&gt;Small Radio&lt;/uds-radio&gt;
+&lt;uds-radio&gt;Medium Radio&lt;/uds-radio&gt;
+&lt;uds-radio size="large"&gt;Large Radio&lt;/uds-radio&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>状态</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio disabled>禁用状态</uds-radio>
+          <uds-radio checked>选中状态</uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio disabled&gt;禁用状态&lt;/uds-radio&gt;
+&lt;uds-radio checked&gt;选中状态&lt;/uds-radio&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>带计数器的单选框</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio counter="99+">
+            带计数器的选项
+          </uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio counter="99+"&gt;
+  带计数器的选项
+&lt;/uds-radio&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>带描述的单选框</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio description="这是一段描述文本，用于解释该选项的更多信息">
+            带描述的选项
+          </uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio description="这是一段描述文本，用于解释该选项的更多信息"&gt;
+  带描述的选项
+&lt;/uds-radio&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>带图标的单选框</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio>
+            带右侧图标的选项
+            <i data-lucide="Info" slot="icon-right"></i>
+          </uds-radio>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio&gt;
+  带右侧图标的选项
+  &lt;i data-lucide="Info" slot="icon-right"&gt;&lt;/i&gt;
+&lt;/uds-radio&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>Table</h2>
+      <div class="example" style="overflow-x: auto;">
+        <div class="example-preview" style=" width: 1500px;">
+          <div class="flex-table">
+            <div class="row header">
+              <div class="cell row-title"></div>
+
+              <div class="group">
+                <div class="cell">Primary</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Secondary</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Danger</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+              </div>
+            </div>
+
+            <div class="row header">
+              <div class="cell row-title"></div>
+
+              <div class="group">
+                <div class="cell">Small</div>
+                <div class="cell">Medium</div>
+                <div class="cell">Large</div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Small</div>
+                <div class="cell">Medium</div>
+                <div class="cell">Large</div>
+              </div>
+
+              <div class="group">
+                <div class="cell">Small</div>
+                <div class="cell">Medium</div>
+                <div class="cell">Large</div>
+              </div>
+            </div>
+
+            <!-- Filled -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" filled>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked filled>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="large" filled>选项</uds-radio>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" filled>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" checked filled>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="large" filled>选项</uds-radio>
+                  </div>
+                </div>
+
+                
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" filled>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="medium" checked filled>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="large" filled>选项</uds-radio>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" filled disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked filled disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="large" filled disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" filled disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" filled checked disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="large" filled disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" filled disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="medium" filled checked disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="large" filled disabled>选项</uds-radio></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Outline -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" outline>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked outline>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="large" outline>选项</uds-radio>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" outline>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" checked outline>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="large" outline>选项</uds-radio>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" outline>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="medium" checked outline>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="large" outline>选项</uds-radio>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" outline disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked outline disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="large" outline disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" outline disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" checked outline disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="large" outline disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" outline disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="medium" checked outline disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="large" outline disabled>选项</uds-radio></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ghost -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" ghost>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked ghost>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="large" ghost>选项</uds-radio>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" ghost>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" checked ghost>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="large" ghost>选项</uds-radio>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" ghost>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="medium" checked ghost>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="large" ghost>选项</uds-radio>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" ghost disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked ghost disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="large" ghost disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" ghost disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" checked ghost disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="large" ghost disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" ghost disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="medium" checked ghost disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="large" ghost disabled>选项</uds-radio></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Text -->
+            <div class="period">
+              <div class="row">
+                <div class="cell row-title">Default</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" text>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked text>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="primary" size="large" text>选项</uds-radio>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" text>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" checked text>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="secondary" size="large" text>选项</uds-radio>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" text>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="medium" checked text>选项</uds-radio>
+                  </div>
+                  <div class="cell"><uds-radio type="danger" size="large" text>选项</uds-radio>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="cell row-title">Disabled</div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="primary" size="small" text disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="medium" checked text disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="primary" size="large" text disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="secondary" size="small" text disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="medium" checked text disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="secondary" size="large" text disabled>选项</uds-radio></div>
+                </div>
+
+                <div class="group">
+                  <div class="cell"><uds-radio type="danger" size="small" text disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="medium" checked text disabled>选项</uds-radio></div>
+                  <div class="cell"><uds-radio type="danger" size="large" text disabled>选项</uds-radio></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>单选框组</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio-group name="group1">
+            <uds-radio value="1">选项1</uds-radio>
+            <uds-radio value="2">选项2</uds-radio>
+            <uds-radio value="3">选项3</uds-radio>
+          </uds-radio-group>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio-group name="group1"&gt;
   &lt;uds-radio value="1"&gt;选项1&lt;/uds-radio&gt;
   &lt;uds-radio value="2"&gt;选项2&lt;/uds-radio&gt;
   &lt;uds-radio value="3"&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
-      </div>
-
-      <div class="demo-block">
-        <div class="demo-title">水平布局</div>
-        <uds-radio-group name="demo10" value="1" horizontal>
-          <uds-radio value="1">选项1</uds-radio>
-          <uds-radio value="2">选项2</uds-radio>
-          <uds-radio value="3">选项3</uds-radio>
-        </uds-radio-group>
-        <div class="code-block">&lt;uds-radio-group name="demo10" value="1" horizontal&gt;
-  &lt;uds-radio value="1"&gt;选项1&lt;/uds-radio&gt;
-  &lt;uds-radio value="2"&gt;选项2&lt;/uds-radio&gt;
-  &lt;uds-radio value="3"&gt;选项3&lt;/uds-radio&gt;
-&lt;/uds-radio-group&gt;</div>
+&lt;/uds-radio-group&gt;</code></pre>
+        </div>
       </div>
     </section>
 
-    <section id="api">
-      <h2>API</h2>
+    <section class="demo-section">
+      <h2>水平排列的单选框组</h2>
+      <div class="example">
+        <div class="example-preview">
+          <uds-radio-group name="group2" horizontal>
+            <uds-radio value="1">选项1</uds-radio>
+            <uds-radio value="2">选项2</uds-radio>
+            <uds-radio value="3">选项3</uds-radio>
+          </uds-radio-group>
+        </div>
+        <button class="toggle-code-button"></button>
+        <div class="example-code">
+          <uds-button text class="copy-button" scale size="small">复制</uds-button>
+          <pre><code>&lt;uds-radio-group name="group2" horizontal&gt;
+  &lt;uds-radio value="1"&gt;选项1&lt;/uds-radio&gt;
+  &lt;uds-radio value="2"&gt;选项2&lt;/uds-radio&gt;
+  &lt;uds-radio value="3"&gt;选项3&lt;/uds-radio&gt;
+&lt;/uds-radio-group&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <h2>API 文档</h2>
       
       <h3>Radio 属性</h3>
-      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+      <table class="api-table">
         <thead>
           <tr>
             <th>属性</th>
-            <th>说明</th>
             <th>类型</th>
             <th>默认值</th>
+            <th>说明</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>type</td>
-            <td>单选框类型，决定单选框的颜色和样式</td>
-            <td>primary | secondary | danger</td>
-            <td>primary</td>
-          </tr>
-          <tr>
-            <td>size</td>
-            <td>单选框尺寸</td>
-            <td>sm | md | lg</td>
-            <td>md</td>
-          </tr>
-          <tr>
-            <td>text</td>
-            <td>文本样式（默认）</td>
-            <td>boolean</td>
-            <td>true</td>
-          </tr>
-          <tr>
-            <td>ghost</td>
-            <td>幽灵样式</td>
+            <td>checked</td>
             <td>boolean</td>
             <td>false</td>
-          </tr>
-          <tr>
-            <td>outline</td>
-            <td>描边样式</td>
-            <td>boolean</td>
-            <td>false</td>
-          </tr>
-          <tr>
-            <td>solid</td>
-            <td>实心样式</td>
-            <td>boolean</td>
-            <td>false</td>
+            <td>是否选中</td>
           </tr>
           <tr>
             <td>disabled</td>
+            <td>boolean</td>
+            <td>false</td>
             <td>是否禁用</td>
-            <td>boolean</td>
-            <td>false</td>
-          </tr>
-          <tr>
-            <td>checked</td>
-            <td>是否选中</td>
-            <td>boolean</td>
-            <td>false</td>
           </tr>
           <tr>
             <td>name</td>
-            <td>单选框名称，通常由RadioGroup统一设置</td>
             <td>string</td>
             <td>-</td>
+            <td>表单名称</td>
           </tr>
           <tr>
             <td>value</td>
-            <td>单选框值</td>
             <td>string</td>
             <td>-</td>
+            <td>单选框的值</td>
           </tr>
-
+          <tr>
+            <td>type</td>
+            <td>string</td>
+            <td>secondary</td>
+            <td>类型，可选值：primary, secondary, danger</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>string</td>
+            <td>medium</td>
+            <td>尺寸，可选值：small, medium, large</td>
+          </tr>
+          <tr>
+            <td>text</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>文本样式（默认样式）</td>
+          </tr>
+          <tr>
+            <td>outline</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>轮廓样式</td>
+          </tr>
+          <tr>
+            <td>ghost</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>幽灵样式</td>
+          </tr>
+          <tr>
+            <td>filled</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>填充样式</td>
+          </tr>
+          <tr>
+            <td>counter</td>
+            <td>string</td>
+            <td>-</td>
+            <td>计数器内容，显示在选项文本右侧</td>
+          </tr>
           <tr>
             <td>description</td>
-            <td>描述文本，用于提供额外信息</td>
             <td>string</td>
             <td>-</td>
+            <td>描述文本，显示在选项文本下方</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>Slots</h3>
-      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+      <h3>Radio 事件</h3>
+      <table class="api-table">
         <thead>
           <tr>
-            <th>名称</th>
+            <th>事件名</th>
             <th>说明</th>
+            <th>参数</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>default</td>
-            <td>默认插槽，单选框的文本内容</td>
-          </tr>
-          <tr>
-            <td>counter</td>
-            <td>计数器插槽，用于显示数量信息</td>
-          </tr>
-          <tr>
-            <td>icon-right</td>
-            <td>右侧图标插槽</td>
+            <td>change</td>
+            <td>选中状态变化时触发</td>
+            <td>event: Event</td>
           </tr>
         </tbody>
       </table>
 
       <h3>RadioGroup 属性</h3>
-      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+      <table class="api-table">
         <thead>
           <tr>
             <th>属性</th>
-            <th>说明</th>
             <th>类型</th>
             <th>默认值</th>
+            <th>说明</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>type</td>
-            <td>单选框组类型，会应用到所有子单选框</td>
-            <td>primary | secondary | danger</td>
-            <td>primary</td>
-          </tr>
-          <tr>
-            <td>size</td>
-            <td>单选框组尺寸，会应用到所有子单选框</td>
-            <td>sm | md | lg</td>
-            <td>md</td>
-          </tr>
-          <tr>
-            <td>disabled</td>
-            <td>是否禁用整个单选框组</td>
-            <td>boolean</td>
-            <td>false</td>
+            <td>name</td>
+            <td>string</td>
+            <td>-</td>
+            <td>表单名称</td>
           </tr>
           <tr>
             <td>value</td>
-            <td>当前选中的值</td>
             <td>string</td>
             <td>-</td>
+            <td>当前选中的值</td>
           </tr>
           <tr>
-            <td>name</td>
-            <td>单选框组名称，会应用到所有子单选框</td>
-            <td>string</td>
-            <td>-</td>
+            <td>disabled</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>是否禁用所有单选框</td>
           </tr>
           <tr>
             <td>horizontal</td>
-            <td>是否水平排列</td>
             <td>boolean</td>
             <td>false</td>
+            <td>是否水平排列</td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td>string</td>
+            <td>secondary</td>
+            <td>类型，可选值：primary, secondary, danger</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>string</td>
+            <td>medium</td>
+            <td>尺寸，可选值：small, medium, large</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>事件</h3>
-      <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+      <h3>RadioGroup 事件</h3>
+      <table class="api-table">
         <thead>
           <tr>
-            <th>事件名称</th>
+            <th>事件名</th>
             <th>说明</th>
-            <th>回调参数</th>
+            <th>参数</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>change</td>
             <td>选中值变化时触发</td>
-            <td>event.detail.value: 当前选中的值</td>
+            <td>value: string</td>
           </tr>
         </tbody>
       </table>
     </section>
-  </div>
+  </main>
 
-  <!-- <script type="module">
-    import '../src/components/radio/uds-radio.js';
-    import '../src/components/radio/uds-radio-group.js';
-  </script> -->
-  <script src="../dist/index.umd.js"></script>
+  <script>
+    // 添加主题切换按钮事件
+    document.querySelector('.theme-toggle')?.addEventListener('click', toggleTheme);
+    
+    // 监听来自父窗口的主题切换消息
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'themeChange') {
+        if (event.data.theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.querySelector('.theme-toggle').textContent = '切换亮色模式';
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          document.querySelector('.theme-toggle').textContent = '切换暗色模式';
+        }
+      }
+    });
+    
+    // 初始化代码示例切换
+    document.querySelectorAll('.toggle-code-button').forEach(button => {
+      button.addEventListener('click', function() {
+        const example = this.closest('.example');
+        example.classList.toggle('show-code');
+        this.classList.toggle('active');
+        const codeBlock = example.querySelector('.example-code');
+        if (codeBlock) {
+          codeBlock.classList.toggle('show');
+        }
+      });
+    });
+    
+    // 初始化抽屉组件
+    const drawerToggle = document.querySelector('.drawer-toggle-btn');
+    const drawer = document.querySelector('.drawer');
+    const drawerClose = document.querySelector('.drawer-close');
+    
+    if (drawerToggle && drawer) {
+      drawerToggle.addEventListener('click', function() {
+        drawer.classList.toggle('open');
+      });
+    }
+    
+    if (drawerClose && drawer) {
+      drawerClose.addEventListener('click', function() {
+        drawer.classList.remove('open');
+      });
+    }
+    
+    // 初始化Lucide图标
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+    
+    // 单选框配置预览功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const typeSelect = document.getElementById('radio-type');
+      const styleSelect = document.getElementById('radio-style');
+      const sizeSelect = document.getElementById('radio-size');
+      
+      function updateRadioPreview() {
+        const type = typeSelect.value;
+        const style = styleSelect.value;
+        const size = sizeSelect.value;
+        
+        // 隐藏所有模板
+        document.querySelectorAll('.radio-template').forEach(template => {
+          template.classList.remove('active');
+        });
+        
+        // 显示匹配的模板
+        const templateId = `${type}-${style}-${size}`;
+        const template = document.getElementById(templateId);
+        if (template) {
+          template.classList.add('active');
+        }
+      }
+      
+      // 初始化预览
+      updateRadioPreview();
+      
+      // 添加事件监听器
+      typeSelect.addEventListener('change', updateRadioPreview);
+      styleSelect.addEventListener('change', updateRadioPreview);
+      sizeSelect.addEventListener('change', updateRadioPreview);
+    });
+  </script>
 </body>
 </html>

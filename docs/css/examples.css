@@ -3,7 +3,7 @@
   margin-bottom: 24px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .example-preview {
@@ -12,13 +12,14 @@
   gap: 16px;
   flex-wrap: wrap;
   align-items: center;
-  background-color: #f9fafb;
+  background-color: var(--bg-color);
 }
+
 
 .example-code {
   position: relative;
-  background-color: #f8f9fa;
-  border-top: 1px solid #e5e7eb;
+  background-color: var(--code-bg-color);
+  border-top: 1px solid var(--border-color);
   padding: 16px;
   margin: 0;
   display: none; /* 默认隐藏代码 */
@@ -58,7 +59,7 @@
   width: 100%;
   padding: 8px 0;
   text-align: center;
-  background-color: #f3f4f6;
+  background-color: var(--bg-color);
   border: none;
   border-top: 1px solid #e5e7eb;
   cursor: pointer;
@@ -67,7 +68,7 @@
 }
 
 .toggle-code-button:hover {
-  background-color: #e5e7eb;
+  background-color: var(--border-color);
 }
 
 .toggle-code-button::after {
